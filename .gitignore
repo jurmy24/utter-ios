@@ -133,6 +133,5 @@ iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
 
-
-# Ignore the configuration file
+# Hide the configuration file
 Config.xcconfig
