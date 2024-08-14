@@ -11,7 +11,7 @@
 		E83960982C6BEA1400D8456D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960972C6BEA1400D8456D /* ContentView.swift */; };
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
-		E83960A62C6BFA0900D8456D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960A52C6BFA0900D8456D /* Configuration.swift */; };
+		E83960A82C6CB6F000D8456D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960A72C6CB6F000D8456D /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +22,7 @@
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A32C6BF83000D8456D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		E83960A52C6BFA0900D8456D /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = "../../../../Downloads/cd2747f09d7bb1c53584d4beb6fc54dc-a27b409966a93237ebc3194479467a79149980f6/Configuration.swift"; sourceTree = "<group>"; };
+		E83960A72C6CB6F000D8456D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 			children = (
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
-				E83960A52C6BFA0900D8456D /* Configuration.swift */,
 				E83960972C6BEA1400D8456D /* ContentView.swift */,
+				E83960A72C6CB6F000D8456D /* Configuration.swift */,
 				E83960A32C6BF83000D8456D /* Config.xcconfig */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E83960A62C6BFA0900D8456D /* Configuration.swift in Sources */,
+				E83960A82C6CB6F000D8456D /* Configuration.swift in Sources */,
 				E83960982C6BEA1400D8456D /* ContentView.swift in Sources */,
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
 			);
