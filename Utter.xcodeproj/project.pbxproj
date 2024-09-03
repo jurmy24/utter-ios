@@ -12,8 +12,8 @@
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
 		E83960A82C6CB6F000D8456D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960A72C6CB6F000D8456D /* Configuration.swift */; };
-		E8B5A7292C87881300B27287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8B5A7282C87881300B27287 /* GoogleService-Info.plist */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
+		E8B5A72E2C878E8E00B27287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8B5A72D2C878E8E00B27287 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E83960A72C6CB6F000D8456D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		E8B5A7282C87881300B27287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E8B5A72D2C878E8E00B27287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 		E83960942C6BEA1400D8456D /* Utter */ = {
 			isa = PBXGroup;
 			children = (
-				E8B5A7282C87881300B27287 /* GoogleService-Info.plist */,
+				E8B5A72D2C878E8E00B27287 /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E83960972C6BEA1400D8456D /* ContentView.swift */,
@@ -141,7 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8B5A7292C87881300B27287 /* GoogleService-Info.plist in Resources */,
+				E8B5A72E2C878E8E00B27287 /* GoogleService-Info.plist in Resources */,
 				E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */,
 				E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */,
 			);
