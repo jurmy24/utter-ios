@@ -137,4 +137,4 @@ iOSInjectionProject/
 Config.xcconfig
 
 # Hide the Firebase configuration file
-GoogleService Info.plist
+GoogleService-Info.plist
