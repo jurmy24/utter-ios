@@ -1,35 +1,31 @@
 //
-//  SignInEmailView.swift
+//  SignUpEmailView.swift
 //  Utter
 //
-//  Created by Victor Magnus Oldensand on 2024-09-04.
+//  Created by Victor Magnus Oldensand on 2024-09-03.
 //
 
 import SwiftUI
 
 @MainActor
-final class SignInEmailViewModel: ObservableObject {
+final class SignUpEmailViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     
-    func signIn() async throws {
+    func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found!")
             return
         }
-
-        let returnedUserData = try await AuthenticationManager.shared.signInUser(email: email, password: password)
-        print("Successfully signed in!")
+        let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+        print("Successfully created a new user!")
         print(returnedUserData)
-    
     }
 }
 
-struct SignInEmailView: View {
-    
-    @StateObject private var viewModel = SignInEmailViewModel()
+struct SignUpEmailView: View {
+    @StateObject private var viewModel = SignUpEmailViewModel()
     @Binding var showSignInView: Bool
-    
     var body: some View {
         VStack{
             TextField("Email...", text:$viewModel.email)
@@ -45,7 +41,7 @@ struct SignInEmailView: View {
             Button {
                 Task {
                     do {
-                        try await viewModel.signIn()
+                        try await viewModel.signUp()
                         showSignInView = false
                         return
                     } catch {
@@ -53,7 +49,7 @@ struct SignInEmailView: View {
                     }
                 }
             } label: {
-                Text("Sign In")
+                Text("Sign Up")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(height:55)
@@ -65,10 +61,13 @@ struct SignInEmailView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("Sign In With Email")
+        .navigationTitle("Sign Up With Email")
     }
 }
 
 #Preview {
-    SignInEmailView(showSignInView: .constant(false))
+    NavigationStack{
+        SignUpEmailView(showSignInView: .constant(false))
+    }
+    
 }
