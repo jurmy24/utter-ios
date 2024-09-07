@@ -20,6 +20,11 @@ struct AuthDataResultModel {
     }
 }
 
+enum AuthProviderOption: String {
+    case email = "password"
+    case google = "google.com"
+}
+
 final class AuthenticationManager {
     
     // Make it a singleton class
@@ -33,6 +38,24 @@ final class AuthenticationManager {
         }
         
         return AuthDataResultModel(user: user)
+    }
+    
+    
+    // google.com
+    // password
+    func getProviders() throws -> [AuthProviderOption] {
+        guard let providerData = Auth.auth().currentUser?.providerData else {
+            throw URLError(.badServerResponse)
+        }
+        var providers: [AuthProviderOption] = []
+        for provider in providerData {
+            if let option = AuthProviderOption(rawValue: provider.providerID) {
+                providers.append(option)
+            } else {
+                assertionFailure("Provider Option Not Found: \(provider.providerID)")
+            }
+        }
+        return providers
     }
     
     func signOut() throws {
@@ -64,16 +87,16 @@ extension AuthenticationManager {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-        
+
         try await user.updatePassword(to: password)
     }
     
     func updateEmail(email: String) async throws {
-        guard let user = Auth.auth().currentUser else {
+        guard let _ = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
         
-        //try await user.__sendEmailVerificationBeforeUpdating(email: email)(to: email)
+        //try await Auth.auth().sendEmailVerification(email: user.email)(to: email)
     }
 }
 
