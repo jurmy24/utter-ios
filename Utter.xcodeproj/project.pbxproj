@@ -23,7 +23,6 @@
 		E83960982C6BEA1400D8456D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960972C6BEA1400D8456D /* ContentView.swift */; };
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
-		E83960A82C6CB6F000D8456D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960A72C6CB6F000D8456D /* Configuration.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +42,6 @@
 		E83960992C6BEA1500D8456D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		E83960A72C6CB6F000D8456D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +113,6 @@
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E83960972C6BEA1400D8456D /* ContentView.swift */,
-				E83960A72C6CB6F000D8456D /* Configuration.swift */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
@@ -212,7 +209,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E83960A82C6CB6F000D8456D /* Configuration.swift in Sources */,
 				E82E3E4A2C87AA3100EF9A6A /* SettingsView.swift in Sources */,
 				E83960982C6BEA1400D8456D /* ContentView.swift in Sources */,
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
