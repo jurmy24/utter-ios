@@ -32,12 +32,12 @@ struct SignInEmailView: View {
     
     var body: some View {
         VStack{
-            TextField("Email...", text:$viewModel.email)
+            TextField("Email", text:$viewModel.email)
                 .padding()
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(10)
             
-            SecureField("Password...", text:$viewModel.password)
+            SecureField("Password", text:$viewModel.password)
                 .padding()
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(10)
@@ -58,14 +58,11 @@ struct SignInEmailView: View {
                     .foregroundColor(.white)
                     .frame(height:55)
                     .frame(maxWidth:.infinity)
-                    .background(Color.blue)
+                    .background(Color("ButtonColor"))
                     .cornerRadius(10)
             }
             
-            Spacer()
         }
-        .padding()
-        .navigationTitle("Sign In With Email")
     }
 }
 

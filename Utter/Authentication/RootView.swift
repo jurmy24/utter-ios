@@ -11,13 +11,14 @@ struct RootView: View {
     
     @State private var showSignInView: Bool = false
     
-    var body: some View {
+    var body: some View { 
         ZStack {
             if !showSignInView {
                 NavigationStack {
                     SettingsView(showSignInView: $showSignInView)
                 }
             }
+        
         }
         .onAppear{
             let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
@@ -28,6 +29,8 @@ struct RootView: View {
                 AuthenticationView(showSignInView: $showSignInView)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Full-screen frame
+        .background(Color("AppBackgroundColor")) // Set background color to purple
         
     }
 }

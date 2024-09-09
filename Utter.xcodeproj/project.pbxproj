@@ -24,6 +24,8 @@
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
+		E8EC60F92C8F512C004A4EA4 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC60F82C8F512C004A4EA4 /* LabelledDivider.swift */; };
+		E8EC60FB2C8F61C5004A4EA4 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC60FA2C8F61C5004A4EA4 /* ContinueWithGoogle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		E83960992C6BEA1500D8456D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E8EC60F82C8F512C004A4EA4 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
+		E8EC60FA2C8F61C5004A4EA4 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		E83960942C6BEA1400D8456D /* Utter */ = {
 			isa = PBXGroup;
 			children = (
+				E8EC60F72C8F5110004A4EA4 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
@@ -126,6 +131,15 @@
 				E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E8EC60F72C8F5110004A4EA4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E8EC60F82C8F512C004A4EA4 /* LabelledDivider.swift */,
+				E8EC60FA2C8F61C5004A4EA4 /* ContinueWithGoogle.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,10 +227,12 @@
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
 				E82E3E482C87A7BE00EF9A6A /* RootView.swift in Sources */,
+				E8EC60F92C8F512C004A4EA4 /* LabelledDivider.swift in Sources */,
 				E82E3E582C8866DF00EF9A6A /* SignInGoogleHelper.swift in Sources */,
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
 				E82E3E4C2C884C1F00EF9A6A /* SignInEmailView.swift in Sources */,
 				E82E3E562C885FF500EF9A6A /* Utilities.swift in Sources */,
+				E8EC60FB2C8F61C5004A4EA4 /* ContinueWithGoogle.swift in Sources */,
 				E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */,
 				E82E3E442C879C0F00EF9A6A /* SignUpEmailView.swift in Sources */,
 			);

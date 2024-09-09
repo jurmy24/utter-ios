@@ -28,5 +28,6 @@ struct UtterApp: App {
         WindowGroup {
             RootView()
         }
+        
     }
 }

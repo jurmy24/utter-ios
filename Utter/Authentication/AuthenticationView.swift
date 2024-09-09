@@ -12,7 +12,7 @@ import GoogleSignInSwift
 
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
-
+    
     @Published var didSignInWithApple: Bool = false
     let signInAppleHelper = SignInAppleHelper()
     
@@ -33,9 +33,6 @@ final class AuthenticationViewModel: ObservableObject {
 }
 
 
-
-
-
 struct AuthenticationView: View {
     
     @StateObject private var viewModel = AuthenticationViewModel()
@@ -43,30 +40,40 @@ struct AuthenticationView: View {
     
     var body: some View {
         VStack{
+            
+            SignInEmailView(showSignInView: $showSignInView)
+            
             NavigationLink{
                 SignUpEmailView(showSignInView: $showSignInView)
             } label: {
-                Text("Sign Up With Email")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                
+                Text("Don't have an account? Sign up.")
+                    .font(.callout)
+                    .foregroundColor(Color.blue)
                     .frame(height:55)
                     .frame(maxWidth:.infinity)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            NavigationLink{
-                SignInEmailView(showSignInView: $showSignInView)
-            } label: {
-                Text("Sign In With Email")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height:55)
-                    .frame(maxWidth:.infinity)
-                    .background(Color.blue)
-                    .cornerRadius(10)
             }
             
-            GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
+            LabelledDivider(label: "Or continue with", color: Color.primary)
+            ssoOptions
+            
+//            Spacer()
+        }
+        .padding()
+        .navigationTitle("Sign In")
+        .navigationBarTitleDisplayMode(.inline)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("AppBackgroundColor"))
+    }
+}
+
+
+extension AuthenticationView {
+    
+    private var ssoOptions: some View {
+        VStack {
+            
+            Button(action: {
                 Task {
                     do {
                         try await viewModel.signInGoogle()
@@ -75,8 +82,9 @@ struct AuthenticationView: View {
                         print(error)
                     }
                 }
-            }
-            
+            }, label: {
+                ContinueWithGoogle()
+            })
             
             Button(action: {
                 Task {
@@ -88,18 +96,14 @@ struct AuthenticationView: View {
                     }
                 }
             }, label: {
-                SignInWithAppleButtonViewRepresentable(type: .signIn, style: .black)
+                SignInWithAppleButtonViewRepresentable(type: .continue, style: .black)
                     .allowsHitTesting(false)
             })
             .frame(height:55)
-            
-            Spacer()
         }
-        .padding()
-        .navigationTitle("Authentication")
     }
 }
-
+    
 #Preview {
     NavigationStack{
         AuthenticationView(showSignInView: .constant(false))
