@@ -1,0 +1,2 @@
+// Testing gitguardian
+OPENAI_API_KEY=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
