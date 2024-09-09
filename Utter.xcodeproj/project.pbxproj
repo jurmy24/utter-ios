@@ -113,12 +113,12 @@
 		E83960942C6BEA1400D8456D /* Utter */ = {
 			isa = PBXGroup;
 			children = (
-				E8EC60F72C8F5110004A4EA4 /* Components */,
-				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
+				E82E3E542C885FEB00EF9A6A /* Utilities */,
+				E8EC60F72C8F5110004A4EA4 /* Components */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
 			);
