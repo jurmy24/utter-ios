@@ -21,7 +21,6 @@
 		E82E3E582C8866DF00EF9A6A /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82E3E572C8866DF00EF9A6A /* SignInGoogleHelper.swift */; };
 		E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82E3E592C8DD5CA00EF9A6A /* SignInAppleHelper.swift */; };
 		E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960952C6BEA1400D8456D /* UtterApp.swift */; };
-		E83960982C6BEA1400D8456D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960972C6BEA1400D8456D /* ContentView.swift */; };
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
@@ -40,7 +39,6 @@
 		E82E3E592C8DD5CA00EF9A6A /* SignInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleHelper.swift; sourceTree = "<group>"; };
 		E83960922C6BEA1400D8456D /* Utter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Utter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83960952C6BEA1400D8456D /* UtterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtterApp.swift; sourceTree = "<group>"; };
-		E83960972C6BEA1400D8456D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E83960992C6BEA1500D8456D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
-				E83960972C6BEA1400D8456D /* ContentView.swift */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
@@ -213,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E82E3E4A2C87AA3100EF9A6A /* SettingsView.swift in Sources */,
-				E83960982C6BEA1400D8456D /* ContentView.swift in Sources */,
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
 				E82E3E482C87A7BE00EF9A6A /* RootView.swift in Sources */,
