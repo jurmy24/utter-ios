@@ -31,9 +31,12 @@ struct AuthenticationView: View {
     
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
+            
+            Image(colorScheme == .dark ? "TextLogoDark" : "TextLogoLight")
             
             SignInEmailView(showSignInView: $showSignInView)
             
