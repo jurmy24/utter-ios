@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E827E4A52C90B2A600D6D4F1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */; };
 		E82E3E3C2C87991500EF9A6A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E82E3E3B2C87991500EF9A6A /* FirebaseAuth */; };
 		E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */; };
 		E82E3E442C879C0F00EF9A6A /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		E82E3E452C879F3E00EF9A6A /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
+				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E8EC60F72C8F5110004A4EA4 /* Components */,
@@ -212,6 +215,7 @@
 			files = (
 				E82E3E4E2C885BFF00EF9A6A /* GoogleService-Info.plist in Resources */,
 				E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */,
+				E827E4A52C90B2A600D6D4F1 /* Launch Screen.storyboard in Resources */,
 				E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +380,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -411,6 +416,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
