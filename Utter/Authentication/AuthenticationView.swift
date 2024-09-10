@@ -31,30 +31,53 @@ struct AuthenticationView: View {
     
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
+    @State private var showSignInDropdown = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
             
             Image(colorScheme == .dark ? "TextLogoDark" : "TextLogoLight")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 70) // Adjust the height to your preference
+                .padding(.vertical, 40) // Add padding if needed (adjust for safe area)
             
-            SignInEmailView(showSignInView: $showSignInView)
-            
-            NavigationLink{
-                SignUpEmailView(showSignInView: $showSignInView)
-            } label: {
-                
-                Text("Don't have an account? Sign up.")
-                    .font(.callout)
-                    .foregroundColor(Color.blue)
+            VStack {
+                // Button to toggle SignInEmailView visibility
+                Button(action: {
+                    withAnimation {
+                        showSignInDropdown.toggle() // Toggle the visibility
+                    }
+                }) {
+                    HStack {
+                        Text("Sign in with email")
+                            .font(.title3)
+                        Image(systemName: showSignInDropdown ? "chevron.up" : "chevron.down")
+                    }
                     .frame(height:55)
                     .frame(maxWidth:.infinity)
+                }
+                
+                if showSignInDropdown {
+                    SignInEmailView(showSignInView: $showSignInView)
+                    
+                    NavigationLink{
+                        SignUpEmailView(showSignInView: $showSignInView)
+                    } label: {
+                        Text("Don't have an account? Sign up.")
+                            .font(.callout)
+                            .foregroundColor(Color.primary)
+                            .frame(height:55)
+                            .frame(maxWidth:.infinity)
+                    }
+                }
             }
-            
-            LabelledDivider(label: "Or continue with", color: Color.primary)
+
+            LabelledDivider(label: "Or continue with", color: .accentColor)
             ssoOptions
             
-            //            Spacer()
+            Spacer()
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
@@ -62,7 +85,6 @@ struct AuthenticationView: View {
         .background(Color("AppBackgroundColor"))
     }
 }
-
 
 extension AuthenticationView {
     
@@ -98,8 +120,8 @@ extension AuthenticationView {
             })
             .frame(height:55)
             .overlay(
-                RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
-                    .stroke(Color.black, lineWidth: 1) // Set the border color and thickness
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black, lineWidth: 1)
             )
         }
     }

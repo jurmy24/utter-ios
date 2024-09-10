@@ -31,12 +31,12 @@ struct SignUpEmailView: View {
             TextField("Email...", text:$viewModel.email)
                 .padding()
                 .background(Color.gray.opacity(0.4))
-                .cornerRadius(10)
+                .cornerRadius(8)
             
             SecureField("Password...", text:$viewModel.password)
                 .padding()
                 .background(Color.gray.opacity(0.4))
-                .cornerRadius(10)
+                .cornerRadius(8)
             
             Button {
                 Task {
@@ -55,7 +55,7 @@ struct SignUpEmailView: View {
                     .frame(height:55)
                     .frame(maxWidth:.infinity)
                     .background(Color.blue)
-                    .cornerRadius(10)
+                    .cornerRadius(8)
             }
             
             Spacer()

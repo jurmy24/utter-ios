@@ -23,9 +23,9 @@ struct ContinueWithGoogle: View {
         .frame(height:55)
         .frame(maxWidth:.infinity)
         .background(Color.white)
-        .cornerRadius(10)
+        .cornerRadius(8)
         .overlay(
-                    RoundedRectangle(cornerRadius: 10) // Matching radius for the border
+                    RoundedRectangle(cornerRadius: 8) // Matching radius for the border
                         .stroke(Color.black, lineWidth: 1) // Blue border with width 2
                 )
     }
