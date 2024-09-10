@@ -33,31 +33,36 @@ struct SignInEmailView: View {
     
     var body: some View {
         VStack{
-            // Email field
-            TextField("Email", text:$viewModel.email)
-                .autocapitalization(.none)
-                .keyboardType(.emailAddress)
-                .padding()
-                .background(Color("FieldBackground"))
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
-                        .stroke(Color("FieldBorder"), lineWidth: 1) // Set the border color and thickness
-                )
+            // Email Field with Icon
+            HStack {
+                Image(systemName: "envelope") // Email icon
+                    .foregroundColor(.accentColor)
+                TextField("Email", text: $viewModel.email)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+            }
+            .padding()
+            .background(Color("FieldBackground"))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
+                    .stroke(Color("FieldBorder"), lineWidth: 1) // Set the border color and thickness
+            )
             
-            // Password field
+            // Password field with icon
             HStack {
                 if isPasswordVisible {
-                    // Show TextField for visible password
+                    Image(systemName: "lock")
+                        .foregroundColor(.accentColor)
                     TextField("Password", text: $viewModel.password)
                         .autocapitalization(.none)
-                        .padding()
                         .cornerRadius(8)
                 } else {
+                    Image(systemName: "lock") // Password icon
+                        .foregroundColor(.accentColor)
                     // Show SecureField for hidden password
                     SecureField("Password", text: $viewModel.password)
                         .autocapitalization(.none)
-                        .padding()
                         .cornerRadius(8)
                 }
                 
@@ -67,10 +72,9 @@ struct SignInEmailView: View {
                 }) {
                     Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
                 }
-                .padding(.trailing, 10)
-                .padding(.vertical, 10)
-                .foregroundColor(Color.primary)
+                .foregroundColor(.accentColor)
             }
+            .padding()
             .background(Color("FieldBackground"))
             .cornerRadius(8)
             .overlay(

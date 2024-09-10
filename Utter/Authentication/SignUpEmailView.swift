@@ -11,12 +11,19 @@ import SwiftUI
 final class SignUpEmailViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var confirmPassword = ""
     
     func signUp() async throws {
-        guard !email.isEmpty, !password.isEmpty else {
+        guard !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
             print("No email or password found!")
             return
         }
+        
+        guard password == confirmPassword else {
+            print("Passwords don't match!")
+            return
+        }
+        
         let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
         print("Successfully created a new user!")
         print(returnedUserData)
@@ -24,19 +31,100 @@ final class SignUpEmailViewModel: ObservableObject {
 }
 
 struct SignUpEmailView: View {
+    
     @StateObject private var viewModel = SignUpEmailViewModel()
     @Binding var showSignInView: Bool
+    @State private var isPasswordVisible: Bool = false
+    
     var body: some View {
         VStack{
-            TextField("Email...", text:$viewModel.email)
-                .padding()
-                .background(Color.gray.opacity(0.4))
-                .cornerRadius(8)
             
-            SecureField("Password...", text:$viewModel.password)
+            Text("Join the Utter community to learn your language with interactive stories!")
+                .font(.headline)
+                .foregroundColor(.accentColor)
                 .padding()
-                .background(Color.gray.opacity(0.4))
-                .cornerRadius(8)
+            
+            // Email Field with Icon
+            HStack {
+                Image(systemName: "envelope") // Email icon
+                    .foregroundColor(.accentColor)
+                TextField("Email", text: $viewModel.email)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+            }
+            .padding()
+            .background(Color("FieldBackground"))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
+                    .stroke(Color("FieldBorder"), lineWidth: 1) // Set the border color and thickness
+            )
+            
+            // Password field with icon
+            HStack {
+                if isPasswordVisible {
+                    Image(systemName: "lock")
+                        .foregroundColor(.accentColor)
+                    TextField("Password", text: $viewModel.password)
+                        .autocapitalization(.none)
+                        .cornerRadius(8)
+                } else {
+                    Image(systemName: "lock") // Password icon
+                        .foregroundColor(.accentColor)
+                    // Show SecureField for hidden password
+                    SecureField("Password", text: $viewModel.password)
+                        .autocapitalization(.none)
+                        .cornerRadius(8)
+                }
+                
+                // Eye icon to toggle password visibility
+                Button(action: {
+                    isPasswordVisible.toggle()
+                }) {
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                }
+                .foregroundColor(.accentColor)
+            }
+            .padding()
+            .background(Color("FieldBackground"))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("FieldBorder"), lineWidth: 1)
+            )
+            
+            // Password field with icon
+            HStack {
+                if isPasswordVisible {
+                    Image(systemName: "lock")
+                        .foregroundColor(.accentColor)
+                    TextField("Confirm Password", text: $viewModel.confirmPassword)
+                        .autocapitalization(.none)
+                        .cornerRadius(8)
+                } else {
+                    Image(systemName: "lock") // Password icon
+                        .foregroundColor(.accentColor)
+                    // Show SecureField for hidden password
+                    SecureField("Confirm Password", text: $viewModel.confirmPassword)
+                        .autocapitalization(.none)
+                        .cornerRadius(8)
+                }
+                
+                // Eye icon to toggle password visibility
+                Button(action: {
+                    isPasswordVisible.toggle()
+                }) {
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                }
+                .foregroundColor(.accentColor)
+            }
+            .padding()
+            .background(Color("FieldBackground"))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("FieldBorder"), lineWidth: 1)
+            )
             
             Button {
                 Task {
@@ -54,14 +142,17 @@ struct SignUpEmailView: View {
                     .foregroundColor(.white)
                     .frame(height:55)
                     .frame(maxWidth:.infinity)
-                    .background(Color.blue)
+                    .background(Color("ButtonColor"))
                     .cornerRadius(8)
             }
             
             Spacer()
         }
         .padding()
-        .navigationTitle("Sign Up With Email")
+        .navigationTitle("Welcome to Utter")
+        .navigationBarTitleDisplayMode(.inline)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("AppBackgroundColor"))
     }
 }
 
