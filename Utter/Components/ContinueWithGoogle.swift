@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContinueWithGoogle: View {
-    @Environment(\.colorScheme) var colorScheme
+    
     
     var body: some View {
         HStack{
@@ -18,15 +18,15 @@ struct ContinueWithGoogle: View {
                 .frame(width:30, height:30)
             Text("Continue with Google")
                 .font(.title3)
-                .foregroundColor(Color.primary)
+                .foregroundColor(Color.black)
         }
         .frame(height:55)
         .frame(maxWidth:.infinity)
-        .background(colorScheme == .dark ? Color.blue : Color.white)
+        .background(Color.white)
         .cornerRadius(10)
         .overlay(
                     RoundedRectangle(cornerRadius: 10) // Matching radius for the border
-                        .stroke(Color.secondary, lineWidth: 1) // Blue border with width 2
+                        .stroke(Color.black, lineWidth: 1) // Blue border with width 2
                 )
     }
 }

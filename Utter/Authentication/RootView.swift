@@ -11,26 +11,27 @@ struct RootView: View {
     
     @State private var showSignInView: Bool = false
     
-    var body: some View { 
+    var body: some View {
+        // Conditionally display the settings page if the user is logged in
         ZStack {
             if !showSignInView {
                 NavigationStack {
                     SettingsView(showSignInView: $showSignInView)
                 }
             }
-        
         }
         .onAppear{
+            // Check if user is logged in using the auth manager and update showSignInView
             let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
             self.showSignInView = authUser == nil ? true : false
         }
         .fullScreenCover(isPresented: $showSignInView) {
+            // Display a full screen cover of the sign in page if the user is not signed in
             NavigationStack {
                 AuthenticationView(showSignInView: $showSignInView)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Full-screen frame
-        .background(Color("AppBackgroundColor")) // Set background color to purple
+        .background(Color("AppBackgroundColor"))
         
     }
 }

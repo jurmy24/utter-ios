@@ -9,13 +9,9 @@ import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
 
-
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
-    
-    @Published var didSignInWithApple: Bool = false
-    let signInAppleHelper = SignInAppleHelper()
-    
+    /* View model to manage login button presses */
     
     func signInGoogle() async throws {
         let helper = SignInGoogleHelper()
@@ -28,8 +24,6 @@ final class AuthenticationViewModel: ObservableObject {
         let tokens = try await helper.startSignInWithAppleFlow()
         try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
     }
-    
-    
 }
 
 
@@ -57,10 +51,9 @@ struct AuthenticationView: View {
             LabelledDivider(label: "Or continue with", color: Color.primary)
             ssoOptions
             
-//            Spacer()
+            //            Spacer()
         }
         .padding()
-        .navigationTitle("Sign In")
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("AppBackgroundColor"))
@@ -86,6 +79,7 @@ extension AuthenticationView {
                 ContinueWithGoogle()
             })
             
+            
             Button(action: {
                 Task {
                     do {
@@ -96,14 +90,18 @@ extension AuthenticationView {
                     }
                 }
             }, label: {
-                SignInWithAppleButtonViewRepresentable(type: .continue, style: .black)
+                SignInWithAppleButtonViewRepresentable(type: .continue, style: .white)
                     .allowsHitTesting(false)
             })
             .frame(height:55)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
+                    .stroke(Color.black, lineWidth: 1) // Set the border color and thickness
+            )
         }
     }
 }
-    
+
 #Preview {
     NavigationStack{
         AuthenticationView(showSignInView: .constant(false))
