@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct HorizontalProgressBar: View {
+    let chapters: Int
+    let chaptersRead: Int
+    let lineThickness: CGFloat
+    let color: Color
+    let cornerRadius: CGFloat = 5
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            HStack(spacing: 4) {
+                ForEach(0..<chapters, id: \.self) { index in
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(index < chaptersRead ? color : Color.gray.opacity(0.3))
+                        .frame(width: (geometry.size.width / CGFloat(chapters)) - 4, height: lineThickness)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    HorizontalProgressBar()
+    HorizontalProgressBar(chapters: 3, chaptersRead: 2, lineThickness: 10, color: .accentColor)
 }
+

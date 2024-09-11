@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct StoryBlob: View {
-    var storyTitle: String
-    var numberOfChapters: Int
+    let level: Int
+    let isLocked: Bool
+    let storyTitle: String
+    let numberOfChapters: Int
     var completedChapters: Int
+    let size: CGFloat // This determines the overall size of the blob
     
     @State private var isBookOpen = false // State to track if the book is open or closed
     
@@ -20,74 +23,49 @@ struct StoryBlob: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: size * 0.05) { // Adjust spacing based on size
             ZStack {
                 // Circular Progress Bar around the Blob
                 CircularProgressBarView(
                     total: numberOfChapters,
                     completed: completedChapters,
                     color: Color("ButtonColor"),
-                    lineWidth: 15 // Adjust the width of the progress bar
+                    lineWidth: size * 0.08 // Line width based on size (e.g., 8% of the size)
                 )
-                .frame(width: 180, height: 180) // Adjust size to wrap around the circle
+                .frame(width: size, height: size) // Overall size of the progress bar
                 
-                if !isStoryComplete{
-                    // Circular Blob with Gradient Background
-                    Circle()
-                        .fill(Color("StoryIncompleteBackground"))
-                        .frame(width: 150, height: 150)
-                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 5)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 3)
-                        )
-                        .overlay(
-                            Image(systemName: isBookOpen ? "book.fill" : "book.closed.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 70, height: 70)
-                                .foregroundColor(Color("ButtonColor"))
-                        )
-                        .onTapGesture {
-                            withAnimation {
-                                isBookOpen.toggle()
-                            }
+                // Blob Circle
+                Circle()
+                    .fill(isLocked ? Color.gray: Color("StoryIncompleteBackground"))
+                    .frame(width: size * 0.85, height: size * 0.85) // Blob size (85% of total size)
+                    .shadow(color: .gray.opacity(0.5), radius: size * 0.1, x: 0, y: size * 0.02) // Shadow based on size
+                    .overlay(
+                        Circle()
+                            .stroke(Color.white, lineWidth: size * 0.02) // Stroke width proportional to size
+                    )
+                    .overlay(
+                        Image(systemName: isBookOpen ? "book.fill" : "book.closed.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: size * 0.45, height: size * 0.45) // Icon size based on size (45% of total)
+                            .foregroundColor(isLocked ? Color.black: (isStoryComplete ? .white.opacity(0.3) : Color("ButtonColor")))
+                    )
+                    .onTapGesture {
+                        withAnimation {
+                            isBookOpen.toggle()
                         }
-                } else {
-                    // Circular Blob with Gradient Background
-                    Circle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]),
-                                             startPoint: .top, endPoint: .bottom))
-                        .frame(width: 150, height: 150)
-                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 5)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 3)
-                        )
-                        .overlay(
-                            Image(systemName: isBookOpen ? "book.fill" : "book.closed.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 70, height: 70)
-                                .foregroundColor(.white.opacity(0.3))
-                        )
-                        .onTapGesture {
-                            withAnimation {
-                                isBookOpen.toggle()
-                            }
-                        }
-                }
+                    }
             }
             
             // Story Title Below the Circle
             Text(storyTitle)
-                .font(.headline)
-                .foregroundColor(.primary)
+                .font(.system(size: size * 0.1, weight: .bold)) // Font size based on size (10% of total)
+                .foregroundColor(isLocked ? Color.gray : .primary)
         }
-        .padding()
+        .padding(size * 0.1) // Padding proportional to size
     }
 }
 
 #Preview {
-    StoryBlob(storyTitle: "The Great Adventure", numberOfChapters: 3, completedChapters: 2)
+    StoryBlob(level: 1, isLocked: true, storyTitle: "The Great Adventure", numberOfChapters: 3, completedChapters: 0, size: 200)
 }
