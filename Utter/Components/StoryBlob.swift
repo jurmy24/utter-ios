@@ -23,7 +23,7 @@ struct StoryBlob: View {
     var completedChapters: Int
     let size: CGFloat
     
-    @StateObject private var viewModel = StoryBlobModel()
+    @StateObject private var storyModel = StoryBlobModel()
     
     // Computed property to check if the story is complete
     var isStoryComplete: Bool {
@@ -40,7 +40,7 @@ struct StoryBlob: View {
                         ZStack{
                             Circle()
                                 .stroke(Color.white, lineWidth: size * 0.02)
-                            Image(systemName: viewModel.isBookOpen ? "book.fill" : "book.closed.fill")
+                            Image(systemName: storyModel.isBookOpen ? "book.fill" : "book.closed.fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: size * 0.45, height: size * 0.45)
@@ -48,7 +48,7 @@ struct StoryBlob: View {
                         }
                         
                     )
-                    
+                
                 // Circular Progress Bar around the Blob
                 CircularProgressBarView(
                     total: numberOfChapters,
@@ -62,13 +62,15 @@ struct StoryBlob: View {
             
             .onTapGesture {
                 withAnimation {
-                    viewModel.isBookOpen.toggle()
-                    viewModel.showTooltip.toggle()
+                    // Toggle book opening
+                    storyModel.isBookOpen.toggle()
+                    // Update showTooltip based on the active ID
+                    storyModel.showTooltip.toggle()
                 }
             }
             .overlay(
                 StoryToolTip(
-                    showTooltip: $viewModel.showTooltip,
+                    showTooltip: $storyModel.showTooltip,
                     storyTitle: storyTitle,
                     storyDescription: storyDescription,
                     chapters: numberOfChapters,
