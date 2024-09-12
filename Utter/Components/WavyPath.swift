@@ -69,4 +69,3 @@ struct WavyPath: View {
         CGPoint(x: 0.3, y: 0.7),
     ], color: .blue, thickness: 30)
 }
-

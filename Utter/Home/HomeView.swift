@@ -28,66 +28,72 @@ final class HomeViewModel: ObservableObject {
 struct HomeView: View {
     
     @StateObject private var viewModel = HomeViewModel()
-
+    
     var body: some View {
         VStack(spacing: 20) {
             // First button
-            Button(action: {
-                viewModel.toggleTooltip(for: 1)
-            }) {
-                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
-            }
-            .overlay(
-                StoryToolTip(
-                    showTooltip: Binding(
-                        get: { viewModel.activeTooltip == 1 },  // Show tooltip if activeTooltip is 1
-                        set: { if !$0 { viewModel.activeTooltip = nil } }
-                    ),
-                    storyTitle: "Level 1",
-                    storyDescription: "This is the first level.",
-                    chapters: 4,
-                    chaptersRead: 1
-                )
-            )
-
-            // Second button
-            Button(action: {
-                viewModel.toggleTooltip(for: 2)
-            }) {
-                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
-            }
-            .overlay(
-                StoryToolTip(
-                    showTooltip: Binding(
-                        get: { viewModel.activeTooltip == 2 },  // Show tooltip if activeTooltip is 2
-                        set: { if !$0 { viewModel.activeTooltip = nil } }
-                    ),
-                    storyTitle: "Level 2",
-                    storyDescription: "This is the second level.",
-                    chapters: 5,
-                    chaptersRead: 2
-                )
-            )
             
-
-            // Third button
-            Button(action: {
-                viewModel.toggleTooltip(for: 3)
-            }) {
-                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
-            }
-            .overlay(
-                StoryToolTip(
-                    showTooltip: Binding(
-                        get: { viewModel.activeTooltip == 3 },  // Show tooltip if activeTooltip is 3
-                        set: { if !$0 { viewModel.activeTooltip = nil } }
-                    ),
-                    storyTitle: "Level 3",
-                    storyDescription: "This is the third level.",
-                    chapters: 6,
-                    chaptersRead: 3
-                )
-            )
+            
+            StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", storyDescription: "Zlatan Ibrahimovic's life and experience.", numberOfChapters: 4, completedChapters: 3, size: 100)
+            
+            StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", storyDescription: "Zlatan Ibrahimovic's life and experience.", numberOfChapters: 4, completedChapters: 3, size: 100)
+            
+            StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", storyDescription: "Zlatan Ibrahimovic's life and experience.", numberOfChapters: 4, completedChapters: 3, size: 100)
+            
+//            
+//            // Second button
+//            Button(action: {
+//                viewModel.toggleTooltip(for: 2)
+//            }) {
+//                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
+//            }
+//            .overlay(
+//                StoryToolTip(
+//                    showTooltip: Binding(
+//                        get: { viewModel.activeTooltip == 2 },  // Show tooltip if activeTooltip is 2
+//                        set: { if !$0 { viewModel.activeTooltip = nil } }
+//                    ),
+//                    storyTitle: "Level 2",
+//                    storyDescription: "This is the second level.",
+//                    chapters: 5,
+//                    chaptersRead: 2
+//                )
+//            )
+//            
+//            
+//            // Third button
+//            Button(action: {
+//                viewModel.toggleTooltip(for: 3)
+//            }) {
+//                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
+//            }
+//            .overlay(
+//                StoryToolTip(
+//                    showTooltip: Binding(
+//                        get: { viewModel.activeTooltip == 3 },  // Show tooltip if activeTooltip is 3
+//                        set: { if !$0 { viewModel.activeTooltip = nil } }
+//                    ),
+//                    storyTitle: "Level 3",
+//                    storyDescription: "This is the third level.",
+//                    chapters: 6,
+//                    chaptersRead: 3
+//                )
+//            )
+            
+            
+            // An option for displaying StoryBlobs at specific points
+//            ForEach(normalizedCenters.indices, id: \.self) { i in
+//                let center = normalizedCenters[i]
+//                let circleDiameter = geometry.size.width / 4
+//                let circleFrameSize = CGSize(width: circleDiameter, height: circleDiameter)
+//                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 3, completedChapters: 2, size: circleDiameter)
+//                    .offset(
+//                        x: center.x - circleFrameSize.width / 2,
+//                        y: center.y - circleFrameSize.height / 2
+//                    )
+//            }
+            
+            
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

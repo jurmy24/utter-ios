@@ -22,6 +22,7 @@ struct StoryToolTip: View {
             backgroundColor: Color("AccentColor")
         ) {
             VStack(alignment: .leading, spacing: 10) {
+                
                 // Horizontal progress bar with customizable data
                 HorizontalProgressBar(chapters: chapters, chaptersRead: chaptersRead, lineThickness: 10, color: Color("AppBackgroundColor"))
                 
@@ -35,6 +36,7 @@ struct StoryToolTip: View {
                     .frame(width: 250, alignment: .leading)
                     .font(.callout)
                     .foregroundColor(Color.white)
+                
                 
                 // Button with custom action
                 Button(action: {
@@ -57,7 +59,7 @@ struct StoryToolTip: View {
 // Main View that tracks active tooltip
 struct ContentView: View {
     @State private var activeTooltip: Int? = nil // Track active tooltip by ID
-
+    
     var body: some View {
         VStack(spacing: 20) {
             // First button
@@ -65,7 +67,8 @@ struct ContentView: View {
                 toggleTooltip(for: 1)
                 
             }) {
-                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
+                Text("Test")
+                //                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
             }
             .overlay(
                 StoryToolTip(
@@ -79,12 +82,13 @@ struct ContentView: View {
                     chaptersRead: 1
                 )
             )
-
+            
             // Second button
             Button(action: {
                 toggleTooltip(for: 2)
             }) {
-                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
+                Text("Test 2")
+                //                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
             }
             .overlay(
                 StoryToolTip(
@@ -99,12 +103,13 @@ struct ContentView: View {
                 )
             )
             
-
+            
             // Third button
             Button(action: {
                 toggleTooltip(for: 3)
             }) {
-                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
+                Text("Test 3")
+                //                StoryBlob(level: 1, isLocked: true, storyTitle: "Zlatan", numberOfChapters: 4, completedChapters: 3, size: 100)
             }
             .overlay(
                 StoryToolTip(
@@ -121,7 +126,7 @@ struct ContentView: View {
         }
         .padding()
     }
-
+    
     // Toggle tooltip visibility based on the provided ID
     private func toggleTooltip(for id: Int) {
         if activeTooltip == id {

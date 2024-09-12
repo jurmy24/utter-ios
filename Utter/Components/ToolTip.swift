@@ -75,9 +75,6 @@ struct ToolTip<Content: View>: View {
                         }
                     }
             }
-            .onTapGesture {
-                isVisible.toggle()
-            }
         }
     }
 }
