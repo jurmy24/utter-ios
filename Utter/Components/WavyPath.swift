@@ -7,13 +7,10 @@
 
 import SwiftUI
 
-struct WavyPathView: View {
-    let circleRelativeCenters = [
-        CGPoint(x: 0.5, y: 0.9),
-        CGPoint(x: 0.3, y: 0.7),
-        CGPoint(x: 0.7, y: 0.5),
-        CGPoint(x: 0.2, y: 0.3),
-    ]
+struct WavyPath: View {
+    let circleRelativeCenters: [CGPoint]
+    let color: Color
+    let thickness: CGFloat
     
     var body: some View {
         GeometryReader { geometry in
@@ -39,14 +36,14 @@ struct WavyPathView: View {
                     prevPoint = center
                 }
             }
-
+            
             // 3. Display the wavy path
             wavyPath
-                .stroke(lineWidth: 20)
-                .foregroundColor(.accentColor)
+                .stroke(lineWidth: thickness)
+                .foregroundColor(color)
             
             // 4. Create path for circles with rounded corners
-            let circlePath = Path { path in
+            let _ = Path { path in
                 let circleDiameter = geometry.size.width / 5
                 let circleFrameSize = CGSize(width: circleDiameter, height: circleDiameter)
                 let circleCornerSize = CGSize(width: circleDiameter / 2, height: circleDiameter / 2)
@@ -61,33 +58,15 @@ struct WavyPathView: View {
                     path.addRoundedRect(in: rect, cornerSize: circleCornerSize)
                 }
             }
-
-            
-            // 5. Draw StoryBlobs at each point
-            ForEach(normalizedCenters.indices, id: \.self) { i in
-                let center = normalizedCenters[i]
-                let circleDiameter = geometry.size.width / 4
-                let circleFrameSize = CGSize(width: circleDiameter, height: circleDiameter)
-                StoryBlob(level: 1, isLocked: false, storyTitle: "Zlatan", numberOfChapters: 3, completedChapters: 2, size: circleDiameter)
-                    .offset(
-                        x: center.x - circleFrameSize.width / 2,
-                        y: center.y - circleFrameSize.height / 2
-                    )
-            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("AppBackgroundColor"))
     }
-
+    
 }
 
 #Preview {
-    //    let circleRelativeCenters = [
-    //        CGPoint(x: 0.8, y: 0.2),
-    //        CGPoint(x: 0.2, y: 0.5),
-    //        CGPoint(x: 0.8, y: 0.8),
-    //    ]
-    
-    WavyPathView()
+    WavyPath(circleRelativeCenters: [
+        CGPoint(x: 0.5, y: 0.9),
+        CGPoint(x: 0.3, y: 0.7),
+    ], color: .blue, thickness: 30)
 }
 
