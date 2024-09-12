@@ -15,7 +15,7 @@ final class HomeViewModel: ObservableObject {
     // Define the size of the StoryBlob and the vertical spacing multiplier
     let blobSize: CGFloat = 100
     // Set a multiplier for vertical spacing
-    let verticalSpacingMultiplier: CGFloat = 1.5
+    let verticalSpacingMultiplier: CGFloat = 0.9
     
     // Fixed scrollable content height (you can adjust this based on your layout)
     let contentHeight: CGFloat = 2000
@@ -25,12 +25,14 @@ final class HomeViewModel: ObservableObject {
     func generateBlobPositions() -> [CGPoint] {
         let margin = blobSize / 1.8 / screenWidth // Ensure the blob stays within bounds as a percentage of screen width
         let positions = (0..<numberOfBlobs).map { index in
-            CGPoint(
-                x: CGFloat.random(in: margin...(1 - margin)), // Random horizontal position, normalized
-                y:CGFloat(0.95) - (CGFloat(index) * (blobSize + blobSize * verticalSpacingMultiplier) / contentHeight) // Inversely spaced vertically, normalized
+            let normalizedX = (sin(CGFloat(index)) + 1) / 2 // Generates values between 0 and 1 based on index
+            let constrainedX = margin + normalizedX * (1 - 2 * margin) // Constrain x to be within [margin, 1 - margin]
+            
+            return CGPoint(
+                x: constrainedX, // Pseudo-random horizontal position based on index
+                y: CGFloat(0.95) - (CGFloat(index) * (blobSize + blobSize * verticalSpacingMultiplier) / contentHeight) // Inversely spaced vertically, normalized
             )
         }
-        print(positions)
         return positions
     }
 
@@ -43,8 +45,6 @@ struct HomeView: View {
     
     var body: some View {
         // Define relative positions for the StoryBlobs along the wavy path
-        
-        
         
         ScrollView(.vertical, content: {
             ZStack {

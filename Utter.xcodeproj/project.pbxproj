@@ -24,6 +24,8 @@
 		E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83960952C6BEA1400D8456D /* UtterApp.swift */; };
 		E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83960992C6BEA1500D8456D /* Assets.xcassets */; };
 		E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */; };
+		E854EE352C93652900BF1E33 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE342C93652900BF1E33 /* CustomTabBar.swift */; };
+		E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE382C93764F00BF1E33 /* TabBarButton.swift */; };
 		E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */; };
 		E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */; };
 		E85517702C90CE0600FEB145 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176F2C90CE0600FEB145 /* HomeView.swift */; };
@@ -55,6 +57,8 @@
 		E83960992C6BEA1500D8456D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E839609C2C6BEA1500D8456D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E83960A42C6BF90400D8456D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E854EE342C93652900BF1E33 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		E854EE382C93764F00BF1E33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 		E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
 		E855176F2C90CE0600FEB145 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -105,7 +109,6 @@
 				E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */,
 				E82E3E452C879F3E00EF9A6A /* AuthenticationManager.swift */,
 				E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */,
-				E82E3E472C87A7BE00EF9A6A /* RootView.swift */,
 				E82E3E4B2C884C1F00EF9A6A /* SignInEmailView.swift */,
 				E82E3E572C8866DF00EF9A6A /* SignInGoogleHelper.swift */,
 				E82E3E592C8DD5CA00EF9A6A /* SignInAppleHelper.swift */,
@@ -144,6 +147,7 @@
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
+				E82E3E472C87A7BE00EF9A6A /* RootView.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
 				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
@@ -163,9 +167,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		E854EE332C93651700BF1E33 /* Custom Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				E854EE342C93652900BF1E33 /* CustomTabBar.swift */,
+				E854EE382C93764F00BF1E33 /* TabBarButton.swift */,
+			);
+			path = "Custom Tab Bar";
+			sourceTree = "<group>";
+		};
 		E85517682C90CD3200FEB145 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
 				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
 				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
 				E85517712C90D07200FEB145 /* StoryBlob.swift */,
@@ -264,6 +278,7 @@
 			files = (
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
+				E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */,
 				E82E3E4A2C87AA3100EF9A6A /* SettingsView.swift in Sources */,
 				E85517852C921B8500FEB145 /* HorizontalProgressBar.swift in Sources */,
 				E855177D2C9205FC00FEB145 /* WavyPath.swift in Sources */,
@@ -276,6 +291,7 @@
 				E82E3E582C8866DF00EF9A6A /* SignInGoogleHelper.swift in Sources */,
 				E85517812C92178200FEB145 /* ToolTip.swift in Sources */,
 				E85517722C90D07200FEB145 /* StoryBlob.swift in Sources */,
+				E854EE352C93652900BF1E33 /* CustomTabBar.swift in Sources */,
 				E85517832C92191D00FEB145 /* StoryToolTip.swift in Sources */,
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
 				E82E3E4C2C884C1F00EF9A6A /* SignInEmailView.swift in Sources */,
