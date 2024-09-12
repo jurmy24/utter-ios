@@ -176,20 +176,28 @@
 			path = "Custom Tab Bar";
 			sourceTree = "<group>";
 		};
-		E85517682C90CD3200FEB145 /* Components */ = {
+		E854EE3A2C9377F700BF1E33 /* StoryBlob */ = {
 			isa = PBXGroup;
 			children = (
-				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
-				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
-				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
 				E85517712C90D07200FEB145 /* StoryBlob.swift */,
 				E85517732C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift */,
 				E85517762C90D51400FEB145 /* CircularProgressBarProgressView.swift */,
 				E85517782C90D5B200FEB145 /* CircularProgressBarView.swift */,
-				E855177C2C9205FC00FEB145 /* WavyPath.swift */,
-				E85517802C92178200FEB145 /* ToolTip.swift */,
 				E85517822C92191D00FEB145 /* StoryToolTip.swift */,
 				E85517842C921B8500FEB145 /* HorizontalProgressBar.swift */,
+			);
+			path = StoryBlob;
+			sourceTree = "<group>";
+		};
+		E85517682C90CD3200FEB145 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
+				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
+				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
+				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
+				E855177C2C9205FC00FEB145 /* WavyPath.swift */,
+				E85517802C92178200FEB145 /* ToolTip.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
