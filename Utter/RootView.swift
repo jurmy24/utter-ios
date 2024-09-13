@@ -17,8 +17,17 @@ struct RootView: View {
         ZStack {
             if !showSignInView {
                 NavigationStack {
-                    HomeView()
+                    switch selectedTab {
+                    case .home:
+                        HomeView()
+                    case .language:
+//                        LanguageView()
+                        HomeView()
+                    case .profile:
+                        ProfileView()
+                    }
                     CustomTabBar(selectedTab: $selectedTab)
+                    
                 }
             }
         }

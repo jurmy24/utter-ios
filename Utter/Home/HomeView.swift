@@ -42,7 +42,6 @@ final class HomeViewModel: ObservableObject {
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     
-    
     var body: some View {
         // Define relative positions for the StoryBlobs along the wavy path
         

@@ -27,6 +27,7 @@
 		E854EE352C93652900BF1E33 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE342C93652900BF1E33 /* CustomTabBar.swift */; };
 		E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE382C93764F00BF1E33 /* TabBarButton.swift */; };
 		E854EE3E2C9427BD00BF1E33 /* StoryPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE3D2C9427BD00BF1E33 /* StoryPopover.swift */; };
+		E854EE412C9440ED00BF1E33 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE402C9440ED00BF1E33 /* ProfileView.swift */; };
 		E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */; };
 		E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */; };
 		E85517702C90CE0600FEB145 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176F2C90CE0600FEB145 /* HomeView.swift */; };
@@ -59,6 +60,7 @@
 		E854EE342C93652900BF1E33 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E854EE382C93764F00BF1E33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		E854EE3D2C9427BD00BF1E33 /* StoryPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPopover.swift; sourceTree = "<group>"; };
+		E854EE402C9440ED00BF1E33 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 		E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
 		E855176F2C90CE0600FEB145 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -88,7 +90,6 @@
 		E827E4A62C90B58500D6D4F1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				E82E3E492C87AA3100EF9A6A /* SettingsView.swift */,
 				E855176F2C90CE0600FEB145 /* HomeView.swift */,
 			);
 			path = Home;
@@ -150,6 +151,7 @@
 				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
+				E854EE3F2C9440D200BF1E33 /* Profile */,
 				E827E4A62C90B58500D6D4F1 /* Home */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
@@ -185,6 +187,15 @@
 				E854EE3D2C9427BD00BF1E33 /* StoryPopover.swift */,
 			);
 			path = StoryBlob;
+			sourceTree = "<group>";
+		};
+		E854EE3F2C9440D200BF1E33 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E492C87AA3100EF9A6A /* SettingsView.swift */,
+				E854EE402C9440ED00BF1E33 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		E85517682C90CD3200FEB145 /* Components */ = {
@@ -298,6 +309,7 @@
 				E854EE3E2C9427BD00BF1E33 /* StoryPopover.swift in Sources */,
 				E854EE352C93652900BF1E33 /* CustomTabBar.swift in Sources */,
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
+				E854EE412C9440ED00BF1E33 /* ProfileView.swift in Sources */,
 				E82E3E4C2C884C1F00EF9A6A /* SignInEmailView.swift in Sources */,
 				E82E3E562C885FF500EF9A6A /* Utilities.swift in Sources */,
 				E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */,
