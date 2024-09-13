@@ -24,6 +24,7 @@ struct StoryBlob: View {
     let size: CGFloat
     
     @StateObject private var storyModel = StoryBlobModel()
+    @State private var isShowingPopover = false
     
     // Computed property to check if the story is complete
     var isStoryComplete: Bool {
@@ -40,7 +41,7 @@ struct StoryBlob: View {
                         ZStack{
                             Circle()
                                 .stroke(Color.white, lineWidth: size * 0.02)
-                            Image(systemName: storyModel.isBookOpen ? "book.fill" : "book.closed.fill")
+                            Image(systemName: self.isShowingPopover ? "book.fill" : "book.closed.fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: size * 0.45, height: size * 0.45)
@@ -66,17 +67,18 @@ struct StoryBlob: View {
                     storyModel.isBookOpen.toggle()
                     // Update showTooltip based on the active ID
                     storyModel.showTooltip.toggle()
+                    self.isShowingPopover.toggle()
                 }
             }
-            .overlay(
-                StoryToolTip(
-                    showTooltip: $storyModel.showTooltip,
+            .popover(
+                isPresented: $isShowingPopover, arrowEdge: .top
+            ) {
+                StoryPopover(
                     storyTitle: storyTitle,
                     storyDescription: storyDescription,
                     chapters: numberOfChapters,
-                    chaptersRead: completedChapters
-                )
-            )
+                    chaptersRead: completedChapters)
+            }
             
             // Story Title
             Text(storyTitle)

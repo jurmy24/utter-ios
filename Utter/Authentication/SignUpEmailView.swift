@@ -57,7 +57,7 @@ struct SignUpEmailView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8) // Create a rounded rectangle for the border
-                    .stroke(Color("FieldBorder"), lineWidth: 1) // Set the border color and thickness
+                    .stroke(Color("ReverseAccent"), lineWidth: 1) // Set the border color and thickness
             )
             
             // Password field with icon
@@ -90,7 +90,7 @@ struct SignUpEmailView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color("FieldBorder"), lineWidth: 1)
+                    .stroke(Color("ReverseAccent"), lineWidth: 1)
             )
             
             // Password field with icon
@@ -123,7 +123,7 @@ struct SignUpEmailView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color("FieldBorder"), lineWidth: 1)
+                    .stroke(Color("ReverseAccent"), lineWidth: 1)
             )
             
             Button {

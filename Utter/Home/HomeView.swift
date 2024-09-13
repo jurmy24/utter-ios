@@ -71,6 +71,7 @@ struct HomeView: View {
                         x: position.x * UIScreen.main.bounds.width, // Width is screen-based
                         y: position.y * viewModel.contentHeight // Height is based on scrollable area
                     )
+                    .zIndex(1/Double(index)) // ensures that the toggled storytooltips are above anything over it
                 }
             }
             .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight) // Set the scrollable content size
