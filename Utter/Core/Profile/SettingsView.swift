@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
 struct SettingsView: View {
+    
     
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
-    
     var body: some View {
         List {
             Button("Log Out") {
@@ -36,6 +35,13 @@ struct SettingsView: View {
     }
 }
 
+#Preview {
+    NavigationStack{
+        SettingsView(showSignInView: .constant(false))
+    }
+    
+}
+
 extension SettingsView {
     private var emailSection: some View {
         Section {
@@ -53,12 +59,4 @@ extension SettingsView {
             Text("Email functions")
         }
     }
-}
-
-
-#Preview {
-    NavigationStack{
-        SettingsView(showSignInView: .constant(false))
-    }
-    
 }
