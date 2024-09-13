@@ -29,6 +29,11 @@
 		E854EE3E2C9427BD00BF1E33 /* StoryPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE3D2C9427BD00BF1E33 /* StoryPopover.swift */; };
 		E854EE412C9440ED00BF1E33 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE402C9440ED00BF1E33 /* ProfileView.swift */; };
 		E854EE432C94B06100BF1E33 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E854EE422C94B06100BF1E33 /* FirebaseFirestore */; };
+		E854EE472C94B1CD00BF1E33 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE462C94B1CD00BF1E33 /* AuthenticationViewModel.swift */; };
+		E854EE4A2C94B21C00BF1E33 /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE492C94B21C00BF1E33 /* SignInEmailViewModel.swift */; };
+		E854EE4C2C94B23E00BF1E33 /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE4B2C94B23E00BF1E33 /* SignUpEmailViewModel.swift */; };
+		E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */; };
+		E854EE502C94B2CD00BF1E33 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE4F2C94B2CD00BF1E33 /* SettingsViewModel.swift */; };
 		E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */; };
 		E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */; };
 		E85517702C90CE0600FEB145 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176F2C90CE0600FEB145 /* HomeView.swift */; };
@@ -62,6 +67,11 @@
 		E854EE382C93764F00BF1E33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		E854EE3D2C9427BD00BF1E33 /* StoryPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPopover.swift; sourceTree = "<group>"; };
 		E854EE402C9440ED00BF1E33 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E854EE462C94B1CD00BF1E33 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		E854EE492C94B21C00BF1E33 /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
+		E854EE4B2C94B23E00BF1E33 /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E854EE4F2C94B2CD00BF1E33 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 		E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
 		E855176F2C90CE0600FEB145 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -93,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				E855176F2C90CE0600FEB145 /* HomeView.swift */,
+				E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -107,10 +118,7 @@
 		E82E3E3D2C879A3700EF9A6A /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */,
 				E82E3E452C879F3E00EF9A6A /* AuthenticationManager.swift */,
-				E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */,
-				E82E3E4B2C884C1F00EF9A6A /* SignInEmailView.swift */,
 				E82E3E572C8866DF00EF9A6A /* SignInGoogleHelper.swift */,
 				E82E3E592C8DD5CA00EF9A6A /* SignInAppleHelper.swift */,
 			);
@@ -148,13 +156,11 @@
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
-				E82E3E472C87A7BE00EF9A6A /* RootView.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
+				E854EE442C94B19300BF1E33 /* Core */,
 				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
-				E854EE3F2C9440D200BF1E33 /* Profile */,
-				E827E4A62C90B58500D6D4F1 /* Home */,
 				E83960992C6BEA1500D8456D /* Assets.xcassets */,
 				E839609B2C6BEA1500D8456D /* Preview Content */,
 			);
@@ -196,8 +202,41 @@
 			children = (
 				E82E3E492C87AA3100EF9A6A /* SettingsView.swift */,
 				E854EE402C9440ED00BF1E33 /* ProfileView.swift */,
+				E854EE4F2C94B2CD00BF1E33 /* SettingsViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		E854EE442C94B19300BF1E33 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E472C87A7BE00EF9A6A /* RootView.swift */,
+				E854EE452C94B1AD00BF1E33 /* Authentication */,
+				E827E4A62C90B58500D6D4F1 /* Home */,
+				E854EE3F2C9440D200BF1E33 /* Profile */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E854EE452C94B1AD00BF1E33 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */,
+				E854EE462C94B1CD00BF1E33 /* AuthenticationViewModel.swift */,
+				E854EE482C94B1ED00BF1E33 /* Subviews */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		E854EE482C94B1ED00BF1E33 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E4B2C884C1F00EF9A6A /* SignInEmailView.swift */,
+				E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */,
+				E854EE492C94B21C00BF1E33 /* SignInEmailViewModel.swift */,
+				E854EE4B2C94B23E00BF1E33 /* SignUpEmailViewModel.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		E85517682C90CD3200FEB145 /* Components */ = {
@@ -305,8 +344,11 @@
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
 				E85517792C90D5B200FEB145 /* CircularProgressBarView.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
+				E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */,
 				E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */,
+				E854EE4C2C94B23E00BF1E33 /* SignUpEmailViewModel.swift in Sources */,
 				E82E3E482C87A7BE00EF9A6A /* RootView.swift in Sources */,
+				E854EE472C94B1CD00BF1E33 /* AuthenticationViewModel.swift in Sources */,
 				E82E3E582C8866DF00EF9A6A /* SignInGoogleHelper.swift in Sources */,
 				E85517722C90D07200FEB145 /* StoryBlob.swift in Sources */,
 				E854EE3E2C9427BD00BF1E33 /* StoryPopover.swift in Sources */,
@@ -318,6 +360,8 @@
 				E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */,
 				E82E3E442C879C0F00EF9A6A /* SignUpEmailView.swift in Sources */,
 				E85517772C90D51400FEB145 /* CircularProgressBarProgressView.swift in Sources */,
+				E854EE4A2C94B21C00BF1E33 /* SignInEmailViewModel.swift in Sources */,
+				E854EE502C94B2CD00BF1E33 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

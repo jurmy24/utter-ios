@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-@MainActor
-final class SignUpEmailViewModel: ObservableObject {
-    @Published var email = ""
-    @Published var password = ""
-    @Published var confirmPassword = ""
-    
-    func signUp() async throws {
-        guard !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
-            print("No email or password found!")
-            return
-        }
-        
-        guard password == confirmPassword else {
-            print("Passwords don't match!")
-            return
-        }
-        
-        let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
-        print("Successfully created a new user!")
-        print(returnedUserData)
-    }
-}
 
 struct SignUpEmailView: View {
     
