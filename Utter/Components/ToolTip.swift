@@ -28,11 +28,29 @@ class TooltipViewModel: ObservableObject {
         return centerOffsetX
     }
     
-    func computeArrowHorizontalOffset(tooltipWidth: CGFloat, parentWidth: CGFloat) -> CGFloat {
-            // Calculate the arrow's horizontal position relative to the parent
-            let arrowCenterOffset = (parentWidth / 2) - (tooltipWidth / 2)
-            return arrowCenterOffset
+    func computeArrowHorizontalOffset(screenWidth: CGFloat, tooltipWidth: CGFloat, parentWidth: CGFloat, tooltipX: CGFloat, horizontalOffset: CGFloat) -> CGFloat {
+        // Calculate the original center offset when the tooltip is perfectly centered over the parent
+        let originalCenterOffsetX = -(tooltipWidth / 2) + (parentWidth / 2)
+        
+        // Initialize the arrow offset with the horizontal offset
+        var arrowOffset = 0.0
+        
+        // Calculate the leftmost and rightmost positions of the tooltip
+        let leftMost = tooltipX + originalCenterOffsetX
+        let rightMost = tooltipX + originalCenterOffsetX + tooltipWidth
+        
+        // Adjust the arrow offset if the tooltip goes off the left edge of the screen
+        if leftMost < 0 {
+            arrowOffset += leftMost / 2
         }
+        
+        // Adjust the arrow offset if the tooltip goes off the right edge of the screen
+        if rightMost > screenWidth {
+            arrowOffset += (rightMost - screenWidth) / 2
+        }
+    
+        return arrowOffset
+    }
 }
 
 struct ToolTip<Content: View>: View {
@@ -61,19 +79,6 @@ struct ToolTip<Content: View>: View {
             .background(backgroundColor)
             .foregroundColor(.white)
             .cornerRadius(20)
-            .background(alignment: oppositeAlignment) {
-                // The arrow is a square that is rotated by 45 degrees
-                Rectangle()
-                    .fill(backgroundColor)
-                    .frame(width: 22, height: 22)
-                    .rotationEffect(.degrees(45))
-                    .offset(x: alignment == .leading ? arrowOffset : 0)
-                    .offset(x: alignment == .trailing ? -arrowOffset : 0)
-                    .offset(y: alignment == .top ? arrowOffset : 0)
-                    .offset(y: alignment == .bottom ? -arrowOffset : 0)
-            }
-            .padding()
-            .fixedSize()
     }
     
     var body: some View {
@@ -81,7 +86,21 @@ struct ToolTip<Content: View>: View {
             GeometryReader { proxy1 in
                 // Use a hidden version of the hint to form the footprint
                 theTip
+                    .background(alignment: oppositeAlignment) {
+                        // The arrow is a square that is rotated by 45 degrees
+                        Rectangle()
+                            .fill(backgroundColor)
+                            .frame(width: 22, height: 22)
+                            .rotationEffect(.degrees(45))
+                            .offset(x: alignment == .leading ? arrowOffset : 0)
+                            .offset(x: alignment == .trailing ? -arrowOffset : 0)
+                            .offset(y: alignment == .top ? arrowOffset : 0)
+                            .offset(y: alignment == .bottom ? -arrowOffset : 0)
+                    }
+                    .padding()
+                    .fixedSize()
                     .hidden()
+                    
                     .overlay {
                         GeometryReader { proxy2 in
                             
@@ -94,10 +113,23 @@ struct ToolTip<Content: View>: View {
                             
                             // Calculate horizontal offset and arrow adjustments using ViewModel
                             let adjustedOffsetX = viewModel.computeHorizontalOffset(screenWidth: screenWidth, tooltipWidth: tooltipWidth, parentWidth: parentWidth, tooltipX: tooltipX)
-                            let arrowCenterOffset = viewModel.computeArrowHorizontalOffset(tooltipWidth: tooltipWidth, parentWidth: parentWidth)
+                            let arrowCenterOffset = viewModel.computeArrowHorizontalOffset(screenWidth: screenWidth, tooltipWidth: tooltipWidth, parentWidth: parentWidth, tooltipX: tooltipX, horizontalOffset: adjustedOffsetX)
                             
                             // The visible version of the hint
                             theTip
+                                .background(alignment: oppositeAlignment) {
+                                    // The arrow is a square that is rotated by 45 degrees
+                                    Rectangle()
+                                        .fill(backgroundColor)
+                                        .frame(width: 22, height: 22)
+                                        .rotationEffect(.degrees(45))
+                                        .offset(x: alignment == .leading ? arrowOffset : arrowCenterOffset)
+                                        .offset(x: alignment == .trailing ? -arrowOffset : arrowCenterOffset)
+                                        .offset(y: alignment == .top ? arrowOffset : 0)
+                                        .offset(y: alignment == .bottom ? -arrowOffset : 0)
+                                }
+                                .padding()
+                                .fixedSize()
                                 .drawingGroup()
                                 .shadow(radius: 4)
 
