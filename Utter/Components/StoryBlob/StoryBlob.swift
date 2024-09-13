@@ -35,7 +35,10 @@ struct StoryBlob: View {
         VStack(spacing: size * 0.05) { // Adjust spacing based on size
             ZStack {
                 Circle()
-                    .fill(isLocked ? Color.gray: Color("StoryIncompleteBackground"))
+                    .fill(
+                        isLocked ? Color("LockedLevelBackground"):
+                            (isStoryComplete ? Color("ButtonColor") : 
+                                Color("StoryIncompleteBackground")))
                     .frame(width: size * 0.82, height: size * 0.82)
                     .overlay(
                         ZStack{
@@ -45,7 +48,7 @@ struct StoryBlob: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: size * 0.45, height: size * 0.45)
-                                .foregroundColor(isLocked ? Color.black: (isStoryComplete ? .white.opacity(0.3) : Color("ButtonColor")))
+                                .foregroundColor(isLocked ? Color.gray: (isStoryComplete ? .white.opacity(0.8) : Color("ButtonColor")))
                         }
                         
                     )
@@ -66,7 +69,7 @@ struct StoryBlob: View {
                     // Toggle book opening
                     storyModel.isBookOpen.toggle()
                     // Update showTooltip based on the active ID
-                    storyModel.showTooltip.toggle()
+//                    storyModel.showTooltip.toggle()
                     self.isShowingPopover.toggle()
                 }
             }
@@ -77,18 +80,21 @@ struct StoryBlob: View {
                     storyTitle: storyTitle,
                     storyDescription: storyDescription,
                     chapters: numberOfChapters,
-                    chaptersRead: completedChapters)
+                    chaptersRead: completedChapters,
+                    isLocked: isLocked,
+                    isStoryComplete: isStoryComplete
+                )
             }
             
             // Story Title
             Text(storyTitle)
                 .font(.system(size: size * 0.1, weight: .bold)) // Font size based on size (10% of total)
-                .foregroundColor(isLocked ? Color.gray : .primary)
+                .foregroundColor(isLocked ? Color.gray : Color("AccentColor"))
         }
         .padding(size * 0.1) // Padding proportional to size
     }
 }
 
 #Preview {
-    StoryBlob(level: 1, isLocked: false, storyTitle: "The Great Adventure", storyDescription: "Some description of this story.", numberOfChapters: 3, completedChapters: 1, size: 200)
+    StoryBlob(level: 1, isLocked: true, storyTitle: "The Great Adventure", storyDescription: "Some description of this story.", numberOfChapters: 3, completedChapters: 0, size: 200)
 }

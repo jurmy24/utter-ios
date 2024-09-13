@@ -35,7 +35,7 @@ final class HomeViewModel: ObservableObject {
         }
         return positions
     }
-
+    
     
 }
 
@@ -51,7 +51,7 @@ struct HomeView: View {
                 let circleRelativeCenters: [CGPoint] = viewModel.generateBlobPositions()
                 
                 // 1. Wavy Path connecting the story blobs
-                WavyPath(circleRelativeCenters: circleRelativeCenters, color: .accentColor, thickness: 30)
+                WavyPath(circleRelativeCenters: circleRelativeCenters, color: Color("ButtonColor").opacity(0.5), thickness: 30)
                     .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight)
                 
                 // 2. Position StoryBlobs along the wavy path
@@ -60,18 +60,23 @@ struct HomeView: View {
                     
                     StoryBlob(
                         level: index + 1,
-                        isLocked: index > 2, // Lock levels after the first two
-                        storyTitle: "Level \(index + 1)",
+                        isLocked: index > 1, // Lock levels after the second level
+                        storyTitle: "Random title",
                         storyDescription: "Description for Level \(index + 1)",
                         numberOfChapters: 4,
-                        completedChapters: index % 4, // Simulate progress
+                        completedChapters: {
+                            switch index {
+                            case 0: return 4 // First level is complete
+                            case 1: return 3 // Second level is almost complete
+                            default: return 0 // Remaining levels are locked
+                            }
+                        }(),
                         size: 100
                     )
                     .position(
                         x: position.x * UIScreen.main.bounds.width, // Width is screen-based
                         y: position.y * viewModel.contentHeight // Height is based on scrollable area
                     )
-                    .zIndex(1/Double(index)) // ensures that the toggled storytooltips are above anything over it
                 }
             }
             .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight) // Set the scrollable content size

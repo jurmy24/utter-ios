@@ -12,48 +12,78 @@ struct StoryPopover: View {
     let storyDescription: String
     let chapters: Int
     let chaptersRead: Int
+    let isLocked: Bool
+    let isStoryComplete: Bool
     
     
     var body: some View {
         ZStack {
-            Color("AccentColor")
-                .scaleEffect(1.5)
+            if !isLocked{
+                Color("AccentColor")
+                    .scaleEffect(1.5)
+            } else {
+                Color("LockedLevelBackground")
+                    .scaleEffect(1.5)
+            }
+            
             
             VStack(alignment: .leading, spacing: 10) {
                 
-                HorizontalProgressBar(chapters: chapters, 
+                HorizontalProgressBar(chapters: chapters,
                                       chaptersRead: chaptersRead,
                                       lineThickness: 10)
                 
                 Text(storyTitle)
                     .frame(width: 250, alignment: .leading)
                     .font(.headline)
-                    .foregroundColor(Color("ReverseTextColor"))
+                    .foregroundColor(isLocked ? Color.gray: Color("ReverseTextColor"))
                 
                 Text(storyDescription)
                     .frame(width: 250, alignment: .leading)
                     .font(.callout)
-                    .foregroundColor(Color("ReverseTextColor"))
+                    .foregroundColor(isLocked ? Color.gray: Color("ReverseTextColor"))
                 
-                Button(action: {
-                    // Button action
-                }) {
-                    HStack {
-                        Text("Enter Chapter \(chaptersRead + 1)")
-                            .font(.headline)
-                        Image(systemName: "chevron.right")
+                if !isLocked {
+                    if isStoryComplete {
+                        Button(action: {
+                            // Button action
+                            // Resets to chapter 1
+                        }) {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                Text("Redo!")
+                                    .font(.headline)
+                            }
+                            .frame(height: 44)
+                            .padding(.horizontal)
+                            .background(Color("ButtonColor"))
+                            .foregroundColor(Color.white)
+                            .cornerRadius(5)
+                        }
+                    } else {
+                        Button(action: {
+                            // Button action
+                            // Resets to chapter 1
+                        }) {
+                            HStack {
+                                Text("Enter Chapter \(chaptersRead + 1)")
+                                    .font(.headline)
+                                Image(systemName: "chevron.right")
+                            }
+                            .frame(height: 44)
+                            .padding(.horizontal)
+                            .background(Color("ButtonColor"))
+                            .foregroundColor(Color.white)
+                            .cornerRadius(5)
+                        }
+                        
                     }
-                    .frame(height: 44)
-                    .padding(.horizontal)
-                    .background(Color("ButtonColor"))
-                    .foregroundColor(Color.white)
-                    .cornerRadius(5)
                 }
             }
+            .presentationCompactAdaptation(.popover)
+            .padding()
+            .background(isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
         }
-        .presentationCompactAdaptation(.popover)
-        .padding()
-        .background(Color.accentColor)
     }
 }
 
@@ -62,5 +92,7 @@ struct StoryPopover: View {
         storyTitle: "test",
         storyDescription: "testing",
         chapters: 3,
-        chaptersRead: 2)
+        chaptersRead: 2,
+        isLocked: true,
+        isStoryComplete: false)
 }

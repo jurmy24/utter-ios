@@ -20,6 +20,7 @@ struct HorizontalProgressBar: View {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(index < chaptersRead ? Color("HighlightColor") : Color("HorizontalProgressBackground"))
                         .frame(width: (geometry.size.width / CGFloat(chapters)) - 4, height: lineThickness)
+                        .shadow(radius:2)
                 }
             }
         }
