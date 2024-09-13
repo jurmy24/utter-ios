@@ -24,7 +24,7 @@ struct RootView: View {
 //                        LanguageView()
                         HomeView()
                     case .profile:
-                        ProfileView()
+                        ProfileView(showSignInView: $showSignInView)
                     }
                     CustomTabBar(selectedTab: $selectedTab)
                     
