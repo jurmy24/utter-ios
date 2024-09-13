@@ -17,18 +17,25 @@ final class ProfileViewModel: ObservableObject {
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
     
+    func updateAvatar(avatar: String)  {
+        guard let user else { return }
+        Task {
+            try await UserManager.shared.updateUserAvatar(userId: user.userId, avatar: avatar)
+            self.user = try await UserManager.shared.getUser(userId: user.userId) // refetch user from database
+        }
+        
+    }
+    
 }
 
 struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
-    @State private var selectedAvatar: String = "🐵" // Default avatar
-    @State private var userName: String = "John Doe"
-    @State private var userEmail: String = "john.doe@example.com"
+    @State private var selectedAvatar: String = "🐵" // TODO: set this from database
     
     // List of available avatars
-    let avatars: [[String]] = [
+    private let avatars: [[String]] = [
         ["🐵", "🐶", "🐱", "🦊"],
         ["🦁", "🦄", "🐨", "🐼"],
         ["🐸", "🐙", "🐷", "🐮"]
@@ -49,7 +56,7 @@ struct ProfileView: View {
                 
                 if let user = viewModel.user {
                     // Username and Email
-                    Text(user.name ?? "User")
+                    Text(user.name?.capitalized ?? "User")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(Color.black)
                     
@@ -91,9 +98,10 @@ struct ProfileView: View {
             
             // Sign Out Button
             Button(action: {
-                // Handle sign out action
+                // Handle save action
+                viewModel.updateAvatar(avatar: selectedAvatar)
             }) {
-                Text("Sign Out")
+                Text("Save")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width - 50, height: 50)
@@ -104,6 +112,10 @@ struct ProfileView: View {
         }
         .task {
             try? await viewModel.loadCurrentUser()
+            if let user = viewModel.user {
+                selectedAvatar = user.avatar ?? "🐵"
+            }
+            
         }
         .navigationTitle("Profile")
         .toolbar {
