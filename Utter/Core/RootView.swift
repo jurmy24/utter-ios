@@ -20,6 +20,7 @@ struct RootView: View {
                     switch selectedTab {
                     case .home:
                         HomeView()
+//                        TestStoryLoadView()
                     case .language:
 //                        LanguageView()
                         HomeView()
