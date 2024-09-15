@@ -43,7 +43,7 @@ struct HomeView: View {
                                 storyTitle: story.title,
                                 storyDescription: story.description,
                                 numberOfChapters: story.chapters,
-                                completedChapters: 0,
+                                completedChapters: 1,
                                 size: viewModel.blobSize
                             )
                             .position(

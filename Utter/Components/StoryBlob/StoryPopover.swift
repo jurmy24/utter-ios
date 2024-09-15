@@ -42,6 +42,8 @@ struct StoryPopover: View {
                     .frame(width: 250, alignment: .leading)
                     .font(.callout)
                     .foregroundColor(isLocked ? Color.gray: Color("ReverseTextColor"))
+                    .lineLimit(nil) // Allow unlimited lines
+                    .fixedSize(horizontal: false, vertical: true) // Prevents truncation
                 
                 if !isLocked {
                     if isStoryComplete {
@@ -63,7 +65,6 @@ struct StoryPopover: View {
                     } else {
                         Button(action: {
                             // Button action
-                            // Resets to chapter 1
                         }) {
                             HStack {
                                 Text("Enter Chapter \(chaptersRead + 1)")

@@ -90,6 +90,9 @@ struct StoryBlob: View {
             Text(storyTitle)
                 .font(.system(size: size * 0.1, weight: .bold)) // Font size based on size (10% of total)
                 .foregroundColor(isLocked ? Color.gray : Color("AccentColor"))
+                .frame(width:size)
+                .lineLimit(nil) // Allow unlimited lines
+                .fixedSize(horizontal: false, vertical: true) // Prevents truncation
         }
         .padding(size * 0.1) // Padding proportional to size
     }
