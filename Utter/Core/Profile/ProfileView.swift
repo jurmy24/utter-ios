@@ -20,10 +20,9 @@ final class ProfileViewModel: ObservableObject {
     func updateAvatar(avatar: String)  {
         guard let user else { return }
         Task {
-            try await UserManager.shared.updateUserAvatar(userId: user.userId, avatar: avatar)
+            try await UserManager.shared.updateUserAvatarStatus(userId: user.userId, avatar: avatar)
             self.user = try await UserManager.shared.getUser(userId: user.userId) // refetch user from database
         }
-        
     }
     
 }

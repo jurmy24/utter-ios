@@ -13,7 +13,7 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let email: String?
     let name: String?
-    var avatar: String?
+    let avatar: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -37,18 +37,34 @@ struct DBUser: Codable {
         self.avatar = avatar // Set standard avatar as dog 🐶 by default
     }
     
-    mutating func updateUserAvatar(avatar: String) {
-        self.avatar = avatar
+    // These are used by the coders
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case dateCreated = "date_created"
+        case email = "email"
+        case name = "name"
+        case avatar = "avatar"
     }
     
-    //    func updateUserAvatar(avatar: String) -> DBUser {
-    //        return DBUser(
-    //            userId: userId,
-    //            dateCreated: dateCreated,
-    //            email: email,
-    //            name: name,
-    //            avatar: avatar)
-    //    }
+    // A decoder that converts the database keys like "user_id" to self.userId
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.userId = try container.decode(String.self, forKey: .userId)
+        self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
+        self.email = try container.decodeIfPresent(String.self, forKey: .email)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.avatar = try container.decodeIfPresent(String.self, forKey: .avatar)
+    }
+    
+    // An encoder that converts eg self.userId to database keys like "user_id"
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.userId, forKey: .userId)
+        try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
+        try container.encodeIfPresent(self.email, forKey: .email)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.avatar, forKey: .avatar)
+    }
 }
 
 final class UserManager {
@@ -61,57 +77,26 @@ final class UserManager {
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
-    
-    private let encoder: Firestore.Encoder = {
-        let encoder = Firestore.Encoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        return encoder
-    }()
-    
-    private let decoder: Firestore.Decoder = {
-        let decoder = Firestore.Decoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
-    
+        
     func createNewUser(user: DBUser) async throws {
-        try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
+        try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
-    
-    //    func createNewUser(auth: AuthDataResultModel) async throws {
-    //        var userData: [String:Any] = [
-    //            "id" : auth.uid,
-    //            "date_created" : Timestamp(),
-    //            "email": auth.email ?? "",
-    //            "name": auth.name ?? "",
-    //            "avatar": "🐵"
-    //        ]
-    //
-    //        try await userDocument(userId: auth.uid).setData(userData, merge: false)
-    //    }
     
     func getUser(userId: String) async throws -> DBUser {
-        return try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
+        return try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
     
-    //    func getUser(userId: String) async throws -> DBUser {
-    //        let snapshot = try await userDocument(userId: userId).getDocument()
-    //
-    //        guard let data = snapshot.data(), let userId = data["id"] as? String else {
-    //            throw URLError(.badServerResponse)
-    //        }
-    //
-    //        let dateCreated = data["date_created"] as? Date
-    //        let email = data["email"] as? String
-    //        let name = data["name"] as? String
-    //        let avatar = data["avatar"] as? String
-    //
-    //        return DBUser(userId: userId, dateCreated: dateCreated, email: email, name: name, avatar: avatar)
-    //    }
-    
-    func updateUserAvatar(userId: String, avatar: String) async throws {
+    func updateUserAvatarStatus(userId: String, avatar: String) async throws {
         let data: [String:Any] = [
-            "avatar" : avatar
+            DBUser.CodingKeys.avatar.rawValue : avatar
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateUserName(userId: String, name: String) async throws {
+        let data: [String:Any] = [
+            DBUser.CodingKeys.name.rawValue : name
         ]
         
         try await userDocument(userId: userId).updateData(data)
