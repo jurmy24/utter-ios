@@ -36,7 +36,6 @@
 		E854EE5D2C94B4ED00BF1E33 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */; };
 		E854EE602C94BA6400BF1E33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE5F2C94BA6400BF1E33 /* UserManager.swift */; };
 		E854EE622C96EEEA00BF1E33 /* StoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE612C96EEEA00BF1E33 /* StoryManager.swift */; };
-		E854EE642C96FD8B00BF1E33 /* TestStoryLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE632C96FD8B00BF1E33 /* TestStoryLoadView.swift */; };
 		E854EE662C96FFE800BF1E33 /* StoriesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE652C96FFE800BF1E33 /* StoriesDatabase.swift */; };
 		E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */; };
 		E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */; };
@@ -51,6 +50,7 @@
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
 		E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */; };
+		E8E346F02C983C58006DDA92 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EF2C983C58006DDA92 /* LanguageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +81,6 @@
 		E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E854EE5F2C94BA6400BF1E33 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		E854EE612C96EEEA00BF1E33 /* StoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryManager.swift; sourceTree = "<group>"; };
-		E854EE632C96FD8B00BF1E33 /* TestStoryLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStoryLoadView.swift; sourceTree = "<group>"; };
 		E854EE652C96FFE800BF1E33 /* StoriesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDatabase.swift; sourceTree = "<group>"; };
 		E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 		E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
+		E8E346EF2C983C58006DDA92 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,6 @@
 			children = (
 				E855176F2C90CE0600FEB145 /* HomeView.swift */,
 				E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */,
-				E854EE632C96FD8B00BF1E33 /* TestStoryLoadView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -173,6 +172,7 @@
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
+				E8E346EE2C983C43006DDA92 /* Managers */,
 				E854EE442C94B19300BF1E33 /* Core */,
 				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
@@ -296,6 +296,14 @@
 			path = LanguageSelection;
 			sourceTree = "<group>";
 		};
+		E8E346EE2C983C43006DDA92 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E8E346EF2C983C58006DDA92 /* LanguageManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,8 +402,8 @@
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
 				E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */,
 				E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */,
+				E8E346F02C983C58006DDA92 /* LanguageManager.swift in Sources */,
 				E854EE4C2C94B23E00BF1E33 /* SignUpEmailViewModel.swift in Sources */,
-				E854EE642C96FD8B00BF1E33 /* TestStoryLoadView.swift in Sources */,
 				E854EE662C96FFE800BF1E33 /* StoriesDatabase.swift in Sources */,
 				E854EE5B2C94B4CC00BF1E33 /* ProfileView.swift in Sources */,
 				E82E3E482C87A7BE00EF9A6A /* RootView.swift in Sources */,

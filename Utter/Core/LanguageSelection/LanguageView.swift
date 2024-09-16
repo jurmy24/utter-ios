@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LanguageView: View {
+    
     @State private var selectedLanguage: StoryLanguage = .swedish
     let languages: [StoryLanguage] = [.english, .french, .swedish]
     

@@ -26,7 +26,7 @@ struct CustomTabBar: View {
                 switch selectedTab {
                 case .language:
                     NavigationView {
-                        HomeView()
+                        LanguageView()
                     }
                 case .home:
                     NavigationView {
