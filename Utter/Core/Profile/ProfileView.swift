@@ -33,15 +33,9 @@ struct ProfileView: View {
     @Binding var showSignInView: Bool
     @State private var selectedAvatar: String = "🐵" // TODO: set this from database
     
-    // List of available avatars
-    private let avatars: [[String]] = [
-        ["🐵", "🐶", "🐱", "🦊"],
-        ["🦁", "🦄", "🐨", "🐼"],
-        ["🐸", "🐙", "🐷", "🐮"]
-    ]
-    
     var body: some View {
         VStack(spacing: 20) {
+            Spacer()
             // Profile Avatar
             VStack {
                 ZStack {
@@ -57,7 +51,7 @@ struct ProfileView: View {
                     // Username and Email
                     Text(user.name?.capitalized ?? "User")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(.primary)
                     
                     Text(user.email ?? "Email")
                         .font(.system(size: 16))
@@ -69,46 +63,26 @@ struct ProfileView: View {
             // Choose Your Avatar Label
             Text("Choose Your Avatar")
                 .font(.headline)
-                .foregroundColor(Color.purple)
+                .foregroundColor(Color("AccentColor"))
                 .padding(.top)
             
             // Avatar Grid
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 4), spacing: 15) {
-                ForEach(avatars.flatMap { $0 }, id: \.self) { avatar in
-                    Button(action: {
-                        selectedAvatar = avatar
-                    }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(selectedAvatar == avatar ? Color.purple.opacity(0.2) : Color.purple.opacity(0.1))
-                                .frame(width: 60, height: 60)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(selectedAvatar == avatar ? Color.purple : Color.clear, lineWidth: 2)
-                                )
-                            
-                            Text(avatar)
-                                .font(.system(size: 30))
-                        }
-                    }
-                }
-            }
-            .padding(.horizontal)
+            AvatarGrid(selectedAvatar: $selectedAvatar)
             
             // Sign Out Button
             Button(action: {
-                // Handle save action
                 viewModel.updateAvatar(avatar: selectedAvatar)
             }) {
                 Text("Save")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width - 50, height: 50)
-                    .background(Color.purple)
+                    .background(Color("ButtonColor"))
                     .cornerRadius(10)
             }
             .padding(.bottom)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             try? await viewModel.loadCurrentUser()
             if let user = viewModel.user {
@@ -127,8 +101,8 @@ struct ProfileView: View {
                 }
             }
         }
-        .background(Color("AppBackgroundColor"))
         .edgesIgnoringSafeArea(.all)
+        .background(Color("AppBackgroundColor"))
     }
     
 }

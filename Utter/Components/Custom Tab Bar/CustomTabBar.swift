@@ -48,7 +48,7 @@ struct CustomTabBar: View {
             }
         }
         .frame(height: 82)
-        .background(Color.white)
+        .background(Color("AppBackgroundColor"))
         .shadow(color: .gray.opacity(0.3), radius: 5)
     }
 }

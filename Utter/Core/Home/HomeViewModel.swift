@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
+import FirebaseFirestore
 
 @MainActor
 final class HomeViewModel: ObservableObject {
     
     @Published private(set) var stories: [DBStory] = []
     @Published var selectedLanguage: StoryLanguage? = nil
+    private var lastDocument: DocumentSnapshot? = nil
     
     // Number of StoryBlobs
     var numberOfBlobs: Int {
@@ -58,6 +60,14 @@ final class HomeViewModel: ObservableObject {
         }
         self.selectedLanguage = language
     }
+    
+    /* In case I end up with a shit ton of stories and want to load them as I scroll upwards */
+//    func getStoriesForLanguageLimited(language: StoryLanguage) async throws {
+//        let (newStories, lastDocument) = try await StoryManager.shared.getAllStoriesByLanguage(language: language, count: 5, lastDocument: lastDocument)
+//        self.stories.append(contentsOf:newStories)
+//        self.selectedLanguage = language
+//        self.lastDocument = lastDocument
+//    }
     
     init(selectedLanguage: StoryLanguage) {
         self.selectedLanguage = selectedLanguage

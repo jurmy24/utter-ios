@@ -9,29 +9,34 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    
     var body: some View {
-        List {
-            Button("Log Out") {
-                Task {
-                    do {
-                        try viewModel.signOut()
-                        showSignInView = true
-                    } catch {
-                        print(error)
+        VStack {
+            List {
+                Button("Log Out") {
+                    Task {
+                        do {
+                            try viewModel.signOut()
+                            showSignInView = true
+                        } catch {
+                            print(error)
+                        }
                     }
                 }
-            }
-            if viewModel.authProviders.contains(.email){
-                emailSection
+                
+                if viewModel.authProviders.contains(.email){
+                    emailSection
+                }
             }
         }
         .onAppear {
             viewModel.loadAuthProviders()
         }
         .navigationBarTitle("Settings")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("AppBackgroundColor"))
     }
 }
 

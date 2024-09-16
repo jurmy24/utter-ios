@@ -43,7 +43,7 @@ struct HomeView: View {
                                 storyTitle: story.title,
                                 storyDescription: story.description,
                                 numberOfChapters: story.chapters,
-                                completedChapters: 1,
+                                completedChapters: 0,
                                 size: viewModel.blobSize
                             )
                             .position(
@@ -51,6 +51,18 @@ struct HomeView: View {
                                 y: position.y * viewModel.contentHeight
                             )
                         }
+                        
+                        /* If I want to paginate */
+//                        if story == viewModel.stories.last {
+//                            ProgressView()
+//                                .onAppear {
+//                                    print("Progress View Appeared")
+//                                    Task {
+//                                        try await viewModel.getStoriesForLanguageLimited(language: .swedish)
+//                                    }
+//                                    
+//                                }
+//                        }
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight)
@@ -61,4 +73,8 @@ struct HomeView: View {
             .edgesIgnoringSafeArea(.all)
         }
     }
+}
+
+#Preview {
+    HomeView()
 }

@@ -32,7 +32,7 @@ struct TabBarButton: View {
                 
                 Text(buttonText)
                     .font(.caption)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(.accentColor)
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
