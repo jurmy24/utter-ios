@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
+    // TODO: The selected language should be what is chosen in the Language view
     @StateObject private var viewModel = HomeViewModel(selectedLanguage: .swedish)
     
     var body: some View {
