@@ -140,26 +140,6 @@ final class StoryManager {
             .order(by: DBStory.CodingKeys.level.rawValue, descending: false)
             .getDocuments(as: DBStory.self)
     }
-    
-//    func getAllStoriesByLanguage(language: StoryLanguage, 
-//                                 count: Int,
-//                                 lastDocument: DocumentSnapshot?
-//    ) async throws -> (stories: [DBStory], lastDocument: DocumentSnapshot?) {
-//        if let lastDocument {
-//            return try await storyCollection
-//                .whereField(DBStory.CodingKeys.language.rawValue, isEqualTo: language.rawValue)
-//                .order(by: DBStory.CodingKeys.level.rawValue, descending: false)
-//                .limit(to: count)
-//                .start(afterDocument: lastDocument)
-//                .getDocumentsWithSnapshot(as: DBStory.self)
-//        } else {
-//            return try await storyCollection
-//                .whereField(DBStory.CodingKeys.language.rawValue, isEqualTo: language.rawValue)
-//                .order(by: DBStory.CodingKeys.level.rawValue, descending: false)
-//                .limit(to: count)
-//                .getDocumentsWithSnapshot(as: DBStory.self)
-//        }
-//    }
 }
 
 extension Query {

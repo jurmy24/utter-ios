@@ -228,6 +228,7 @@
 				E854EE452C94B1AD00BF1E33 /* Authentication */,
 				E827E4A62C90B58500D6D4F1 /* Home */,
 				E854EE3F2C9440D200BF1E33 /* Profile */,
+				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -266,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
-				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
 				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
 				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
 				E855177C2C9205FC00FEB145 /* WavyPath.swift */,

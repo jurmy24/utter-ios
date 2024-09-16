@@ -31,11 +31,10 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
-    @State private var selectedAvatar: String = "🐵" // TODO: set this from database
+    @State private var selectedAvatar: String = "🐵"
     
     var body: some View {
         VStack(spacing: 20) {
-            Spacer()
             // Profile Avatar
             VStack {
                 ZStack {

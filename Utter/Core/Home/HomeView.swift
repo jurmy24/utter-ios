@@ -67,6 +67,7 @@ struct HomeView: View {
                 }
                 .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight)
             }
+            .padding(.bottom, 100)
             .defaultScrollAnchor(.bottom)
             .scrollIndicators(.hidden)
             .background(Color("AppBackgroundColor"))
