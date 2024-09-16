@@ -8,6 +8,15 @@
 import Foundation
 import FirebaseFirestore
 
+enum CEFRLevel: String, Codable {
+    case a1 = "a1"
+    case a2 = "a2"
+    case b1 = "b1"
+    case b2 = "b2"
+    case c1 = "c1"
+    case c2 = "c2"
+}
+
 struct DBUser: Codable {
     let userId: String
     let dateCreated: Date?
@@ -77,7 +86,15 @@ final class UserManager {
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
-        
+    
+    private func userLanguageCollection(userId: String) -> CollectionReference {
+        userDocument(userId: userId).collection("languages_progress")
+    }
+    
+    private func userLanguageDocument(userId: String, languageDocumentId: String) -> DocumentReference {
+        userLanguageCollection(userId: userId).document(languageDocumentId)
+    }
+    
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
@@ -100,5 +117,63 @@ final class UserManager {
         ]
         
         try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func getUserLanguages(userId: String) async throws -> [UserLanguage] {
+        return try await userLanguageCollection(userId: userId).getDocuments(as: UserLanguage.self)
+    }
+    
+    func addNewLanguage(userId: String, language: StoryLanguage) async throws {
+        let document = userLanguageCollection(userId: userId).document()
+        let documentId = document.documentID
+        
+        let data: [String: Any] = [
+            UserLanguage.CodingKeys.id.rawValue: documentId,
+            UserLanguage.CodingKeys.language.rawValue: language.rawValue,
+            UserLanguage.CodingKeys.currentCefr.rawValue: CEFRLevel.a1.rawValue, // set to a1 by default now
+            UserLanguage.CodingKeys.startingDifficulty.rawValue: Difficulty.beginner.rawValue // set to beginner by default now
+        ]
+        
+        try await document.setData(data, merge: false)
+    }
+    
+    //    func newStoryUnlocked(userId: String, language: StoryLanguage, storyId: String) {
+    //        try await userDocument(userId: userId).collection("languages_progress")
+    //    }
+    //
+    //    func updateUserStoryProgress(userId: String, language: StoryLanguage) {
+    //        try await userDocument(userId: userId).collection("languages_progress")
+    //    }
+    
+}
+
+
+struct UserLanguage: Codable {
+    let id: String
+    let language: StoryLanguage
+    let currentCefr: CEFRLevel
+    let startingDifficulty: Difficulty
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case language = "language"
+        case currentCefr = "current_cefr"
+        case startingDifficulty = "starting_difficulty"
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.language = try container.decode(StoryLanguage.self, forKey: .language)
+        self.currentCefr = try container.decode(CEFRLevel.self, forKey: .currentCefr)
+        self.startingDifficulty = try container.decode(Difficulty.self, forKey: .startingDifficulty)
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.language, forKey: .language)
+        try container.encode(self.currentCefr, forKey: .currentCefr)
+        try container.encode(self.startingDifficulty, forKey: .startingDifficulty)
     }
 }
