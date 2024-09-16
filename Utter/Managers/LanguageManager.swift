@@ -5,6 +5,8 @@
 //  Created by Victor Magnus Oldensand on 2024-09-16.
 //
 
+/* This file is UNUSED for now! */
+
 import Foundation
 
 final class LanguageManager: ObservableObject {
