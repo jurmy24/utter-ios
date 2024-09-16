@@ -61,6 +61,7 @@ struct TextBlob: View {
     var avatar: String // This can be the name of an SF Symbol or Image
     var text: String
     var showAudioIcon: Bool = true // Optional audio icon toggle
+    var underlineText: Bool = true
     
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
@@ -68,38 +69,50 @@ struct TextBlob: View {
             Image(systemName: avatar)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40, height: 40)
+                .frame(width: 50, height: 50)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.gray, lineWidth: 1))
             
             // Speech bubble containing the text
             ZStack {
                 SpeechBubble()
-                    .stroke(Color.gray, lineWidth: 3)
+                    .stroke(Color("AccentColor"), lineWidth: 3)
                 HStack(spacing: 10) {
-                    // Optional audio icon
-                    if showAudioIcon {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .foregroundColor(.blue)
-                            .padding(.leading)
-                    }
-
-                    // The text content
-                    Text(text)
-                        .font(.body)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
                     
-                    Spacer()
+                    if showAudioIcon {
+                        Button {
+                            // Replay the Audio file
+                        } label: {
+                            Image(systemName: "speaker.wave.2.fill")
+                                .foregroundColor(Color("AccentColor"))
+                                .padding(.leading)
+                        }
+                    }
+                    
+                    if underlineText {
+                        let words = text.components(separatedBy: " ")
+                        WordWrapView(words: words) { word in
+                            // Handle tap on word
+                            print("Tapped on word: \(word)")
+                        }
+                    } else {
+                        Text(text)
+                            .font(.headline)
+                            .foregroundColor(Color("TextColor"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.trailing)
+                    }
+                    
+                    
                 }
             }
-            .frame(width: .infinity, height: 60)
+            .frame(maxWidth: .infinity, minHeight: 60)
         }
         .padding(.horizontal, 10)
     }
 }
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", text: "Perdón, mi amor. Estoy cansada.")
+    TextBlob(avatar: "person.circle.fill", text: "Tjenare mannen, det går bra för min del. Hur går det för dig?")
 }
 
