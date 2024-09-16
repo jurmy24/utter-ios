@@ -35,7 +35,7 @@ final class HomeViewModel: ObservableObject {
     
     // Generate random horizontal positions and equally spaced vertical positions (relative)
     func generateBlobPositions() -> [CGPoint] {
-        print(numberOfBlobs)
+//        print(numberOfBlobs)
         let margin = blobSize / 1.8 / screenWidth
         let positions = (0..<numberOfBlobs).map { index in
             let normalizedX = (sin(CGFloat(index)) + 1) / 2

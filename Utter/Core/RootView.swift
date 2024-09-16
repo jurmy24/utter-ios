@@ -14,7 +14,7 @@ struct RootView: View {
     
     var body: some View {
         // Conditionally display the settings page if the user is logged in
-        ZStack {
+        VStack {
             if !showSignInView {
                 NavigationStack {
                     switch selectedTab {
@@ -28,7 +28,6 @@ struct RootView: View {
                         ProfileView(showSignInView: $showSignInView)
                     }
                     CustomTabBar(selectedTab: $selectedTab)
-                    
                 }
             }
         }
