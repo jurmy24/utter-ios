@@ -12,9 +12,10 @@ import FirebaseFirestore
 @MainActor
 final class HomeViewModel: ObservableObject {
     
-    @Published private(set) var stories: [DBStory] = []
+//    @Published private(set) var stories: [DBStory] = []
+    @Published private(set) var storiesWithProgress: [StoryWithProgress] = []
     @Published var selectedLanguage: StoryLanguage? = nil
-    private var lastDocument: DocumentSnapshot? = nil
+    //    private var lastDocument: DocumentSnapshot? = nil
     
     // Define the Constants inside the class
     let blobSize: CGFloat = 100
@@ -25,48 +26,59 @@ final class HomeViewModel: ObservableObject {
     
     // Define variables dependent on the number of stories
     var numberOfBlobs: Int {
-        stories.count
+        storiesWithProgress.count
     }
     var contentHeight: CGFloat {
         let blobHeightWithSpacing = blobSize + (blobSize * verticalSpacingMultiplier)
         return CGFloat(max(numberOfBlobs, 1)) * blobHeightWithSpacing + extraContentHeight
     }
     
-    func getStoriesForLanguage(language: StoryLanguage) async throws {
-        switch language {
-        case .english:
-            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .english)
-        case .french:
-            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .french)
-        case .swedish:
-            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .swedish)
-        }
-        self.selectedLanguage = language
-    }
-    
-    /* In case I end up with a shit ton of stories and want to load them as I scroll upwards */
-    //    func getStoriesForLanguageLimited(language: StoryLanguage) async throws {
-    //        let (newStories, lastDocument) = try await StoryManager.shared.getAllStoriesByLanguage(language: language, count: 5, lastDocument: lastDocument)
-    //        self.stories.append(contentsOf:newStories)
-    //        self.selectedLanguage = language
-    //        self.lastDocument = lastDocument
-    //    }
-    
     init(selectedLanguage: StoryLanguage) {
         self.selectedLanguage = selectedLanguage
         Task {
-            await self.loadStories()
+            await self.loadStoriesWithProgress()
         }
     }
     
-    private func loadStories() async {
-        guard let language = self.selectedLanguage else { return }
+//    private func loadStories() async {
+//        guard let language = self.selectedLanguage else { return }
+//        do {
+//            try await getStoriesForLanguage(language: language)
+//        } catch {
+//            print("Error loading stories: \(error)")
+//        }
+//    }
+    
+    func loadStoriesWithProgress() async {
+        guard let selectedLanguage = self.selectedLanguage else { return }
         do {
-            try await getStoriesForLanguage(language: language)
+            // Fetch stories and user progress
+            let dbStories = try await StoryManager.shared.getAllStoriesByLanguage(language: selectedLanguage)
+            let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+            let userStories = try await UserManager.shared.getUserLanguageStories(userId: authDataResult.uid, language: selectedLanguage)
+            
+            // Use LevelManager to merge data
+            self.storiesWithProgress = LevelManager.shared.mergeStoriesWithProgress(dbStories: dbStories, userStories: userStories)
         } catch {
-            print("Error loading stories: \(error)")
+            print("Error loading stories with progress: \(error)")
         }
     }
+    
+//    func getStoriesForLanguage(language: StoryLanguage) async throws {
+//        let authDataResponse = try AuthenticationManager.shared.getAuthenticatedUser()
+//        
+//        switch language {
+//        case .english:
+//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .english)
+//        case .french:
+//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .french)
+//        case .swedish:
+//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .swedish)
+//            let test = try await UserManager.shared.getUserLanguageStories(userId: authDataResponse.uid, language: .swedish)
+//            print(test)
+//        }
+//        self.selectedLanguage = language
+//    }
     
 }
 

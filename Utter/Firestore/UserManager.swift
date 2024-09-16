@@ -95,6 +95,14 @@ final class UserManager {
         userLanguageCollection(userId: userId).document(languageDocumentId)
     }
     
+    private func userLanguageStoryCollection(userId: String, languageDocumentId: String) -> CollectionReference {
+        userLanguageDocument(userId: userId, languageDocumentId: languageDocumentId).collection("progress")
+    }
+    
+    private func userLanguageStoryDocument(userId: String, languageDocumentId: String, storyId: String) -> DocumentReference {
+        userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).document(storyId)
+    }
+    
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
@@ -137,6 +145,23 @@ final class UserManager {
         try await document.setData(data, merge: false)
     }
     
+    func getUserLanguageStories(userId: String, language: StoryLanguage) async throws -> [UserStory] {
+        // 1. Fetch the user's languages
+        let userLanguages = try await getUserLanguages(userId: userId)
+
+        // 2. Find the language document ID matching the specified language
+        guard let languageProgress = userLanguages.first(where: { $0.language == language }) else {
+            throw UserManagerError.languageNotFound(language.rawValue)
+        }
+
+        let languageDocumentId = languageProgress.id
+
+        // 3. Fetch the user's stories for the specified language
+        let stories = try await userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).getDocuments(as: UserStory.self)
+
+        return stories
+    }
+    
     //    func newStoryUnlocked(userId: String, language: StoryLanguage, storyId: String) {
     //        try await userDocument(userId: userId).collection("languages_progress")
     //    }
@@ -145,6 +170,18 @@ final class UserManager {
     //        try await userDocument(userId: userId).collection("languages_progress")
     //    }
     
+}
+
+// Custom error type for better error handling
+enum UserManagerError: Error {
+    case languageNotFound(String)
+
+    var localizedDescription: String {
+        switch self {
+        case .languageNotFound(let language):
+            return "User has no progress for language \(language)."
+        }
+    }
 }
 
 
@@ -175,5 +212,32 @@ struct UserLanguage: Codable {
         try container.encode(self.language, forKey: .language)
         try container.encode(self.currentCefr, forKey: .currentCefr)
         try container.encode(self.startingDifficulty, forKey: .startingDifficulty)
+    }
+}
+
+struct UserStory: Codable {
+    let storyId: String
+    let isComplete: Bool
+    let chapter: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case storyId = "story_id"
+        case isComplete = "is_complete"
+        case chapter = "chapter"
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.storyId = try container.decode(String.self, forKey: .storyId)
+        self.isComplete = try container.decode(Bool.self, forKey: .isComplete)
+        self.chapter = try container.decode(Int.self, forKey: .chapter)
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.storyId, forKey: .storyId)
+        try container.encode(self.isComplete, forKey: .isComplete)
+        try container.encode(self.chapter, forKey: .chapter)
     }
 }

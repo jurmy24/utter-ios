@@ -51,6 +51,7 @@
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
 		E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */; };
 		E8E346F02C983C58006DDA92 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EF2C983C58006DDA92 /* LanguageManager.swift */; };
+		E8E346F22C988956006DDA92 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346F12C988956006DDA92 /* LevelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
 		E8E346EF2C983C58006DDA92 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		E8E346F12C988956006DDA92 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				E8E346EF2C983C58006DDA92 /* LanguageManager.swift */,
+				E8E346F12C988956006DDA92 /* LevelManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
 				E82E3E4C2C884C1F00EF9A6A /* SignInEmailView.swift in Sources */,
 				E854EE592C94B49300BF1E33 /* SettingsView.swift in Sources */,
+				E8E346F22C988956006DDA92 /* LevelManager.swift in Sources */,
 				E854EE622C96EEEA00BF1E33 /* StoryManager.swift in Sources */,
 				E82E3E562C885FF500EF9A6A /* Utilities.swift in Sources */,
 				E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */,
