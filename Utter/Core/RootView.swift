@@ -13,23 +13,10 @@ struct RootView: View {
 //    @State var selectedTab: Tabs = .home
     
     var body: some View {
-        // Conditionally display the settings page if the user is logged in
+        // Conditionally display the home pages if the user is logged in
         VStack {
             if !showSignInView {
                 CustomTabBar(showSignInView: $showSignInView)
-//                NavigationStack {
-//                    switch selectedTab {
-//                    case .home:
-//                        HomeView()
-////                        TestStoryLoadView()
-//                    case .language:
-////                        LanguageView()
-//                        HomeView()
-//                    case .profile:
-//                        ProfileView(showSignInView: $showSignInView)
-//                    }
-////                    CustomTabBar(selectedTab: $selectedTab)
-//                }
             }
         }
         .onAppear{
