@@ -5,6 +5,8 @@
 //  Created by Victor Magnus Oldensand on 2024-09-15.
 //
 
+/* This document is not used in the final app but is used to upload some fake stories to the database.*/
+
 import Foundation
 
 struct StoryArray: Codable {
