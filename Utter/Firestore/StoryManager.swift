@@ -18,6 +18,29 @@ enum StoryLanguage: String, Codable {
     case english = "en"
     case swedish = "se"
     case french = "fr"
+    
+    // Function to return the display name and flag for each language
+    var displayName: String {
+        switch self {
+        case .english:
+            return "English"
+        case .swedish:
+            return "Swedish"
+        case .french:
+            return "French"
+        }
+    }
+    
+    var flag: String {
+        switch self {
+        case .english:
+            return "🇬🇧"
+        case .swedish:
+            return "🇸🇪"
+        case .french:
+            return "🇫🇷"
+        }
+    }
 }
 
 enum StoryType: String, Codable {

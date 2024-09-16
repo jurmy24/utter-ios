@@ -49,6 +49,8 @@
 		E85517852C921B8500FEB145 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517842C921B8500FEB145 /* HorizontalProgressBar.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
+		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
+		E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		E855177C2C9205FC00FEB145 /* WavyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavyPath.swift; sourceTree = "<group>"; };
 		E85517842C921B8500FEB145 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
+		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,7 @@
 				E854EE452C94B1AD00BF1E33 /* Authentication */,
 				E827E4A62C90B58500D6D4F1 /* Home */,
 				E854EE3F2C9440D200BF1E33 /* Profile */,
+				E8E346E92C982D90006DDA92 /* LanguageSelection */,
 				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
 			);
 			path = Core;
@@ -280,6 +285,15 @@
 				E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		E8E346E92C982D90006DDA92 /* LanguageSelection */ = {
+			isa = PBXGroup;
+			children = (
+				E8E346EA2C982DB2006DDA92 /* LanguageView.swift */,
+				E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */,
+			);
+			path = LanguageSelection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,10 +383,12 @@
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
 				E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */,
 				E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */,
+				E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */,
 				E85517852C921B8500FEB145 /* HorizontalProgressBar.swift in Sources */,
 				E855177D2C9205FC00FEB145 /* WavyPath.swift in Sources */,
 				E85517702C90CE0600FEB145 /* HomeView.swift in Sources */,
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
+				E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */,
 				E854EE602C94BA6400BF1E33 /* UserManager.swift in Sources */,
 				E85517792C90D5B200FEB145 /* CircularProgressBarView.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
