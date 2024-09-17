@@ -56,6 +56,7 @@
 		E8E346F82C988CF5006DDA92 /* TextBlob.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346F72C988CF5006DDA92 /* TextBlob.swift */; };
 		E8E346FB2C98D27F006DDA92 /* WordWrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346FA2C98D27F006DDA92 /* WordWrapView.swift */; };
 		E8E346FD2C98D292006DDA92 /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346FC2C98D292006DDA92 /* WordView.swift */; };
+		E8E347022C99F4D0006DDA92 /* ActionTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347012C99F4D0006DDA92 /* ActionTypeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		E8E346F72C988CF5006DDA92 /* TextBlob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlob.swift; sourceTree = "<group>"; };
 		E8E346FA2C98D27F006DDA92 /* WordWrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapView.swift; sourceTree = "<group>"; };
 		E8E346FC2C98D292006DDA92 /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
+		E8E347012C99F4D0006DDA92 /* ActionTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTypeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
+				E8E347002C99F256006DDA92 /* Models */,
 				E8E346EE2C983C43006DDA92 /* Managers */,
 				E854EE442C94B19300BF1E33 /* Core */,
 				E85517682C90CD3200FEB145 /* Components */,
@@ -343,6 +346,14 @@
 			path = Word;
 			sourceTree = "<group>";
 		};
+		E8E347002C99F256006DDA92 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8E347012C99F4D0006DDA92 /* ActionTypeModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -426,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8E347022C99F4D0006DDA92 /* ActionTypeModel.swift in Sources */,
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
 				E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */,

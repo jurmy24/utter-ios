@@ -60,9 +60,8 @@ struct SpeechBubble: Shape {
 struct TextBlob: View {
     var avatar: String // This can be the name of an SF Symbol or Image
     var text: String
-    var showAudioIcon: Bool = true // Optional audio icon toggle
-    var underlineText: Bool = false
-    
+    var modifier: ActionType?
+
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
             // Avatar on the left
@@ -76,36 +75,78 @@ struct TextBlob: View {
             // Speech bubble containing the text
             HStack {
                 
-                if showAudioIcon {
+                switch modifier {
+                case .hideAll:
+                    Button {} label: {
+                        Image(systemName: "speaker.slash.fill")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 20)) // Set the desired size
+                    }
+                    .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
+                    
+                    Text(text)
+                        .font(.headline)
+                        .foregroundColor(Color("TextColor"))
+                        .blur(radius: 4)
+                case .hideAudio:
+                    Button {} label: {
+                        Image(systemName: "speaker.slash.fill")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 20)) // Set the desired size
+                    }
+                    .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
+                    
+                    Text(text)
+                        .font(.headline)
+                        .foregroundColor(Color("TextColor"))
+                case .hideText:
                     Button {
                         // Replay the Audio file
                     } label: {
                         Image(systemName: "speaker.wave.2.fill")
                             .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 20)) // Set the desired size
                     }
-                }
-                
-                if underlineText {
-                    let words = text.components(separatedBy: " ")
-                    WordWrapView(words: words) { word in
-                        // Handle tap on word
-                        print("Tapped on word: \(word)")
+                    
+                    Text(text)
+                        .font(.headline)
+                        .foregroundColor(Color("TextColor"))
+                        .blur(radius: 4)
+                case .emphasizeText:
+                    Button {
+                        // Replay the Audio file
+                    } label: {
+                        Image(systemName: "speaker.wave.2.fill")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 20)) // Set the desired size
                     }
-                } else {
+                    
+                    Text(text)
+                        .font(.headline)
+                        .fontWeight(.black)
+                        .foregroundColor(Color("TextColor"))
+                case nil:
+                    Button {
+                        // Replay the Audio file
+                    } label: {
+                        Image(systemName: "speaker.wave.2.fill")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 20)) // Set the desired size
+                    }
+                    
                     Text(text)
                         .font(.headline)
                         .foregroundColor(Color("TextColor"))
                 }
+
             }
             .padding(.horizontal, 16)
-        
             .padding(.vertical, 8)
-            .background(Color.white) // Replace with your desired background
             .frame(maxWidth: .infinity, alignment: .leading)
-            .clipShape(SpeechBubble()) // Apply speech bubble shape
+            .clipShape(SpeechBubble())
             .overlay(
                 SpeechBubble()
-                    .stroke(Color("AccentColor"), lineWidth: 3)
+                    .stroke(modifier == nil ? Color("ReverseAccent") : Color("AccentColor"), lineWidth: 3)
             )
             
         }
