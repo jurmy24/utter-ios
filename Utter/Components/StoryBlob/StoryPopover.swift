@@ -15,7 +15,6 @@ struct StoryPopover: View {
     let isLocked: Bool
     let isStoryComplete: Bool
     
-    
     var body: some View {
         ZStack {
             if !isLocked{
@@ -49,7 +48,6 @@ struct StoryPopover: View {
                     if isStoryComplete {
                         Button(action: {
                             // Button action
-                            // Resets to chapter 1
                         }) {
                             HStack {
                                 Image(systemName: "chevron.left")
@@ -64,6 +62,7 @@ struct StoryPopover: View {
                         }
                     } else {
                         Button(action: {
+                            // TODO: open the story view and print the storageLocation (for now)
                             // Button action
                         }) {
                             HStack {
