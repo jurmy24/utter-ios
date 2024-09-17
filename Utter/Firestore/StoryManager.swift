@@ -60,6 +60,7 @@ struct DBStory: Identifiable, Codable, Equatable {
     let level: Int
     let dateCreated: Date
     let dateModified: Date?
+    let storageLocation: String?
     
     init(
         id: String,
@@ -71,7 +72,8 @@ struct DBStory: Identifiable, Codable, Equatable {
         type: StoryType,
         level: Int,
         dateCreated: Date,
-        dateModified: Date? = nil
+        dateModified: Date? = nil,
+        storageLocation: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -83,6 +85,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         self.level = level
         self.dateCreated = dateCreated
         self.dateModified = dateModified
+        self.storageLocation = storageLocation
     }
     
     // These are used by the coders
@@ -97,6 +100,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         case level = "level"
         case dateCreated = "date_created"
         case dateModified = "date_modified"
+        case storageLocation = "storage_location"
     }
     
     // A decoder that converts the database keys like "user_id" to self.userId
@@ -112,6 +116,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         self.level = try container.decode(Int.self, forKey: .level)
         self.dateCreated = try container.decode(Date.self, forKey: .dateCreated)
         self.dateModified = try container.decodeIfPresent(Date.self, forKey: .dateModified)
+        self.storageLocation = try container.decodeIfPresent(String.self, forKey: .storageLocation)
     }
     
     // An encoder that converts eg self.userId to database keys like "user_id"
@@ -127,6 +132,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         try container.encode(self.level, forKey: .level)
         try container.encode(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.dateModified, forKey: .dateModified)
+        try container.encodeIfPresent(self.storageLocation, forKey: .storageLocation)
     }
     
     static func ==(lhs: DBStory, rhs: DBStory) -> Bool {
