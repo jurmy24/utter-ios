@@ -39,12 +39,7 @@ struct HomeView: View {
                             let position = circleRelativeCenters[index]
                             
                             StoryBlob(
-                                level: storyWithProgress.story.level,
-                                isLocked: storyWithProgress.isLocked,
-                                storyTitle: storyWithProgress.story.title,
-                                storyDescription: storyWithProgress.story.description,
-                                numberOfChapters: storyWithProgress.story.chapters,
-                                completedChapters: storyWithProgress.currentChapter,
+                                story: storyWithProgress,
                                 size: viewModel.blobSize
                             )
                             .position(
@@ -52,18 +47,6 @@ struct HomeView: View {
                                 y: position.y * viewModel.contentHeight
                             )
                         }
-                        
-                        /* If I want to paginate */
-//                        if story == viewModel.stories.last {
-//                            ProgressView()
-//                                .onAppear {
-//                                    print("Progress View Appeared")
-//                                    Task {
-//                                        try await viewModel.getStoriesForLanguageLimited(language: .swedish)
-//                                    }
-//                                    
-//                                }
-//                        }
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight)

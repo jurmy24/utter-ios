@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct StoryPopover: View {
-    let storyTitle: String
-    let storyDescription: String
-    let chapters: Int
-    let chaptersRead: Int
-    let isLocked: Bool
-    let isStoryComplete: Bool
+    let story: StoryWithProgress
+    @State private var showStoryView: Bool = false
+    //    let storyTitle: String
+    //    let storyDescription: String
+    //    let chapters: Int
+    //    let chaptersRead: Int
+    //    let isLocked: Bool
+    //    let isStoryComplete: Bool
     
     var body: some View {
         ZStack {
-            if !isLocked{
+            if !story.isLocked{
                 Color("AccentColor")
                     .scaleEffect(1.5)
             } else {
@@ -28,24 +30,24 @@ struct StoryPopover: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 
-                HorizontalProgressBar(chapters: chapters,
-                                      chaptersRead: chaptersRead,
+                HorizontalProgressBar(chapters: story.story.chapters,
+                                      chaptersRead: story.currentChapter,
                                       lineThickness: 10)
                 
-                Text(storyTitle)
+                Text(story.story.title)
                     .frame(width: 250, alignment: .leading)
                     .font(.headline)
-                    .foregroundColor(isLocked ? Color.gray: Color("ReverseTextColor"))
+                    .foregroundColor(story.isLocked ? Color.gray: Color("ReverseTextColor"))
                 
-                Text(storyDescription)
+                Text(story.story.description)
                     .frame(width: 250, alignment: .leading)
                     .font(.callout)
-                    .foregroundColor(isLocked ? Color.gray: Color("ReverseTextColor"))
+                    .foregroundColor(story.isLocked ? Color.gray: Color("ReverseTextColor"))
                     .lineLimit(nil) // Allow unlimited lines
                     .fixedSize(horizontal: false, vertical: true) // Prevents truncation
                 
-                if !isLocked {
-                    if isStoryComplete {
+                if !story.isLocked {
+                    if story.isComplete {
                         Button(action: {
                             // Button action
                         }) {
@@ -64,9 +66,12 @@ struct StoryPopover: View {
                         Button(action: {
                             // TODO: open the story view and print the storageLocation (for now)
                             // Button action
+                            showStoryView = true
+                            
+                            
                         }) {
                             HStack {
-                                Text("Enter Chapter \(chaptersRead + 1)")
+                                Text("Enter Chapter \(story.currentChapter + 1)")
                                     .font(.headline)
                                 Image(systemName: "chevron.right")
                             }
@@ -82,17 +87,20 @@ struct StoryPopover: View {
             }
             .presentationCompactAdaptation(.popover)
             .padding()
-            .background(isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
+            .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
+            .fullScreenCover(isPresented: $showStoryView) {
+                StoryView(story: story)
+            }
         }
     }
 }
 
-#Preview {
-    StoryPopover(
-        storyTitle: "test",
-        storyDescription: "testing",
-        chapters: 3,
-        chaptersRead: 2,
-        isLocked: true,
-        isStoryComplete: false)
-}
+//#Preview {
+//    StoryPopover(
+//        storyTitle: "test",
+//        storyDescription: "testing",
+//        chapters: 3,
+//        chaptersRead: 2,
+//        isLocked: true,
+//        isStoryComplete: false)
+//}

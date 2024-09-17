@@ -15,29 +15,30 @@ final class StoryBlobModel: ObservableObject {
 }
 
 struct StoryBlob: View {
-    let level: Int
-    let isLocked: Bool
-    let storyTitle: String
-    let storyDescription: String
-    let numberOfChapters: Int
-    var completedChapters: Int
+    let story: StoryWithProgress
+//    let level: Int
+//    let isLocked: Bool
+//    let storyTitle: String
+//    let storyDescription: String
+//    let numberOfChapters: Int
+//    var completedChapters: Int
     let size: CGFloat
     
     @StateObject private var storyModel = StoryBlobModel()
     @State private var isShowingPopover = false
     
     // Computed property to check if the story is complete
-    var isStoryComplete: Bool {
-        numberOfChapters == completedChapters
-    }
+//    var isStoryComplete: Bool {
+//        story. == story.currentChapter
+//    }
     
     var body: some View {
         VStack(spacing: size * 0.05) { // Adjust spacing based on size
             ZStack {
                 Circle()
                     .fill(
-                        isLocked ? Color("LockedLevelBackground"):
-                            (isStoryComplete ? Color("ButtonColor") : 
+                        story.isLocked ? Color("LockedLevelBackground"):
+                            (story.isComplete ? Color("ButtonColor") :
                                 Color("StoryIncompleteBackground")))
                     .frame(width: size * 0.82, height: size * 0.82)
                     .overlay(
@@ -48,15 +49,15 @@ struct StoryBlob: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: size * 0.45, height: size * 0.45)
-                                .foregroundColor(isLocked ? Color.gray: (isStoryComplete ? .white.opacity(0.8) : Color("ButtonColor")))
+                                .foregroundColor(story.isLocked ? Color.gray: (story.isComplete ? .white.opacity(0.8) : Color("ButtonColor")))
                         }
                         
                     )
                 
                 // Circular Progress Bar around the Blob
                 CircularProgressBarView(
-                    total: numberOfChapters,
-                    completed: completedChapters,
+                    total: story.story.chapters,
+                    completed: story.currentChapter,
                     color: Color("ButtonColor"),
                     lineWidth: size * 0.08
                 )
@@ -77,19 +78,20 @@ struct StoryBlob: View {
                 isPresented: $isShowingPopover, arrowEdge: .top
             ) {
                 StoryPopover(
-                    storyTitle: storyTitle,
-                    storyDescription: storyDescription,
-                    chapters: numberOfChapters,
-                    chaptersRead: completedChapters,
-                    isLocked: isLocked,
-                    isStoryComplete: isStoryComplete
+                    story: story
+//                    storyTitle: storyTitle,
+//                    storyDescription: storyDescription,
+//                    chapters: numberOfChapters,
+//                    chaptersRead: completedChapters,
+//                    isLocked: isLocked,
+//                    isStoryComplete: isStoryComplete
                 )
             }
             
             // Story Title
-            Text(storyTitle)
+            Text(story.story.title)
                 .font(.system(size: size * 0.1, weight: .bold)) // Font size based on size (10% of total)
-                .foregroundColor(isLocked ? Color.gray : Color("AccentColor"))
+                .foregroundColor(story.isLocked ? Color.gray : Color("AccentColor"))
                 .frame(width:size)
                 .lineLimit(nil) // Allow unlimited lines
                 .fixedSize(horizontal: false, vertical: true) // Prevents truncation
@@ -98,6 +100,6 @@ struct StoryBlob: View {
     }
 }
 
-#Preview {
-    StoryBlob(level: 1, isLocked: true, storyTitle: "The Great Adventure", storyDescription: "Some description of this story.", numberOfChapters: 3, completedChapters: 0, size: 200)
-}
+//#Preview {
+//    StoryBlob(level: 1, isLocked: true, storyTitle: "The Great Adventure", storyDescription: "Some description of this story.", numberOfChapters: 3, completedChapters: 0, size: 200)
+//}
