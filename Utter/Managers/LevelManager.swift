@@ -13,7 +13,6 @@ struct StoryWithProgress: Identifiable {
     let isLocked: Bool
     let isComplete: Bool
     let currentChapter: Int
-    let storageLocation: String?
 }
 
 final class LevelManager {
@@ -37,12 +36,12 @@ final class LevelManager {
                 let isComplete = userStory.isComplete
                 let isLocked = false
                 let currentChapter = userStory.chapter
-                result.append(StoryWithProgress(id: story.id, story: story, isLocked: isLocked, isComplete: isComplete, currentChapter: currentChapter, storageLocation: story.storageLocation))
+                result.append(StoryWithProgress(id: story.id, story: story, isLocked: isLocked, isComplete: isComplete, currentChapter: currentChapter))
                 shouldUnlockNextStory = isComplete // Unlock next story if current is complete
             } else {
                 // User hasn't started this story
                 let isLocked = !shouldUnlockNextStory
-                result.append(StoryWithProgress(id: story.id, story: story, isLocked: isLocked, isComplete: false, currentChapter: 0, storageLocation: story.storageLocation))
+                result.append(StoryWithProgress(id: story.id, story: story, isLocked: isLocked, isComplete: false, currentChapter: 0))
                 shouldUnlockNextStory = false
             }
         }
