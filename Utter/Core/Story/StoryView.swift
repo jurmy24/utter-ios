@@ -72,6 +72,7 @@ struct StoryView: View {
                 showStoryView = false
             }
         }
+        .background(Color("AppBackgroundColor"))
         .defaultScrollAnchor(.bottom)
     }
 
