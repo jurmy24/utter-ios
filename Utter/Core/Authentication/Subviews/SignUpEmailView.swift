@@ -138,5 +138,4 @@ struct SignUpEmailView: View {
     NavigationStack{
         SignUpEmailView(showSignInView: .constant(false))
     }
-    
 }
