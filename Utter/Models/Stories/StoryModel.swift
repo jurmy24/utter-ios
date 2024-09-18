@@ -40,13 +40,6 @@ struct Story: Identifiable {
 }
 
 extension Story {
-    /// Creates a `Story` from a `DBStory` and an optional `UserStoryProgress`.
-    ///
-    /// - Parameters:
-    ///   - story: The `DBStory` instance.
-    ///   - userProgress: An optional `UserStoryProgress` instance.
-    ///   - isLocked: A `Bool` indicating whether the story is locked.
-    /// - Returns: A `Story` instance.
     static func create(from story: DBStory, userProgress: UserStoryProgress?, isLocked: Bool) -> Story {
         return Story(
             id: story.id,
@@ -55,4 +48,68 @@ extension Story {
             isLocked: isLocked
         )
     }
+}
+
+// Some sample stories
+extension Story {
+    static let sample1 = Story(
+        id: "1",
+        story: DBStory(
+            id: "1",
+            title: "A Magical Morning",
+            description: "The man called Otto experiences a day in his life.",
+            chapters: 4,
+            difficulty: .beginner,
+            language: .english,
+            type: .basic,
+            level: 1,
+            dateCreated: Date()
+        ),
+        userProgress: UserStoryProgress(
+            storyId: "1",
+            isComplete: false,
+            chapter: 2
+        ),
+        isLocked: false
+    )
+    
+    static let sample2 = Story(
+        id: "2",
+        story: DBStory(
+            id: "2",
+            title: "An Evening Adventure",
+            description: "A thrilling journey through the city at night.",
+            chapters: 3,
+            difficulty: .intermediate,
+            language: .english,
+            type: .basic,
+            level: 2,
+            dateCreated: Date()
+        ),
+        userProgress: UserStoryProgress(
+            storyId: "2",
+            isComplete: true,
+            chapter: 3
+        ),
+        isLocked: false
+    )
+    
+    static let sample3 = Story(
+        id: "3",
+        story: DBStory(
+            id: "3",
+            title: "Mysteries of the Forest",
+            description: "Uncover the secrets hidden among the trees.",
+            chapters: 3,
+            difficulty: .advanced,
+            language: .english,
+            type: .basic,
+            level: 3,
+            dateCreated: Date()
+        ),
+        userProgress: nil,
+        isLocked: true
+    )
+    
+    static let samples = [sample1, sample2, sample3]
 }

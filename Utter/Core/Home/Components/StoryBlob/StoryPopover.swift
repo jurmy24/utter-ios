@@ -10,12 +10,6 @@ import SwiftUI
 struct StoryPopover: View {
     let story: Story
     @State private var showStoryView: Bool = false
-    //    let storyTitle: String
-    //    let storyDescription: String
-    //    let chapters: Int
-    //    let chaptersRead: Int
-    //    let isLocked: Bool
-    //    let isStoryComplete: Bool
     
     var body: some View {
         ZStack {
@@ -89,18 +83,12 @@ struct StoryPopover: View {
             .padding()
             .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
             .fullScreenCover(isPresented: $showStoryView) {
-                StoryView(story: story)
+                StoryView(story: story, showStoryView: $showStoryView)
             }
         }
     }
 }
 
-//#Preview {
-//    StoryPopover(
-//        storyTitle: "test",
-//        storyDescription: "testing",
-//        chapters: 3,
-//        chaptersRead: 2,
-//        isLocked: true,
-//        isStoryComplete: false)
-//}
+#Preview {
+    StoryPopover(story: Story.sample1)
+}

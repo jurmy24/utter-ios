@@ -10,6 +10,7 @@ import SwiftUI
 struct StoryView: View {
     
     let story: Story
+    @Binding var showStoryView: Bool
     @StateObject private var viewModel = StoryViewModel()
     @State private var textInfo: String = ""
     
@@ -26,10 +27,6 @@ struct StoryView: View {
 //            }
             // TODO: print the json file in the Text() here
             Text(textInfo)
-            
-//            if let jsonData, let jsonData = JSONSerialization(jsonData) {
-//                Text
-//            }
         }
         .task {
             guard let storageLocation = story.story.storageLocation else {
@@ -46,6 +43,6 @@ struct StoryView: View {
     }
 }
 
-//#Preview {
-//    StoryView()
-//}
+#Preview {
+    StoryView(story: Story.sample1, showStoryView: .constant(true))
+}

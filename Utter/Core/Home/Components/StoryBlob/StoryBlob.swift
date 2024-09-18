@@ -100,6 +100,6 @@ struct StoryBlob: View {
     }
 }
 
-//#Preview {
-//    StoryBlob(level: 1, isLocked: true, storyTitle: "The Great Adventure", storyDescription: "Some description of this story.", numberOfChapters: 3, completedChapters: 0, size: 200)
-//}
+#Preview {
+    StoryBlob(story: Story.sample3, size: 150)
+}

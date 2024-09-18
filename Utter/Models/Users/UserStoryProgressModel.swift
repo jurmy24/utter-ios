@@ -12,6 +12,12 @@ struct UserStoryProgress: Codable {
     let isComplete: Bool
     let chapter: Int
     
+    init(storyId: String, isComplete: Bool, chapter: Int) {
+        self.storyId = storyId
+        self.isComplete = isComplete
+        self.chapter = chapter
+    }
+    
     enum CodingKeys: String, CodingKey {
         case storyId = "story_id"
         case isComplete = "is_complete"
