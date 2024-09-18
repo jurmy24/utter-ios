@@ -70,11 +70,12 @@ struct TextBlob: View {
                 Image(systemName: avatar)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 50, height: 50)
+                    .frame(width: 40, height: 40)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.gray, lineWidth: 1))
                 Text(character)
-                    .font(.headline)
+                    .font(.body)
+                    .fontWeight(.semibold)
                     .foregroundColor(Color("TextColor"))
             }
             
