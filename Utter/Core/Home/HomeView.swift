@@ -13,7 +13,7 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel(selectedLanguage: .swedish)
     
     var body: some View {
-        if viewModel.storiesWithProgress.isEmpty {
+        if viewModel.stories.isEmpty {
             VStack {
                 Spacer()
                 ProgressView("Loading stories...")
@@ -33,13 +33,13 @@ struct HomeView: View {
                         .frame(width: UIScreen.main.bounds.width, height: viewModel.contentHeight)
                     
                     // 2. Position StoryBlobs along the wavy path
-                    ForEach(viewModel.storiesWithProgress) { storyWithProgress in
-                        let index = storyWithProgress.story.level - 1
+                    ForEach(viewModel.stories) { storyModel in
+                        let index = storyModel.story.level - 1
                         if index >= 0 && index < circleRelativeCenters.count {
                             let position = circleRelativeCenters[index]
                             
                             StoryBlob(
-                                story: storyWithProgress,
+                                story: storyModel,
                                 size: viewModel.blobSize
                             )
                             .position(

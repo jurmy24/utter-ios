@@ -15,7 +15,7 @@ final class StoryBlobModel: ObservableObject {
 }
 
 struct StoryBlob: View {
-    let story: StoryWithProgress
+    let story: Story
 //    let level: Int
 //    let isLocked: Bool
 //    let storyTitle: String

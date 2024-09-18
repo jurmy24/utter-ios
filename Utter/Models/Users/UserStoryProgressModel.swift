@@ -1,5 +1,5 @@
 //
-//  UserStoryModel.swift
+//  UserStoryProgressModel.swift
 //  Utter
 //
 //  Created by Victor Magnus Oldensand on 2024-09-18.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserStory: Codable {
+struct UserStoryProgress: Codable {
     let storyId: String
     let isComplete: Bool
     let chapter: Int

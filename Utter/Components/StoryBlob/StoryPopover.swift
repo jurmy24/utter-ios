@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StoryPopover: View {
-    let story: StoryWithProgress
+    let story: Story
     @State private var showStoryView: Bool = false
     //    let storyTitle: String
     //    let storyDescription: String

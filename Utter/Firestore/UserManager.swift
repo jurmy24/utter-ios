@@ -78,7 +78,7 @@ final class UserManager {
         try await document.setData(data, merge: false)
     }
     
-    func getUserLanguageStories(userId: String, language: Language) async throws -> [UserStory] {
+    func getUserLanguageStories(userId: String, language: Language) async throws -> [UserStoryProgress] {
         // 1. Fetch the user's languages
         let userLanguages = try await getUserLanguages(userId: userId)
 
@@ -90,7 +90,7 @@ final class UserManager {
         let languageDocumentId = languageProgress.id
 
         // 3. Fetch the user's stories for the specified language
-        let stories = try await userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).getDocuments(as: UserStory.self)
+        let stories = try await userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).getDocuments(as: UserStoryProgress.self)
 
         return stories
     }

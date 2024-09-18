@@ -12,10 +12,8 @@ import FirebaseFirestore
 @MainActor
 final class HomeViewModel: ObservableObject {
     
-//    @Published private(set) var stories: [DBStory] = []
-    @Published private(set) var storiesWithProgress: [StoryWithProgress] = []
+    @Published private(set) var stories: [Story] = []
     @Published var selectedLanguage: Language? = nil
-    //    private var lastDocument: DocumentSnapshot? = nil
     
     // Define the Constants inside the class
     let blobSize: CGFloat = 100
@@ -26,8 +24,9 @@ final class HomeViewModel: ObservableObject {
     
     // Define variables dependent on the number of stories
     var numberOfBlobs: Int {
-        storiesWithProgress.count
+        stories.count
     }
+    
     var contentHeight: CGFloat {
         let blobHeightWithSpacing = blobSize + (blobSize * verticalSpacingMultiplier)
         return CGFloat(max(numberOfBlobs, 1)) * blobHeightWithSpacing + extraContentHeight
@@ -36,50 +35,49 @@ final class HomeViewModel: ObservableObject {
     init(selectedLanguage: Language) {
         self.selectedLanguage = selectedLanguage
         Task {
-            await self.loadStoriesWithProgress()
+            await self.loadStories()
         }
     }
     
-//    private func loadStories() async {
-//        guard let language = self.selectedLanguage else { return }
-//        do {
-//            try await getStoriesForLanguage(language: language)
-//        } catch {
-//            print("Error loading stories: \(error)")
-//        }
-//    }
-    
-    func loadStoriesWithProgress() async {
+    func loadStories() async {
         guard let selectedLanguage = self.selectedLanguage else { return }
         do {
             // Fetch stories and user progress
             let dbStories = try await StoryManager.shared.getAllStoriesByLanguage(language: selectedLanguage)
             let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-            let userStories = try await UserManager.shared.getUserLanguageStories(userId: authDataResult.uid, language: selectedLanguage)
+            let userProgresses = try await UserManager.shared.getUserLanguageStories(userId: authDataResult.uid, language: selectedLanguage)
             
-            // Use LevelManager to merge data
-            self.storiesWithProgress = LevelManager.shared.mergeStoriesWithProgress(dbStories: dbStories, userStories: userStories)
+            // Combine the stories with user progress
+            self.stories = getStories(dbStories: dbStories, userProgresses: userProgresses)
         } catch {
             print("Error loading stories with progress: \(error)")
         }
     }
     
-//    func getStoriesForLanguage(language: Language) async throws {
-//        let authDataResponse = try AuthenticationManager.shared.getAuthenticatedUser()
-//        
-//        switch language {
-//        case .english:
-//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .english)
-//        case .french:
-//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .french)
-//        case .swedish:
-//            self.stories = try await StoryManager.shared.getAllStoriesByLanguage(language: .swedish)
-//            let test = try await UserManager.shared.getUserLanguageStories(userId: authDataResponse.uid, language: .swedish)
-//            print(test)
-//        }
-//        self.selectedLanguage = language
-//    }
-    
+    private func getStories(dbStories: [DBStory], userProgresses: [UserStoryProgress]) -> [Story] {
+        // Create a dictionary for quick lookup of user progress by story ID
+        let userStoriesDict = Dictionary(uniqueKeysWithValues: userProgresses.map { ($0.storyId, $0) })
+        
+        // dbStories are already sorted as per the firestore fetch
+        let sortedStories = dbStories
+        
+        var isPreviousStoryComplete = true
+        var storyModels: [Story] = []
+        
+        for story in sortedStories {
+            let userProgress = userStoriesDict[story.id] // returns nil if not present
+            let isLocked = !isPreviousStoryComplete // TODO: might be better to set to true when userProgress is nil
+            
+            // Create the StoryModel using the static method
+            let storyModel = Story.create(from: story, userProgress: userProgress, isLocked: isLocked)
+            storyModels.append(storyModel)
+            
+            // Update the completion status for the next iteration
+            isPreviousStoryComplete = storyModel.isComplete
+        }
+        
+        return storyModels
+    }
 }
 
 // Generate blob positions extension

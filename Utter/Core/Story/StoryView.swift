@@ -23,7 +23,7 @@ final class StoryViewModel: ObservableObject {
 
 struct StoryView: View {
     
-    let story: StoryWithProgress
+    let story: Story
     @StateObject private var viewModel = StoryViewModel()
     @State private var textInfo: String = ""
     
