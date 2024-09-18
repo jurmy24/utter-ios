@@ -8,25 +8,6 @@
 import Foundation
 import FirebaseAuth
 
-struct AuthDataResultModel {
-    let uid: String
-    let email: String?
-    let photoUrl: String?
-    let name: String?
-    
-    init (user:User){
-        self.uid = user.uid
-        self.email = user.email
-        self.photoUrl = user.photoURL?.absoluteString
-        self.name = user.displayName
-    }
-}
-
-enum AuthProviderOption: String {
-    case email = "password"
-    case google = "google.com"
-    case apple = "apple.com"
-}
 
 final class AuthenticationManager {
     
@@ -43,9 +24,6 @@ final class AuthenticationManager {
         return AuthDataResultModel(user: user)
     }
     
-    
-    // google.com
-    // password
     func getProviders
     () throws -> [AuthProviderOption] {
         guard let providerData = Auth.auth().currentUser?.providerData else {
