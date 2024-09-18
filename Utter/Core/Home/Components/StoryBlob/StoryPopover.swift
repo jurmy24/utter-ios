@@ -83,7 +83,7 @@ struct StoryPopover: View {
             .padding()
             .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
             .fullScreenCover(isPresented: $showStoryView) {
-                StoryView(story: story, showStoryView: $showStoryView)
+                StoryView(storyMetadata: story, showStoryView: $showStoryView)
             }
         }
     }

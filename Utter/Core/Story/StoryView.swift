@@ -8,32 +8,27 @@
 import SwiftUI
 
 struct StoryView: View {
-    let story: Story
+    let storyMetadata: Story
     @Binding var showStoryView: Bool
     @StateObject private var viewModel = StoryViewModel()
-    @State private var textInfo: String = ""
 
     var body: some View {
         ScrollView {
-            if let loadedStory = viewModel.story {
-                VStack(alignment: .leading, spacing: 16) {
-                    // Story title
+            VStack(alignment: .leading, spacing: 16) {
+                // Display story title and description
+                if let loadedStory = viewModel.story, viewModel.currentChapter == nil {
                     Text(loadedStory.title)
                         .font(.title)
                         .foregroundColor(.blue)
-
-                    // Story description
                     Text(loadedStory.description)
                         .font(.body)
                         .foregroundColor(.gray)
-                        .padding(.bottom, 20)
 
-                    // Next button
+                    // Start button to play intro and move to first chapter
                     Button(action: {
-                        // Add your next action here (e.g., navigating to the next chapter)
-                        print("Next button tapped")
+                        viewModel.playNextBlock()  // Start the story
                     }) {
-                        Text("Next")
+                        Text("Start Story")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -41,30 +36,75 @@ struct StoryView: View {
                             .background(Color.blue)
                             .cornerRadius(10)
                     }
+                } else if let chapter = viewModel.currentChapter {
+                    // Display all played blocks in the chapter
+                    ForEach(viewModel.playedBlocks) { block in
+                        displayBlock(block)
+                    }
+
+                    // Button to play the next block
+                    if viewModel.getCurrentBlock() != nil {
+                        Button(action: {
+                            viewModel.playNextBlock()
+                        }) {
+                            Text("Next")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
+                    }
                 }
-                .padding(.horizontal)
-            } else {
-                Text(textInfo)
-                    .foregroundColor(.red)
-                    .font(.headline)
             }
+            .padding()
         }
         .task {
             // Load the story when the view appears
-            guard let storageLocation = story.storageLocation else {
-                textInfo = "Storage location not found"
+            guard let storageLocation = storyMetadata.storageLocation else {
+                showStoryView = false
                 return
             }
             do {
                 try await viewModel.loadStory(path: storageLocation)
-                textInfo = ""  // Clear any previous error messages on success
             } catch {
-                textInfo = "Unable to load story: \(error.localizedDescription)"
+                showStoryView = false
+            }
+        }
+    }
+
+    // Display block
+    @ViewBuilder
+    private func displayBlock(_ block: Block) -> some View {
+        if block.blockType == .story, let lines = block.lines {
+            displayStoryBlock(lines)
+        } else if block.blockType == .exercise, let exercises = block.exerciseOptions {
+            displayExerciseBlock(exercises)
+        }
+    }
+
+    // Display story block
+    @ViewBuilder
+    private func displayStoryBlock(_ lines: [Line]) -> some View {
+        ForEach(lines) { line in
+            TextBlob(avatar: "person.circle.fill", character: line.character.rawValue, text: line.text)
+        }
+    }
+
+    // Display exercise block
+    @ViewBuilder
+    private func displayExerciseBlock(_ exercises: [ExerciseOption]) -> some View {
+        ForEach(exercises) { exercise in
+            if let query = exercise.query {
+                Text("Exercise: \(query)")
+                    .font(.headline)
+                    .padding(.vertical, 8)
             }
         }
     }
 }
 
 #Preview {
-    StoryView(story: Story.sample1, showStoryView: .constant(true))
+    StoryView(storyMetadata: Story.sample1, showStoryView: .constant(true))
 }

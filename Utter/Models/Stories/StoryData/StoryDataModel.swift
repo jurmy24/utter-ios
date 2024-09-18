@@ -35,14 +35,14 @@ struct Chapter: Codable {
     let blocks: [Block]
 }
 
-struct Block: Codable {
-    let blockID: Int
+struct Block: Identifiable, Codable {
+    let id: Int
     let blockType: BlockType
     let lines: [Line]?
     let exerciseOptions: [ExerciseOption]?
 
     enum CodingKeys: String, CodingKey {
-        case blockID = "block_id"
+        case id = "block_id"
         case blockType = "block_type"
         case lines
         case exerciseOptions = "exercise_options"
@@ -54,8 +54,8 @@ enum BlockType: String, Codable {
     case story = "story"
 }
 
-struct ExerciseOption: Codable {
-    let exerciseID: Int
+struct ExerciseOption: Identifiable, Codable {
+    let id: Int
     let type: String
     let cefr: [CEFRLevel]
     let query: String?
@@ -67,7 +67,7 @@ struct ExerciseOption: Codable {
     let correctAnswer: String?
 
     enum CodingKeys: String, CodingKey {
-        case exerciseID = "exercise_id"
+        case id = "exercise_id"
         case type, cefr
         case query
         case answerOptions = "answer_options"
@@ -104,13 +104,13 @@ struct AnswerOption: Codable {
 //}
 
 
-struct Line: Codable {
-    let lineID: Int
+struct Line: Identifiable, Codable {
+    let id: Int
     let character: Character
     let text, audio: String
 
     enum CodingKeys: String, CodingKey {
-        case lineID = "line_id"
+        case id = "line_id"
         case character, text, audio
     }
 }

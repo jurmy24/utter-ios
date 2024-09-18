@@ -59,18 +59,25 @@ struct SpeechBubble: Shape {
 
 struct TextBlob: View {
     var avatar: String // This can be the name of an SF Symbol or Image
+    var character: String
     var text: String
     var modifier: Action?
 
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
             // Avatar on the left
-            Image(systemName: avatar)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+            VStack {
+                Image(systemName: avatar)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                Text(character)
+                    .font(.headline)
+                    .foregroundColor(Color("TextColor"))
+            }
+            
             
             // Speech bubble containing the text
             HStack {
@@ -155,6 +162,6 @@ struct TextBlob: View {
 
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?")
+    TextBlob(avatar: "person.circle.fill", character: "Jim", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?")
 }
 
