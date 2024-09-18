@@ -383,7 +383,6 @@
 				E8E347262C9AB136006DDA92 /* Authentication */,
 				E8E347252C9AB108006DDA92 /* Stories */,
 				E8E347242C9AACAB006DDA92 /* Users */,
-				E8E347222C9AAB7C006DDA92 /* StoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,6 +429,7 @@
 		E8E347252C9AB108006DDA92 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				E8E347222C9AAB7C006DDA92 /* StoryModel.swift */,
 				E8E347152C9A9E8E006DDA92 /* DBStoryModel.swift */,
 			);
 			path = Stories;
