@@ -156,6 +156,8 @@
 			children = (
 				E855176F2C90CE0600FEB145 /* HomeView.swift */,
 				E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */,
+				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
+				E8E347272C9AD4C0006DDA92 /* WavyPath */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -213,7 +215,6 @@
 				E8E347002C99F256006DDA92 /* Models */,
 				E8E3471F2C9AA0B7006DDA92 /* Enums */,
 				E854EE442C94B19300BF1E33 /* Core */,
-				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
 				E82E3E3D2C879A3700EF9A6A /* Authentication */,
 				E854EE5E2C94BA5000BF1E33 /* Firestore */,
@@ -294,10 +295,10 @@
 		E854EE482C94B1ED00BF1E33 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				E82E3E4B2C884C1F00EF9A6A /* SignInEmailView.swift */,
-				E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */,
-				E854EE492C94B21C00BF1E33 /* SignInEmailViewModel.swift */,
-				E854EE4B2C94B23E00BF1E33 /* SignUpEmailViewModel.swift */,
+				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
+				E8E3472A2C9AD519006DDA92 /* ContinueWithGoogle */,
+				E8E347292C9AD510006DDA92 /* SignUp */,
+				E8E347282C9AD4F8006DDA92 /* SignIn */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -309,17 +310,6 @@
 				E854EE612C96EEEA00BF1E33 /* StoryManager.swift */,
 			);
 			path = Firestore;
-			sourceTree = "<group>";
-		};
-		E85517682C90CD3200FEB145 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
-				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
-				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
-				E855177C2C9205FC00FEB145 /* WavyPath.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		E8E346E62C98168E006DDA92 /* Subviews */ = {
@@ -430,6 +420,40 @@
 				E8E3471D2C9A9F5F006DDA92 /* AuthDataResultModel.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		E8E347272C9AD4C0006DDA92 /* WavyPath */ = {
+			isa = PBXGroup;
+			children = (
+				E855177C2C9205FC00FEB145 /* WavyPath.swift */,
+			);
+			path = WavyPath;
+			sourceTree = "<group>";
+		};
+		E8E347282C9AD4F8006DDA92 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E4B2C884C1F00EF9A6A /* SignInEmailView.swift */,
+				E854EE492C94B21C00BF1E33 /* SignInEmailViewModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		E8E347292C9AD510006DDA92 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E82E3E432C879C0F00EF9A6A /* SignUpEmailView.swift */,
+				E854EE4B2C94B23E00BF1E33 /* SignUpEmailViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		E8E3472A2C9AD519006DDA92 /* ContinueWithGoogle */ = {
+			isa = PBXGroup;
+			children = (
+				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
+			);
+			path = ContinueWithGoogle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
