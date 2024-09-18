@@ -72,6 +72,7 @@ struct StoryView: View {
                 showStoryView = false
             }
         }
+        .defaultScrollAnchor(.bottom)
     }
 
     // Display block
