@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StoryLanguage: String, Codable {
+enum Language: String, Codable {
     case english = "en"
     case swedish = "se"
     case french = "fr"

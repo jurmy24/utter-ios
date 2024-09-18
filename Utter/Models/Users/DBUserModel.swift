@@ -13,6 +13,7 @@ struct DBUser: Codable {
     let email: String?
     let name: String?
     let avatar: String?
+    let languages: [Language]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -20,6 +21,7 @@ struct DBUser: Codable {
         self.email = auth.email
         self.name = auth.name
         self.avatar = "🐶" // Set standard avatar as dog 🐶 by default
+        self.languages = nil
     }
     
     init(
@@ -27,13 +29,15 @@ struct DBUser: Codable {
         dateCreated: Date? ,
         email: String? = nil,
         name: String? = nil,
-        avatar: String? = nil
+        avatar: String? = nil,
+        languages: [Language]? = nil
     ) {
         self.userId = userId
         self.dateCreated = dateCreated
         self.email = email
         self.name = name
         self.avatar = avatar // Set standard avatar as dog 🐶 by default
+        self.languages = languages
     }
     
     // These are used by the coders
@@ -43,6 +47,7 @@ struct DBUser: Codable {
         case email = "email"
         case name = "name"
         case avatar = "avatar"
+        case languages = "languages"
     }
     
     // A decoder that converts the database keys like "user_id" to self.userId
@@ -53,6 +58,7 @@ struct DBUser: Codable {
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.avatar = try container.decodeIfPresent(String.self, forKey: .avatar)
+        self.languages = try container.decodeIfPresent([Language].self, forKey: .languages)
     }
     
     // An encoder that converts eg self.userId to database keys like "user_id"
@@ -63,5 +69,6 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.email, forKey: .email)
         try container.encodeIfPresent(self.name, forKey: .name)
         try container.encodeIfPresent(self.avatar, forKey: .avatar)
+        try container.encodeIfPresent(self.languages, forKey: .languages)
     }
 }

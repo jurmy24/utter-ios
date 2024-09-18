@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Difficulty: String, Codable {
+enum StoryDifficulty: String, Codable {
     case beginner = "beginner"
     case intermediate = "intermediate"
     case advanced = "advanced"

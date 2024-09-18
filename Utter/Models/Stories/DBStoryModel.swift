@@ -12,8 +12,8 @@ struct DBStory: Identifiable, Codable, Equatable {
     let title: String
     let description: String
     let chapters: Int
-    let difficulty: Difficulty
-    let language: StoryLanguage
+    let difficulty: StoryDifficulty
+    let language: Language
     let type: StoryType
     let level: Int
     let dateCreated: Date
@@ -25,8 +25,8 @@ struct DBStory: Identifiable, Codable, Equatable {
         title: String,
         description: String,
         chapters: Int,
-        difficulty: Difficulty,
-        language: StoryLanguage,
+        difficulty: StoryDifficulty,
+        language: Language,
         type: StoryType,
         level: Int,
         dateCreated: Date,
@@ -68,8 +68,8 @@ struct DBStory: Identifiable, Codable, Equatable {
         self.title = try container.decode(String.self, forKey: .title)
         self.description = try container.decode(String.self, forKey: .description)
         self.chapters = try container.decode(Int.self, forKey: .chapters)
-        self.difficulty = try container.decode(Difficulty.self, forKey: .difficulty)
-        self.language = try container.decode(StoryLanguage.self, forKey: .language)
+        self.difficulty = try container.decode(StoryDifficulty.self, forKey: .difficulty)
+        self.language = try container.decode(Language.self, forKey: .language)
         self.type = try container.decode(StoryType.self, forKey: .type)
         self.level = try container.decode(Int.self, forKey: .level)
         self.dateCreated = try container.decode(Date.self, forKey: .dateCreated)

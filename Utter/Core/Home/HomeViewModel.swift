@@ -14,7 +14,7 @@ final class HomeViewModel: ObservableObject {
     
 //    @Published private(set) var stories: [DBStory] = []
     @Published private(set) var storiesWithProgress: [StoryWithProgress] = []
-    @Published var selectedLanguage: StoryLanguage? = nil
+    @Published var selectedLanguage: Language? = nil
     //    private var lastDocument: DocumentSnapshot? = nil
     
     // Define the Constants inside the class
@@ -33,7 +33,7 @@ final class HomeViewModel: ObservableObject {
         return CGFloat(max(numberOfBlobs, 1)) * blobHeightWithSpacing + extraContentHeight
     }
     
-    init(selectedLanguage: StoryLanguage) {
+    init(selectedLanguage: Language) {
         self.selectedLanguage = selectedLanguage
         Task {
             await self.loadStoriesWithProgress()
@@ -64,7 +64,7 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-//    func getStoriesForLanguage(language: StoryLanguage) async throws {
+//    func getStoriesForLanguage(language: Language) async throws {
 //        let authDataResponse = try AuthenticationManager.shared.getAuthenticatedUser()
 //        
 //        switch language {

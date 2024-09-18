@@ -10,9 +10,10 @@ import SwiftUI
 @MainActor
 final class LanguageViewModel: ObservableObject {
     
-    @Published private(set) var userLanguages: [StoryLanguage] = []
-    @Published private(set) var otherLanguages: [StoryLanguage] = [.english, .french, .swedish]
+    @Published private(set) var userLanguages: [Language] = []
+    @Published private(set) var otherLanguages: [Language] = [.english, .french, .swedish]
     
+    // TODO: update this and getUserLanguages to just use the languages field in the user collection
     func getUserLanguages() {
         Task {
             let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
@@ -31,7 +32,7 @@ final class LanguageViewModel: ObservableObject {
         }
     }
     
-    func addUserLanguage(language: StoryLanguage) {
+    func addUserLanguage(language: Language) {
         Task {
             let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
             try? await UserManager.shared.addNewLanguage(userId: authDataResult.uid, language: language)
@@ -41,7 +42,7 @@ final class LanguageViewModel: ObservableObject {
 
 struct LanguageView: View {
     
-    @State private var selectedLanguage: StoryLanguage = .swedish
+    @State private var selectedLanguage: Language = .swedish
     @StateObject private var viewModel = LanguageViewModel()
     
     var body: some View {

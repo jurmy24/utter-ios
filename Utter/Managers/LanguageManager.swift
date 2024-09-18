@@ -14,7 +14,7 @@ final class LanguageManager: ObservableObject {
     // Singleton instance
     static let shared = LanguageManager()
     
-    @Published var selectedLanguage: StoryLanguage {
+    @Published var selectedLanguage: Language {
         didSet {
             // Persist the selected language in UserDefaults whenever it changes
             UserDefaults.standard.set(selectedLanguage.rawValue, forKey: "selectedLanguage")
@@ -23,7 +23,7 @@ final class LanguageManager: ObservableObject {
     
     // Private initializer to prevent creating multiple instances
     private init() {
-        let savedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") ?? StoryLanguage.english.rawValue
-        self.selectedLanguage = StoryLanguage(rawValue: savedLanguage) ?? .english
+        let savedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") ?? Language.english.rawValue
+        self.selectedLanguage = Language(rawValue: savedLanguage) ?? .english
     }
 }

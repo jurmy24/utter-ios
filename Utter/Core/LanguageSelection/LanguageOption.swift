@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LanguageOption: View {
-    let language: StoryLanguage
+    let language: Language
     let isSelected: Bool // Determines if this language is selected
     
     var body: some View {

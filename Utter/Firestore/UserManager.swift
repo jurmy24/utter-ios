@@ -60,25 +60,25 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
-    func getUserLanguages(userId: String) async throws -> [UserLanguage] {
-        return try await userLanguageCollection(userId: userId).getDocuments(as: UserLanguage.self)
+    func getUserLanguages(userId: String) async throws -> [UserLanguageDetails] {
+        return try await userLanguageCollection(userId: userId).getDocuments(as: UserLanguageDetails.self)
     }
     
-    func addNewLanguage(userId: String, language: StoryLanguage) async throws {
+    func addNewLanguage(userId: String, language: Language) async throws {
         let document = userLanguageCollection(userId: userId).document()
         let documentId = document.documentID
         
         let data: [String: Any] = [
-            UserLanguage.CodingKeys.id.rawValue: documentId,
-            UserLanguage.CodingKeys.language.rawValue: language.rawValue,
-            UserLanguage.CodingKeys.currentCefr.rawValue: CEFRLevel.a1.rawValue, // set to a1 by default now
-            UserLanguage.CodingKeys.startingDifficulty.rawValue: Difficulty.beginner.rawValue // set to beginner by default now
+            UserLanguageDetails.CodingKeys.id.rawValue: documentId,
+            UserLanguageDetails.CodingKeys.language.rawValue: language.rawValue,
+            UserLanguageDetails.CodingKeys.currentCefr.rawValue: CEFRLevel.a1.rawValue, // set to a1 by default now
+            UserLanguageDetails.CodingKeys.startingDifficulty.rawValue: StoryDifficulty.beginner.rawValue // set to beginner by default now
         ]
         
         try await document.setData(data, merge: false)
     }
     
-    func getUserLanguageStories(userId: String, language: StoryLanguage) async throws -> [UserStory] {
+    func getUserLanguageStories(userId: String, language: Language) async throws -> [UserStory] {
         // 1. Fetch the user's languages
         let userLanguages = try await getUserLanguages(userId: userId)
 
@@ -95,11 +95,11 @@ final class UserManager {
         return stories
     }
     
-    //    func newStoryUnlocked(userId: String, language: StoryLanguage, storyId: String) {
+    //    func newStoryUnlocked(userId: String, language: Language, storyId: String) {
     //        try await userDocument(userId: userId).collection("languages_progress")
     //    }
     //
-    //    func updateUserStoryProgress(userId: String, language: StoryLanguage) {
+    //    func updateUserStoryProgress(userId: String, language: Language) {
     //        try await userDocument(userId: userId).collection("languages_progress")
     //    }
     

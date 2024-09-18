@@ -7,14 +7,6 @@
 
 import Foundation
 
-struct StoryWithProgress: Identifiable {
-    let id: String
-    let story: DBStory
-    let isLocked: Bool
-    let isComplete: Bool
-    let currentChapter: Int
-}
-
 final class LevelManager {
     
     static let shared = LevelManager()

@@ -1,5 +1,5 @@
 //
-//  UserLanguageModel.swift
+//  UserLanguageDetailsModel.swift
 //  Utter
 //
 //  Created by Victor Magnus Oldensand on 2024-09-18.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct UserLanguage: Codable {
+struct UserLanguageDetails: Codable {
     let id: String
-    let language: StoryLanguage
+    let language: Language
     let currentCefr: CEFRLevel
-    let startingDifficulty: Difficulty
+    let startingDifficulty: StoryDifficulty
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -23,9 +23,9 @@ struct UserLanguage: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.language = try container.decode(StoryLanguage.self, forKey: .language)
+        self.language = try container.decode(Language.self, forKey: .language)
         self.currentCefr = try container.decode(CEFRLevel.self, forKey: .currentCefr)
-        self.startingDifficulty = try container.decode(Difficulty.self, forKey: .startingDifficulty)
+        self.startingDifficulty = try container.decode(StoryDifficulty.self, forKey: .startingDifficulty)
     }
     
     func encode(to encoder: any Encoder) throws {

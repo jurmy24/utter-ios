@@ -32,7 +32,7 @@ final class StoryManager {
         try await storyCollection.getDocuments(as: DBStory.self)
     }
         
-    func getAllStoriesByLanguage(language: StoryLanguage) async throws -> [DBStory] {
+    func getAllStoriesByLanguage(language: Language) async throws -> [DBStory] {
         try await storyCollection
             .whereField(DBStory.CodingKeys.language.rawValue, isEqualTo: language.rawValue)
             .order(by: DBStory.CodingKeys.level.rawValue, descending: false)

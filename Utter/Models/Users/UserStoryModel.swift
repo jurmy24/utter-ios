@@ -13,7 +13,6 @@ struct UserStory: Codable {
     let chapter: Int
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
         case storyId = "story_id"
         case isComplete = "is_complete"
         case chapter = "chapter"
