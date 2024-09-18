@@ -60,7 +60,7 @@ struct SpeechBubble: Shape {
 struct TextBlob: View {
     var avatar: String // This can be the name of an SF Symbol or Image
     var text: String
-    var modifier: ActionType?
+    var modifier: Action?
 
     var body: some View {
         HStack(alignment: .center, spacing: 20) {

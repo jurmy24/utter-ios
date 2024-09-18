@@ -54,7 +54,6 @@
 		E8E346F82C988CF5006DDA92 /* TextBlob.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346F72C988CF5006DDA92 /* TextBlob.swift */; };
 		E8E346FB2C98D27F006DDA92 /* WordWrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346FA2C98D27F006DDA92 /* WordWrapView.swift */; };
 		E8E346FD2C98D292006DDA92 /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346FC2C98D292006DDA92 /* WordView.swift */; };
-		E8E347022C99F4D0006DDA92 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347012C99F4D0006DDA92 /* ActionType.swift */; };
 		E8E347042C9A0D97006DDA92 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E8E347032C9A0D97006DDA92 /* FirebaseStorage */; };
 		E8E347072C9A0E33006DDA92 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347062C9A0E33006DDA92 /* StorageManager.swift */; };
 		E8E347092C9A10F3006DDA92 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347082C9A10F3006DDA92 /* ProfileViewModel.swift */; };
@@ -73,6 +72,7 @@
 		E8E3472E2C9AD664006DDA92 /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3472D2C9AD664006DDA92 /* StoryViewModel.swift */; };
 		E8E347302C9AD6E6006DDA92 /* GoogleSignInResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3472F2C9AD6E6006DDA92 /* GoogleSignInResultModel.swift */; };
 		E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347312C9AD757006DDA92 /* AppleSignInResultModel.swift */; };
+		E8E347352C9AE979006DDA92 /* StoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347342C9AE979006DDA92 /* StoryDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,7 +120,6 @@
 		E8E346F72C988CF5006DDA92 /* TextBlob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlob.swift; sourceTree = "<group>"; };
 		E8E346FA2C98D27F006DDA92 /* WordWrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapView.swift; sourceTree = "<group>"; };
 		E8E346FC2C98D292006DDA92 /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
-		E8E347012C99F4D0006DDA92 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		E8E347062C9A0E33006DDA92 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E8E347082C9A10F3006DDA92 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		E8E3470A2C9A9D87006DDA92 /* UserStoryProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoryProgressModel.swift; sourceTree = "<group>"; };
@@ -138,6 +137,7 @@
 		E8E3472D2C9AD664006DDA92 /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		E8E3472F2C9AD6E6006DDA92 /* GoogleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInResultModel.swift; sourceTree = "<group>"; };
 		E8E347312C9AD757006DDA92 /* AppleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInResultModel.swift; sourceTree = "<group>"; };
+		E8E347342C9AE979006DDA92 /* StoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,7 +390,6 @@
 		E8E3471F2C9AA0B7006DDA92 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				E8E347012C99F4D0006DDA92 /* ActionType.swift */,
 				E8E347132C9A9E72006DDA92 /* CEFRLevel.swift */,
 				E8E3471B2C9A9F12006DDA92 /* StoryDifficulty.swift */,
 				E8E347192C9A9EF4006DDA92 /* Language.swift */,
@@ -413,6 +412,7 @@
 		E8E347252C9AB108006DDA92 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				E8E347332C9AE944006DDA92 /* StoryData */,
 				E8E347222C9AAB7C006DDA92 /* StoryModel.swift */,
 				E8E347152C9A9E8E006DDA92 /* DBStoryModel.swift */,
 			);
@@ -479,6 +479,14 @@
 				E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		E8E347332C9AE944006DDA92 /* StoryData */ = {
+			isa = PBXGroup;
+			children = (
+				E8E347342C9AE979006DDA92 /* StoryDataModel.swift */,
+			);
+			path = StoryData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,7 +575,6 @@
 			files = (
 				E8E3471C2C9A9F12006DDA92 /* StoryDifficulty.swift in Sources */,
 				E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */,
-				E8E347022C99F4D0006DDA92 /* ActionType.swift in Sources */,
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
 				E8E347182C9A9ED2006DDA92 /* StoryType.swift in Sources */,
@@ -621,6 +628,7 @@
 				E854EE4A2C94B21C00BF1E33 /* SignInEmailViewModel.swift in Sources */,
 				E854EE5D2C94B4ED00BF1E33 /* SettingsViewModel.swift in Sources */,
 				E8E347102C9A9E02006DDA92 /* CustomErrors.swift in Sources */,
+				E8E347352C9AE979006DDA92 /* StoryDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

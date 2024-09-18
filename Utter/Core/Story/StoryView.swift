@@ -8,36 +8,58 @@
 import SwiftUI
 
 struct StoryView: View {
-    
     let story: Story
     @Binding var showStoryView: Bool
     @StateObject private var viewModel = StoryViewModel()
     @State private var textInfo: String = ""
-    
+
     var body: some View {
         ScrollView {
-//            VStack (alignment: .leading, spacing: 30){
-//                let blocks = [1, 2, 3]
-//                ForEach(blocks, id: \.self) { block in
-//                    TextBlob(avatar: "person.circle.fill", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?", modifier: .hideAudio)
-//                        .padding(.horizontal, 16)
-//                }
-//                
-//                Spacer()
-//            }
-            // TODO: print the json file in the Text() here
-            Text(textInfo)
+            if let loadedStory = viewModel.story {
+                VStack(alignment: .leading, spacing: 16) {
+                    // Story title
+                    Text(loadedStory.title)
+                        .font(.title)
+                        .foregroundColor(.blue)
+
+                    // Story description
+                    Text(loadedStory.description)
+                        .font(.body)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 20)
+
+                    // Next button
+                    Button(action: {
+                        // Add your next action here (e.g., navigating to the next chapter)
+                        print("Next button tapped")
+                    }) {
+                        Text("Next")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding(.horizontal)
+            } else {
+                Text(textInfo)
+                    .foregroundColor(.red)
+                    .font(.headline)
+            }
         }
         .task {
+            // Load the story when the view appears
             guard let storageLocation = story.storageLocation else {
-                textInfo = "storageLocation not found"
+                textInfo = "Storage location not found"
                 return
             }
             do {
                 try await viewModel.loadStory(path: storageLocation)
-                textInfo = viewModel.storyString
+                textInfo = ""  // Clear any previous error messages on success
             } catch {
-                textInfo = "unable to load story"
+                textInfo = "Unable to load story: \(error.localizedDescription)"
             }
         }
     }
