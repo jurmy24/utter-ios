@@ -212,7 +212,6 @@
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
 				E8E347002C99F256006DDA92 /* Models */,
 				E8E3471F2C9AA0B7006DDA92 /* Enums */,
-				E8E346EE2C983C43006DDA92 /* Managers */,
 				E854EE442C94B19300BF1E33 /* Core */,
 				E85517682C90CD3200FEB145 /* Components */,
 				E82E3E542C885FEB00EF9A6A /* Utilities */,
@@ -338,13 +337,6 @@
 				E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */,
 			);
 			path = LanguageSelection;
-			sourceTree = "<group>";
-		};
-		E8E346EE2C983C43006DDA92 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		E8E346F32C988CCA006DDA92 /* Story */ = {
