@@ -10,7 +10,6 @@ import SwiftUI
 struct RootView: View {
     
     @State private var showSignInView: Bool = false
-//    @State var selectedTab: Tabs = .home
     
     var body: some View {
         // Conditionally display the home pages if the user is logged in
