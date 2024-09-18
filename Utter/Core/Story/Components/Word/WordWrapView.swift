@@ -97,7 +97,7 @@ struct WordWrapView: View {
             }
         }
         
-        let text = "What the heck is going on god damn it"
+        let text = "What the heck is going on damn it"
         if true {
             
             let words = text.components(separatedBy: " ")
