@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class StoryViewModel: ObservableObject {
     //    @Published var blocks:
 //    @Published var jsonData = nil
@@ -14,9 +15,6 @@ final class StoryViewModel: ObservableObject {
     
     func loadStory(path: String) async throws {
         let data = try await StorageManager.shared.getStory(path: path)
-        
         self.storyString = String(data: data, encoding: .utf8) ?? "It didn't work"
-        
     }
-    
 }

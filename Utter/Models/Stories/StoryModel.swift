@@ -37,6 +37,10 @@ struct Story: Identifiable {
     var currentChapter: Int {
         userProgress?.chapter ?? 0
     }
+    
+    var storageLocation: String? {
+        story.storageLocation ?? nil
+    }
 }
 
 extension Story {

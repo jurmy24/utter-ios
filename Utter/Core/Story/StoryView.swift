@@ -29,7 +29,7 @@ struct StoryView: View {
             Text(textInfo)
         }
         .task {
-            guard let storageLocation = story.story.storageLocation else {
+            guard let storageLocation = story.storageLocation else {
                 textInfo = "storageLocation not found"
                 return
             }
