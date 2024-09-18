@@ -69,7 +69,7 @@ extension AuthenticationManager {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-
+        
         try await user.updatePassword(to: password)
     }
     
@@ -92,7 +92,7 @@ extension AuthenticationManager {
     }
     
     @discardableResult
-    func signInWithApple(tokens: SignInWithAppleResult) async throws -> AuthDataResultModel{
+    func signInWithApple(tokens: AppleSignInResultModel) async throws -> AuthDataResultModel{
         let credential = OAuthProvider.credential(withProviderID: AuthProviderOption.apple.rawValue, idToken: tokens.token, rawNonce: tokens.nonce)
         //let credential = OAuthProvider.credential(providerID: AuthProviderOption.apple.rawValue, idToken: tokens.token, rawNonce: tokens.nonce)
         return try await signIn(credential: credential)

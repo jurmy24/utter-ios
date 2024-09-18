@@ -22,23 +22,16 @@ struct SignInWithAppleButtonViewRepresentable: UIViewRepresentable {
     func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {}
 }
 
-struct SignInWithAppleResult {
-    let token: String
-    let nonce: String
-    let name: String?
-    let email: String?
-}
-
 
 @MainActor
 final class SignInAppleHelper: NSObject {
     
     // Unhashed nonce.
     private var currentNonce: String?
-    private var completionHandler: ((Result<SignInWithAppleResult, Error>) -> Void)? = nil
+    private var completionHandler: ((Result<AppleSignInResultModel, Error>) -> Void)? = nil
     
     
-    func startSignInWithAppleFlow() async throws -> SignInWithAppleResult {
+    func startSignInWithAppleFlow() async throws -> AppleSignInResultModel {
         try await withCheckedThrowingContinuation { continuation in
             self.startSignInWithAppleFlow { result in
                 switch result {
@@ -53,7 +46,7 @@ final class SignInAppleHelper: NSObject {
         }
     }
     
-    func startSignInWithAppleFlow(completion: @escaping (Result<SignInWithAppleResult, Error>) -> Void) {
+    func startSignInWithAppleFlow(completion: @escaping (Result<AppleSignInResultModel, Error>) -> Void) {
         
         guard let topVC = Utilities.shared.topViewController() else {
             completion(.failure(URLError(.badURL)))
@@ -123,9 +116,9 @@ extension SignInAppleHelper: ASAuthorizationControllerDelegate {
         let name = appleIDCredential.fullName?.givenName
         let email = appleIDCredential.email
         
-        let tokens = SignInWithAppleResult(token: idTokenString, nonce: nonce, name: name, email: email)
+        let tokens = AppleSignInResultModel(token: idTokenString, nonce: nonce, name: name, email: email)
         completionHandler?(.success(tokens))
-    
+        
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

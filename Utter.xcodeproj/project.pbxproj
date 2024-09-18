@@ -36,7 +36,7 @@
 		E854EE5D2C94B4ED00BF1E33 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */; };
 		E854EE602C94BA6400BF1E33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE5F2C94BA6400BF1E33 /* UserManager.swift */; };
 		E854EE622C96EEEA00BF1E33 /* StoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE612C96EEEA00BF1E33 /* StoryManager.swift */; };
-		E854EE662C96FFE800BF1E33 /* StoriesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE652C96FFE800BF1E33 /* StoriesDatabase.swift */; };
+		E854EE662C96FFE800BF1E33 /* StoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E854EE652C96FFE800BF1E33 /* StoryDatabase.swift */; };
 		E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */; };
 		E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */; };
 		E85517702C90CE0600FEB145 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855176F2C90CE0600FEB145 /* HomeView.swift */; };
@@ -70,6 +70,9 @@
 		E8E3471E2C9A9F5F006DDA92 /* AuthDataResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3471D2C9A9F5F006DDA92 /* AuthDataResultModel.swift */; };
 		E8E347212C9AA104006DDA92 /* AuthProviderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347202C9AA104006DDA92 /* AuthProviderOption.swift */; };
 		E8E347232C9AAB7C006DDA92 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347222C9AAB7C006DDA92 /* StoryModel.swift */; };
+		E8E3472E2C9AD664006DDA92 /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3472D2C9AD664006DDA92 /* StoryViewModel.swift */; };
+		E8E347302C9AD6E6006DDA92 /* GoogleSignInResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3472F2C9AD6E6006DDA92 /* GoogleSignInResultModel.swift */; };
+		E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E347312C9AD757006DDA92 /* AppleSignInResultModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,7 +103,7 @@
 		E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E854EE5F2C94BA6400BF1E33 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		E854EE612C96EEEA00BF1E33 /* StoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryManager.swift; sourceTree = "<group>"; };
-		E854EE652C96FFE800BF1E33 /* StoriesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDatabase.swift; sourceTree = "<group>"; };
+		E854EE652C96FFE800BF1E33 /* StoryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDatabase.swift; sourceTree = "<group>"; };
 		E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWithGoogle.swift; sourceTree = "<group>"; };
 		E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledDivider.swift; sourceTree = "<group>"; };
 		E855176F2C90CE0600FEB145 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -132,6 +135,9 @@
 		E8E3471D2C9A9F5F006DDA92 /* AuthDataResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModel.swift; sourceTree = "<group>"; };
 		E8E347202C9AA104006DDA92 /* AuthProviderOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderOption.swift; sourceTree = "<group>"; };
 		E8E347222C9AAB7C006DDA92 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		E8E3472D2C9AD664006DDA92 /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
+		E8E3472F2C9AD6E6006DDA92 /* GoogleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInResultModel.swift; sourceTree = "<group>"; };
+		E8E347312C9AD757006DDA92 /* AppleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInResultModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,10 +160,9 @@
 		E827E4A62C90B58500D6D4F1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E8E3472B2C9AD5C4006DDA92 /* Components */,
 				E855176F2C90CE0600FEB145 /* HomeView.swift */,
 				E854EE4D2C94B28E00BF1E33 /* HomeViewModel.swift */,
-				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
-				E8E347272C9AD4C0006DDA92 /* WavyPath */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -183,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E82E3E552C885FF500EF9A6A /* Utilities.swift */,
-				E854EE652C96FFE800BF1E33 /* StoriesDatabase.swift */,
+				E854EE652C96FFE800BF1E33 /* StoryDatabase.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -234,13 +239,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E854EE332C93651700BF1E33 /* Custom Tab Bar */ = {
+		E854EE332C93651700BF1E33 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				E854EE342C93652900BF1E33 /* CustomTabBar.swift */,
 				E854EE382C93764F00BF1E33 /* TabBarButton.swift */,
 			);
-			path = "Custom Tab Bar";
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		E854EE3A2C9377F700BF1E33 /* StoryBlob */ = {
@@ -259,10 +264,9 @@
 		E854EE3F2C9440D200BF1E33 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E8E346E62C98168E006DDA92 /* Subviews */,
-				E854EE582C94B49300BF1E33 /* SettingsView.swift */,
+				E8E3472C2C9AD5EE006DDA92 /* Settings */,
+				E8E346E62C98168E006DDA92 /* Components */,
 				E854EE5A2C94B4CC00BF1E33 /* ProfileView.swift */,
-				E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */,
 				E8E347082C9A10F3006DDA92 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
@@ -276,7 +280,7 @@
 				E827E4A62C90B58500D6D4F1 /* Home */,
 				E854EE3F2C9440D200BF1E33 /* Profile */,
 				E8E346E92C982D90006DDA92 /* LanguageSelection */,
-				E854EE332C93651700BF1E33 /* Custom Tab Bar */,
+				E854EE332C93651700BF1E33 /* TabBar */,
 				E8E346F32C988CCA006DDA92 /* Story */,
 			);
 			path = Core;
@@ -287,20 +291,20 @@
 			children = (
 				E82E3E412C879A8300EF9A6A /* AuthenticationView.swift */,
 				E854EE462C94B1CD00BF1E33 /* AuthenticationViewModel.swift */,
-				E854EE482C94B1ED00BF1E33 /* Subviews */,
+				E8E347292C9AD510006DDA92 /* SignUp */,
+				E8E347282C9AD4F8006DDA92 /* SignIn */,
+				E854EE482C94B1ED00BF1E33 /* Components */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		E854EE482C94B1ED00BF1E33 /* Subviews */ = {
+		E854EE482C94B1ED00BF1E33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				E855176B2C90CD5D00FEB145 /* LabelledDivider.swift */,
 				E8E3472A2C9AD519006DDA92 /* ContinueWithGoogle */,
-				E8E347292C9AD510006DDA92 /* SignUp */,
-				E8E347282C9AD4F8006DDA92 /* SignIn */,
 			);
-			path = Subviews;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E854EE5E2C94BA5000BF1E33 /* Firestore */ = {
@@ -312,12 +316,12 @@
 			path = Firestore;
 			sourceTree = "<group>";
 		};
-		E8E346E62C98168E006DDA92 /* Subviews */ = {
+		E8E346E62C98168E006DDA92 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */,
 			);
-			path = Subviews;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E8E346E92C982D90006DDA92 /* LanguageSelection */ = {
@@ -332,19 +336,20 @@
 		E8E346F32C988CCA006DDA92 /* Story */ = {
 			isa = PBXGroup;
 			children = (
-				E8E346F62C988CE6006DDA92 /* Subviews */,
+				E8E346F62C988CE6006DDA92 /* Components */,
 				E8E346F42C988CE1006DDA92 /* StoryView.swift */,
+				E8E3472D2C9AD664006DDA92 /* StoryViewModel.swift */,
 			);
 			path = Story;
 			sourceTree = "<group>";
 		};
-		E8E346F62C988CE6006DDA92 /* Subviews */ = {
+		E8E346F62C988CE6006DDA92 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				E8E346F92C98D261006DDA92 /* Word */,
 				E8E346F72C988CF5006DDA92 /* TextBlob.swift */,
 			);
-			path = Subviews;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E8E346F92C98D261006DDA92 /* Word */ = {
@@ -418,6 +423,8 @@
 			isa = PBXGroup;
 			children = (
 				E8E3471D2C9A9F5F006DDA92 /* AuthDataResultModel.swift */,
+				E8E3472F2C9AD6E6006DDA92 /* GoogleSignInResultModel.swift */,
+				E8E347312C9AD757006DDA92 /* AppleSignInResultModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -454,6 +461,24 @@
 				E85517692C90CD4C00FEB145 /* ContinueWithGoogle.swift */,
 			);
 			path = ContinueWithGoogle;
+			sourceTree = "<group>";
+		};
+		E8E3472B2C9AD5C4006DDA92 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E854EE3A2C9377F700BF1E33 /* StoryBlob */,
+				E8E347272C9AD4C0006DDA92 /* WavyPath */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E8E3472C2C9AD5EE006DDA92 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E854EE582C94B49300BF1E33 /* SettingsView.swift */,
+				E854EE5C2C94B4ED00BF1E33 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,6 +566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E3471C2C9A9F12006DDA92 /* StoryDifficulty.swift in Sources */,
+				E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */,
 				E8E347022C99F4D0006DDA92 /* ActionType.swift in Sources */,
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
@@ -558,16 +584,18 @@
 				E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */,
 				E854EE602C94BA6400BF1E33 /* UserManager.swift in Sources */,
 				E85517792C90D5B200FEB145 /* CircularProgressBarView.swift in Sources */,
+				E8E3472E2C9AD664006DDA92 /* StoryViewModel.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
 				E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */,
 				E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */,
 				E8E346FD2C98D292006DDA92 /* WordView.swift in Sources */,
 				E854EE4C2C94B23E00BF1E33 /* SignUpEmailViewModel.swift in Sources */,
-				E854EE662C96FFE800BF1E33 /* StoriesDatabase.swift in Sources */,
+				E854EE662C96FFE800BF1E33 /* StoryDatabase.swift in Sources */,
 				E8E346F82C988CF5006DDA92 /* TextBlob.swift in Sources */,
 				E8E347142C9A9E73006DDA92 /* CEFRLevel.swift in Sources */,
 				E854EE5B2C94B4CC00BF1E33 /* ProfileView.swift in Sources */,
 				E82E3E482C87A7BE00EF9A6A /* RootView.swift in Sources */,
+				E8E347302C9AD6E6006DDA92 /* GoogleSignInResultModel.swift in Sources */,
 				E8E3470D2C9A9DCE006DDA92 /* UserLanguageDetailsModel.swift in Sources */,
 				E854EE472C94B1CD00BF1E33 /* AuthenticationViewModel.swift in Sources */,
 				E8E347212C9AA104006DDA92 /* AuthProviderOption.swift in Sources */,
