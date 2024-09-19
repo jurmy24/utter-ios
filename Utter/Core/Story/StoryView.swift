@@ -91,6 +91,7 @@ struct StoryView: View {
             withAnimation {
                 proxy.scrollTo("bottomID", anchor: .bottom)
             }
+            showStoryView = !viewModel.chapterComplete
         }
         .padding()
     }

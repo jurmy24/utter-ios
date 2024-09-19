@@ -16,6 +16,7 @@ final class StoryViewModel: ObservableObject {
     @Published var lineModifications: [String: Action] = [:] // Store modifications per line
     @Published var selectedExercises: [Int: ExerciseOption] = [:]  // Store selected exercises per block
     @Published var displayedBlocks: [Block] = []
+    @Published var chapterComplete: Bool = false
         
     let chapterId: Int
     let userLevel: CEFRLevel
@@ -41,17 +42,6 @@ final class StoryViewModel: ObservableObject {
         startChapter()
     }
     
-    //    // Function to load the story from Firebase
-    //    @discardableResult
-    //    func loadStory(path: String) async throws -> StoryData? {
-    //        let data = try await StorageManager.shared.getStory(path: path)
-    //        self.story = try compileJsonToStory(jsonData: data)
-    //        guard let story = self.story else {
-    //            throw URLError(.badServerResponse)
-    //        }
-    //        return story
-    //    }
-    
     private func compileJsonToStory(jsonData: Data) throws -> StoryData {
         do {
             return try JSONDecoder().decode(StoryData.self, from: jsonData)
@@ -60,35 +50,6 @@ final class StoryViewModel: ObservableObject {
             throw error
         }
     }
-    
-    //    // Compile the JSON data into a StoryData object
-    //    func compileJsonToStory(jsonData: Data) throws -> StoryData {
-    //        do {
-    //            let story = try JSONDecoder().decode(StoryData.self, from: jsonData)
-    //            return story
-    //        } catch let error as DecodingError {
-    //            switch error {
-    //            case .keyNotFound(let key, let context):
-    //                print("Key '\(key.stringValue)' not found: \(context.debugDescription). CodingPath: \(context.codingPath)")
-    //                throw error
-    //            case .typeMismatch(let type, let context):
-    //                print("Type mismatch for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
-    //                throw error
-    //            case .valueNotFound(let type, let context):
-    //                print("Value not found for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
-    //                throw error
-    //            case .dataCorrupted(let context):
-    //                print("Data corrupted: \(context.debugDescription). CodingPath: \(context.codingPath)")
-    //                throw error
-    //            default:
-    //                print("Unknown decoding error: \(error.localizedDescription)")
-    //                throw error
-    //            }
-    //        } catch {
-    //            print("Unknown error: \(error.localizedDescription)")
-    //            throw error
-    //        }
-    //    }
 }
 
 // Handle the display logic
@@ -114,6 +75,7 @@ extension StoryViewModel {
             currentLineIndex = 0
         } else {
             // End of chapter logic here
+            
             print("End of chapter")
         }
     }
@@ -127,9 +89,11 @@ extension StoryViewModel {
             if currentLineIndex < (storyBlock.lines?.count ?? 0) - 1 {
                 currentLineIndex += 1
             } else {
+                print("Moving from story block to exercise block")
                 moveToNextBlock()
             }
         case .exercise:
+            print("Moving from exercise block to next block")
             moveToNextBlock()
         }
     }
@@ -146,6 +110,7 @@ extension StoryViewModel {
         } else {
             // End of chapter logic here
             print("End of chapter")
+            chapterComplete = true
         }
     }
     
@@ -159,7 +124,12 @@ extension StoryViewModel {
                     return
                 }
                 
-                let suitableExercises = exerciseOptions.filter { $0.cefr.contains(userLevel) }
+                // Accept any exercise below your CEFR level
+                let suitableExercises = exerciseOptions.filter { option in
+                    // Allow exercises with CEFR levels less than or equal to the user's level
+                    return option.cefr.contains(where: { $0.rank <= userLevel.rank })
+                }
+
                 if let selectedExercise = suitableExercises.randomElement() {
                     selectedExercises[block.id] = selectedExercise
                     if let affectedLine = selectedExercise.affectedLine, let action = selectedExercise.action {
@@ -169,6 +139,7 @@ extension StoryViewModel {
                 }
             }
         }
+
     }
     
     // Parse affected line format "1-1-2-1" into (chapter, block, line)
