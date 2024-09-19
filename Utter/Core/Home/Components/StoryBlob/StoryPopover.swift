@@ -84,9 +84,13 @@ struct StoryPopover: View {
             .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
             .fullScreenCover(isPresented: $showStoryView) {
                 if story.currentChapter == 0 {
-                    StoryTitleView(storyMetadata: story, showStoryView: $showStoryView)
+                    NavigationStack {
+                        StoryTitleView(storyMetadata: story, showStoryView: $showStoryView)
+                    }
                 } else {
-                    StoryView(storyMetadata: story, showStoryView: $showStoryView)
+                    NavigationStack {
+                        StoryView(storyMetadata: story, showStoryView: $showStoryView)
+                    }
                 }
             }
         }

@@ -48,6 +48,7 @@ struct StoryView: View {
         }
         .background(Color("AppBackgroundColor"))
         .defaultScrollAnchor(.bottom)
+        .navigationBarBackButtonHidden(true)
     }
 
     // Display block

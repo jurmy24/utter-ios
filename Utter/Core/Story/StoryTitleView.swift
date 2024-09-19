@@ -12,6 +12,7 @@ struct StoryTitleView: View {
     @Binding var showStoryView: Bool
     @State private var isVisible = false
     @State private var image: UIImage? = nil
+    @State private var navigateToStoryView = false // State to trigger navigation
     
     var body: some View {
         VStack {
@@ -46,10 +47,13 @@ struct StoryTitleView: View {
             }
             .padding(.bottom, 20)
             
-            StoryButton(text: "Start!", color: Color("AccentColor"), action: {
-                // Navigate to the first chapter view, but a fullscreencover might be unneccessary
-            })
-            .padding()
+            NavigationLink {
+                StoryView(storyMetadata: storyMetadata, showStoryView: $showStoryView)
+            } label: {
+                StoryButton(text: "Start!", color: Color("AccentColor"), action: {})
+                    .allowsHitTesting(false)
+                    .padding()
+            }
         }
         .task {
             guard let imageLocation = storyMetadata.imageLocation else {
