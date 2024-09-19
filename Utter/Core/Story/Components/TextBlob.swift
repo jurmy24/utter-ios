@@ -129,7 +129,7 @@ struct TextBlob: View {
         Text(text)
             .font(.body)
             .fontWeight(modifier == .emphasizeText ? .black : .regular)
-            .foregroundColor(Color("TextColor"))
+            .foregroundColor(modifier != .emphasizeText ? Color("TextColor") : Color("ReverseAccent"))
             .blur(radius: modifier == .hideText || modifier == .hideAll ? 4 : 0)
     }
 
@@ -140,7 +140,7 @@ struct TextBlob: View {
 }
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", character: "Chris", text: "Tjenare mannen")
+    TextBlob(avatar: "person.circle.fill", character: "Chris", text: "Tjenare mannen", modifier: .emphasizeText)
 }
 
 //, det går bra för min del. Hur går det för dig?

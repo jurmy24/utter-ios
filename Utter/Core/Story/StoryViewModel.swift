@@ -16,13 +16,23 @@ final class StoryViewModel: ObservableObject {
     @Published var lineModifications: [String: Action] = [:] // Store modifications per line
     @Published var selectedExercises: [Int: ExerciseOption] = [:]  // Store selected exercises per block
     @Published var displayedBlocks: [Block] = []
-    
+        
     let chapterId: Int
     let userLevel: CEFRLevel
     
     init(chapterId: Int, userLevel: CEFRLevel) {
         self.chapterId = chapterId
         self.userLevel = userLevel
+    }
+    
+    // Computed property for progress
+    var progress: Double {
+        guard let currentChapter = currentChapter else {
+            return 0
+        }
+        let totalBlocks = currentChapter.blocks.count
+        let displayedCount = displayedBlocks.count
+        return totalBlocks > 0 ? Double(displayedCount) / Double(totalBlocks) : 0
     }
     
     func loadStory(path: String) async throws {

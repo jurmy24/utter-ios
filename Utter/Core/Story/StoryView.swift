@@ -50,7 +50,12 @@ struct StoryView: View {
         }
         .navigationBarBackButtonHidden(true)
         .scrollIndicators(.hidden)
-        .toolbar { exitButton }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                progressBar
+            }
+            exitButton
+        }
         .task { await loadStory() }
     }
     
@@ -114,7 +119,19 @@ struct StoryView: View {
             print("Failed to load story: \(error)")
         }
     }
+    
+    // Progress bar at the top of the view, placed in the toolbar
+    private var progressBar: some View {
+        ProgressView(value: viewModel.progress)
+            .progressViewStyle(LinearProgressViewStyle())
+            .frame(width: UIScreen.main.bounds.width * 0.8)
+            .foregroundStyle(Color("AccentColor").opacity(0.7))
+            .controlSize(.large)
+    }
 }
+
+
+
 
 //#Preview {
 //    StoryView(storyMetadata: Story.sample1, showStoryView: .constant(true))
