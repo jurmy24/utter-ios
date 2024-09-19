@@ -16,21 +16,10 @@ final class StoryBlobModel: ObservableObject {
 
 struct StoryBlob: View {
     let story: Story
-//    let level: Int
-//    let isLocked: Bool
-//    let storyTitle: String
-//    let storyDescription: String
-//    let numberOfChapters: Int
-//    var completedChapters: Int
     let size: CGFloat
     
     @StateObject private var storyModel = StoryBlobModel()
     @State private var isShowingPopover = false
-    
-    // Computed property to check if the story is complete
-//    var isStoryComplete: Bool {
-//        story. == story.currentChapter
-//    }
     
     var body: some View {
         VStack(spacing: size * 0.05) { // Adjust spacing based on size
@@ -57,7 +46,7 @@ struct StoryBlob: View {
                 // Circular Progress Bar around the Blob
                 CircularProgressBarView(
                     total: story.story.chapters,
-                    completed: story.currentChapter,
+                    completed: story.currentChapter - 1,
                     color: Color("ButtonColor"),
                     lineWidth: size * 0.08
                 )
@@ -79,12 +68,6 @@ struct StoryBlob: View {
             ) {
                 StoryPopover(
                     story: story
-//                    storyTitle: storyTitle,
-//                    storyDescription: storyDescription,
-//                    chapters: numberOfChapters,
-//                    chaptersRead: completedChapters,
-//                    isLocked: isLocked,
-//                    isStoryComplete: isStoryComplete
                 )
             }
             

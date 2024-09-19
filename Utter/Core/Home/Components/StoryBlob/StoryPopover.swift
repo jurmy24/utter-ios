@@ -25,7 +25,7 @@ struct StoryPopover: View {
             VStack(alignment: .leading, spacing: 10) {
                 
                 HorizontalProgressBar(chapters: story.story.chapters,
-                                      chaptersRead: story.currentChapter,
+                                      chaptersRead: story.currentChapter - 1,
                                       lineThickness: 10)
                 
                 Text(story.story.title)
@@ -58,14 +58,10 @@ struct StoryPopover: View {
                         }
                     } else {
                         Button(action: {
-                            // TODO: open the story view and print the storageLocation (for now)
-                            // Button action
                             showStoryView = true
-                            
-                            
                         }) {
                             HStack {
-                                Text("Enter Chapter \(story.currentChapter + 1)")
+                                Text("Enter Chapter \(story.currentChapter)")
                                     .font(.headline)
                                 Image(systemName: "chevron.right")
                             }
@@ -83,7 +79,7 @@ struct StoryPopover: View {
             .padding()
             .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
             .fullScreenCover(isPresented: $showStoryView) {
-                if story.currentChapter == 0 {
+                if story.currentChapter == 1 {
                     NavigationStack {
                         StoryTitleView(storyMetadata: story, showStoryView: $showStoryView)
                     }
