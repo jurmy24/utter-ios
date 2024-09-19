@@ -58,27 +58,28 @@ struct SpeechBubble: Shape {
 }
 
 struct TextBlob: View {
-    var avatar: String // This can be the name of an SF Symbol or Image
+    var avatar: String
     var character: String
     var text: String
     var modifier: Action?
-
+    
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
             // Avatar on the left
-            VStack {
-                Image(systemName: avatar)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                Text(character)
-                    .font(.body)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
+            if character != "Narrator" {
+                VStack {
+                    Image(systemName: avatar)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                    Text(character)
+                        .font(.body)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("TextColor"))
+                }
             }
-            
             
             // Speech bubble containing the text
             HStack {
@@ -107,6 +108,7 @@ struct TextBlob: View {
                     Text(text)
                         .font(.headline)
                         .foregroundColor(Color("TextColor"))
+                        .fontWeight(.bold)
                 case .hideText:
                     Button {
                         // Replay the Audio file
@@ -137,32 +139,35 @@ struct TextBlob: View {
                     Button {
                         // Replay the Audio file
                     } label: {
+                        // Place the Image at the top
                         Image(systemName: "speaker.wave.2.fill")
                             .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20)) // Set the desired size
+                            .font(.system(size: 20))
                     }
                     
                     Text(text)
                         .font(.headline)
                         .foregroundColor(Color("TextColor"))
+                        .fontWeight(.bold)
                 }
-
+                
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
             .clipShape(SpeechBubble())
             .overlay(
+                character != "Narrator" ?
                 SpeechBubble()
                     .stroke(modifier == nil ? Color("ReverseAccent") : Color("AccentColor"), lineWidth: 3)
+                : nil
             )
-            
         }
     }
 }
 
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", character: "Jim", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?")
+    TextBlob(avatar: "person.circle.fill", character: "Narrator", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?")
 }
 

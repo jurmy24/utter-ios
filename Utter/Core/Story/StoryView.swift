@@ -11,31 +11,16 @@ struct StoryView: View {
     let storyMetadata: Story
     @Binding var showStoryView: Bool
     @StateObject private var viewModel = StoryViewModel()
+    @State private var displayTitle = true
+    @State private var image: UIImage? = nil
+    @State private var story: StoryData?
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 // Display story title and description
                 if let loadedStory = viewModel.story, viewModel.currentChapter == nil {
-                    Text(loadedStory.title)
-                        .font(.title)
-                        .foregroundColor(.blue)
-                    Text(loadedStory.description)
-                        .font(.body)
-                        .foregroundColor(.gray)
-
-                    // Start button to play intro and move to first chapter
-                    Button(action: {
-                        viewModel.playNextBlock()  // Start the story
-                    }) {
-                        Text("Start Story")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                    }
+                    
                 } else if let chapter = viewModel.currentChapter {
                     // Display all played blocks in the chapter
                     ForEach(viewModel.playedBlocks) { block in
@@ -44,17 +29,9 @@ struct StoryView: View {
 
                     // Button to play the next block
                     if viewModel.getCurrentBlock() != nil {
-                        Button(action: {
+                        StoryButton(text: "Next", color: Color("AccentColor"), action: {
                             viewModel.playNextBlock()
-                        }) {
-                            Text("Next")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                        }
+                        })
                     }
                 }
             }
@@ -66,11 +43,8 @@ struct StoryView: View {
                 showStoryView = false
                 return
             }
-            do {
-                try await viewModel.loadStory(path: storageLocation)
-            } catch {
-                showStoryView = false
-            }
+            let story = try? await viewModel.loadStory(path: storageLocation)
+            self.story = story
         }
         .background(Color("AppBackgroundColor"))
         .defaultScrollAnchor(.bottom)

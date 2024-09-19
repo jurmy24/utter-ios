@@ -19,6 +19,7 @@ struct DBStory: Identifiable, Codable, Equatable {
     let dateCreated: Date
     let dateModified: Date?
     let storageLocation: String?
+    let imageLocation: String?
     
     init(
         id: String,
@@ -31,7 +32,8 @@ struct DBStory: Identifiable, Codable, Equatable {
         level: Int,
         dateCreated: Date,
         dateModified: Date? = nil,
-        storageLocation: String? = nil
+        storageLocation: String? = nil,
+        imageLocation: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -44,6 +46,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         self.dateCreated = dateCreated
         self.dateModified = dateModified
         self.storageLocation = storageLocation
+        self.imageLocation = imageLocation
     }
     
     // These are used by the coders
@@ -59,6 +62,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         case dateCreated = "date_created"
         case dateModified = "date_modified"
         case storageLocation = "storage_location"
+        case imageLocation = "image_location"
     }
     
     // A decoder that converts the database keys like "user_id" to self.userId
@@ -75,6 +79,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         self.dateCreated = try container.decode(Date.self, forKey: .dateCreated)
         self.dateModified = try container.decodeIfPresent(Date.self, forKey: .dateModified)
         self.storageLocation = try container.decodeIfPresent(String.self, forKey: .storageLocation)
+        self.imageLocation = try container.decodeIfPresent(String.self, forKey: .imageLocation)
     }
     
     // An encoder that converts eg self.userId to database keys like "user_id"
@@ -91,6 +96,7 @@ struct DBStory: Identifiable, Codable, Equatable {
         try container.encode(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.dateModified, forKey: .dateModified)
         try container.encodeIfPresent(self.storageLocation, forKey: .storageLocation)
+        try container.encodeIfPresent(self.imageLocation, forKey: .imageLocation)
     }
     
     static func ==(lhs: DBStory, rhs: DBStory) -> Bool {

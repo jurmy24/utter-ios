@@ -7,14 +7,6 @@
 
 import Foundation
 
-//struct StoryWithProgress: Identifiable {
-//    let id: String
-//    let story: DBStory
-//    let isLocked: Bool
-//    let isComplete: Bool
-//    let currentChapter: Int
-//}
-
 struct Story: Identifiable {
     let id: String
     let story: DBStory
@@ -40,6 +32,10 @@ struct Story: Identifiable {
     
     var storageLocation: String? {
         story.storageLocation ?? nil
+    }
+    
+    var imageLocation: String? {
+        story.imageLocation ?? nil
     }
 }
 

@@ -53,8 +53,21 @@ final class StorageManager {
 //    func getData(userId: String, path: String) async throws -> Data {
 //        try await userReference(userId: userId).child(path).data(maxSize: 3 * 1024 * 1024)
 //    }
+    func getImage(path: String) async throws -> UIImage {
+        let data = try await getData(path: path)
+        
+        guard let image = UIImage(data: data) else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return image
+    }
     
     func getStory(path: String) async throws -> Data {
+        try await getData(path: path)
+    }
+    
+    func getData(path: String) async throws -> Data {
         try await gsStorage.reference(forURL: path).data(maxSize: 1 * 1024 * 1024)
     }
     

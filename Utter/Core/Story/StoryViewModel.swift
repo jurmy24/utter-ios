@@ -12,17 +12,23 @@ final class StoryViewModel: ObservableObject {
     @Published var story: StoryData? = nil       // The entire story loaded from JSON
     @Published var currentChapter: Chapter? = nil  // The current chapter being played
     @Published var playedBlocks: [Block] = []    // Tracks blocks that have been played
+    @Published var imageData: Data? = nil
     
     private var currentBlockIndex: Int = 0       // Tracks the index of the current block
     
     // Function to load the story from Firebase or other storage
-    func loadStory(path: String) async throws {
+    func loadStory(path: String) async throws -> StoryData? {
         let data = try await StorageManager.shared.getStory(path: path)
         self.story = try compileJsonToStory(jsonData: data)
         if let firstChapter = story?.chapters.first {
             self.currentChapter = firstChapter
         }
+        guard let story = self.story else {
+            throw URLError(.badServerResponse)
+        }
+        return story
     }
+    
     
     // Compile the JSON data into a StoryData object
     func compileJsonToStory(jsonData: Data) throws -> StoryData {
@@ -56,7 +62,7 @@ final class StoryViewModel: ObservableObject {
     // Play the next block in the story
     func playNextBlock() {
         // Ensure there is a current chapter
-        guard let currentChapter = currentChapter else { return }
+        guard let _ = currentChapter else { return }
         
         // Check if there is a current block to be played
         if let currentBlock = getCurrentBlock() {
