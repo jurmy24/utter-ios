@@ -22,8 +22,15 @@ struct ProfileView: View {
                         .fill(Color.purple.opacity(0.2))
                         .frame(width: 120, height: 120)
                     
-                    Text(selectedAvatar)
-                        .font(.system(size: 60))
+                    if let user = viewModel.user {
+                        // Show user's selected avatar
+                        Text(selectedAvatar)
+                            .font(.system(size: 60))
+                    } else {
+                        // Show a placeholder loading indicator
+                        ProgressView()
+                            .frame(width: 60, height: 60)
+                    }
                 }
                 
                 if let user = viewModel.user {
@@ -35,6 +42,19 @@ struct ProfileView: View {
                     Text(user.email ?? "Email")
                         .font(.system(size: 16))
                         .foregroundColor(Color.purple)
+                } else {
+                    // Placeholder for Username and Email
+                    VStack {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 150, height: 24)
+                            .cornerRadius(8)
+                        
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 200, height: 16)
+                            .cornerRadius(8)
+                    }
                 }
             }
             .padding(.top)
@@ -67,7 +87,6 @@ struct ProfileView: View {
             if let user = viewModel.user {
                 selectedAvatar = user.avatar ?? "🐵"
             }
-            
         }
         .navigationTitle("Profile")
         .toolbar {
@@ -83,7 +102,6 @@ struct ProfileView: View {
         .edgesIgnoringSafeArea(.all)
         .background(Color("AppBackgroundColor"))
     }
-    
 }
 
 #Preview {
