@@ -88,10 +88,18 @@ final class UserManager {
         }
 
         let languageDocumentId = languageProgress.id
+        let languageCefr = languageProgress.currentCefr
 
         // 3. Fetch the user's stories for the specified language
-        let stories = try await userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).getDocuments(as: UserStoryProgress.self)
-
+        var stories = try await userLanguageStoryCollection(userId: userId, languageDocumentId: languageDocumentId).getDocuments(as: UserStoryProgress.self)
+        
+        // 4. Append the currentCefr to each UserStoryProgress
+        stories = stories.map { story in
+            var updatedStory = story
+            updatedStory.currentCefr = languageCefr // Assign the currentCefr to each story
+            return updatedStory
+        }
+        
         return stories
     }
     

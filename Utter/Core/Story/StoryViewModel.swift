@@ -9,101 +9,162 @@ import Foundation
 
 @MainActor
 final class StoryViewModel: ObservableObject {
-    @Published var story: StoryData? = nil       // The entire story loaded from JSON
-    @Published var currentChapter: Chapter? = nil  // The current chapter being played
-    @Published var playedBlocks: [Block] = []    // Tracks blocks that have been played
-    @Published var imageData: Data? = nil
+    @Published var story: StoryData?
+    @Published var currentChapter: Chapter?
+    @Published var currentBlock: Block?
+    @Published var currentLineIndex: Int = 0
+    @Published var lineModifications: [String: Action] = [:] // Store modifications per line
+    @Published var selectedExercises: [Int: ExerciseOption] = [:]  // Store selected exercises per block
+    @Published var displayedBlocks: [Block] = []
     
-    private var currentBlockIndex: Int = 0       // Tracks the index of the current block
+    let chapterId: Int
+    let userLevel: CEFRLevel
     
-    // Function to load the story from Firebase or other storage
-    func loadStory(path: String) async throws -> StoryData? {
-        let data = try await StorageManager.shared.getStory(path: path)
-        self.story = try compileJsonToStory(jsonData: data)
-        if let firstChapter = story?.chapters.first {
-            self.currentChapter = firstChapter
-        }
-        guard let story = self.story else {
-            throw URLError(.badServerResponse)
-        }
-        return story
+    init(chapterId: Int, userLevel: CEFRLevel) {
+        self.chapterId = chapterId
+        self.userLevel = userLevel
     }
     
+    func loadStory(path: String) async throws {
+        let data = try await StorageManager.shared.getStory(path: path)
+        self.story = try compileJsonToStory(jsonData: data)
+        startChapter()
+    }
     
-    // Compile the JSON data into a StoryData object
-    func compileJsonToStory(jsonData: Data) throws -> StoryData {
+    //    // Function to load the story from Firebase
+    //    @discardableResult
+    //    func loadStory(path: String) async throws -> StoryData? {
+    //        let data = try await StorageManager.shared.getStory(path: path)
+    //        self.story = try compileJsonToStory(jsonData: data)
+    //        guard let story = self.story else {
+    //            throw URLError(.badServerResponse)
+    //        }
+    //        return story
+    //    }
+    
+    private func compileJsonToStory(jsonData: Data) throws -> StoryData {
         do {
-            let story = try JSONDecoder().decode(StoryData.self, from: jsonData)
-            return story
-        } catch let error as DecodingError {
-            switch error {
-            case .keyNotFound(let key, let context):
-                print("Key '\(key.stringValue)' not found: \(context.debugDescription). CodingPath: \(context.codingPath)")
-                throw error
-            case .typeMismatch(let type, let context):
-                print("Type mismatch for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
-                throw error
-            case .valueNotFound(let type, let context):
-                print("Value not found for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
-                throw error
-            case .dataCorrupted(let context):
-                print("Data corrupted: \(context.debugDescription). CodingPath: \(context.codingPath)")
-                throw error
-            default:
-                print("Unknown decoding error: \(error.localizedDescription)")
-                throw error
-            }
+            return try JSONDecoder().decode(StoryData.self, from: jsonData)
         } catch {
-            print("Unknown error: \(error.localizedDescription)")
+            print("Error decoding story: \(error)")
             throw error
         }
     }
     
-    // Play the next block in the story
+    //    // Compile the JSON data into a StoryData object
+    //    func compileJsonToStory(jsonData: Data) throws -> StoryData {
+    //        do {
+    //            let story = try JSONDecoder().decode(StoryData.self, from: jsonData)
+    //            return story
+    //        } catch let error as DecodingError {
+    //            switch error {
+    //            case .keyNotFound(let key, let context):
+    //                print("Key '\(key.stringValue)' not found: \(context.debugDescription). CodingPath: \(context.codingPath)")
+    //                throw error
+    //            case .typeMismatch(let type, let context):
+    //                print("Type mismatch for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
+    //                throw error
+    //            case .valueNotFound(let type, let context):
+    //                print("Value not found for type \(type): \(context.debugDescription). CodingPath: \(context.codingPath)")
+    //                throw error
+    //            case .dataCorrupted(let context):
+    //                print("Data corrupted: \(context.debugDescription). CodingPath: \(context.codingPath)")
+    //                throw error
+    //            default:
+    //                print("Unknown decoding error: \(error.localizedDescription)")
+    //                throw error
+    //            }
+    //        } catch {
+    //            print("Unknown error: \(error.localizedDescription)")
+    //            throw error
+    //        }
+    //    }
+}
+
+// Handle the display logic
+extension StoryViewModel {
+    
+    // Start by loading the first block of the chapter
+    func startChapter() {
+        guard let story = story else { return }
+        currentChapter = story.chapters.first { $0.chapter == chapterId }
+        currentBlock = currentChapter?.blocks.first
+        displayedBlocks = [currentBlock].compactMap { $0 }
+        preprocessBlocks()
+    }
+    
+    // Move to the next block in the chapter
     func playNextBlock() {
-        // Ensure there is a current chapter
-        guard let _ = currentChapter else { return }
+        guard let currentChapter = currentChapter,
+              let currentIndex = currentChapter.blocks.firstIndex(where: { $0.id == currentBlock?.id }) else { return }
         
-        // Check if there is a current block to be played
-        if let currentBlock = getCurrentBlock() {
-            // Append the current block to played blocks
-            playedBlocks.append(currentBlock)
-            currentBlockIndex += 1
+        let nextIndex = currentIndex + 1
+        if nextIndex < currentChapter.blocks.count {
+            currentBlock = currentChapter.blocks[nextIndex]
+            currentLineIndex = 0
         } else {
-            // Move to the next chapter if there are no more blocks in the current chapter
-            moveToNextChapter()
+            // End of chapter logic here
+            print("End of chapter")
         }
     }
     
-    // Get the current block (unplayed)
-    func getCurrentBlock() -> Block? {
-        // Ensure we have a valid chapter
-        guard let currentChapter = currentChapter else { return nil }
+    func playNextLine() {
+        guard let currentBlock = currentBlock else { return }
         
-        // Return the next block that hasn't been played yet
-        if currentBlockIndex < currentChapter.blocks.count {
-            return currentChapter.blocks[currentBlockIndex]
-        } else {
-            return nil
+        switch currentBlock.blockType {
+        case .story:
+            let storyBlock = currentBlock
+            if currentLineIndex < (storyBlock.lines?.count ?? 0) - 1 {
+                currentLineIndex += 1
+            } else {
+                moveToNextBlock()
+            }
+        case .exercise:
+            moveToNextBlock()
         }
     }
     
-    // Move to the next chapter if the current one is finished
-    private func moveToNextChapter() {
-        // Ensure there is a current story and chapter
-        guard let story = story, let currentChapter = currentChapter else { return }
+    private func moveToNextBlock() {
+        guard let currentChapter = currentChapter,
+              let currentIndex = currentChapter.blocks.firstIndex(where: { $0.id == currentBlock?.id }) else { return }
         
-        // Find the current chapter index
-        if let currentChapterIndex = story.chapters.firstIndex(where: { $0.chapter == currentChapter.chapter }) {
-            // Check if there is a next chapter
-            let nextChapterIndex = currentChapterIndex + 1
-            if nextChapterIndex < story.chapters.count {
-                // Move to the next chapter
-                self.currentChapter = story.chapters[nextChapterIndex]
-                self.currentBlockIndex = 0   // Reset block index for the new chapter
-                playedBlocks.removeAll()     // Clear played blocks for the new chapter
+        let nextIndex = currentIndex + 1
+        if nextIndex < currentChapter.blocks.count {
+            currentBlock = currentChapter.blocks[nextIndex]
+            currentLineIndex = 0
+            displayedBlocks.append(currentBlock!)
+        } else {
+            // End of chapter logic here
+            print("End of chapter")
+        }
+    }
+    
+    private func preprocessBlocks() {
+        guard let blocks = currentChapter?.blocks else { return }
+        
+        for block in blocks {
+            if case .exercise = block.blockType {
+                guard let exerciseOptions = block.exerciseOptions else {
+                    print("No exercises found in block with id: \(block.id)")
+                    return
+                }
+                
+                let suitableExercises = exerciseOptions.filter { $0.cefr.contains(userLevel) }
+                if let selectedExercise = suitableExercises.randomElement() {
+                    selectedExercises[block.id] = selectedExercise
+                    if let affectedLine = selectedExercise.affectedLine, let action = selectedExercise.action {
+                        let (_, blockId, lineId) = parseAffectedLine(affectedLine)
+                        lineModifications["\(blockId)-\(lineId)"] = action
+                    }
+                }
             }
         }
+    }
+    
+    // Parse affected line format "1-1-2-1" into (chapter, block, line)
+    private func parseAffectedLine(_ affectedLine: String) -> (Int, Int, Int) {
+        let components = affectedLine.split(separator: "-").compactMap { Int($0) }
+        return (components[0], components[1], components[2])
     }
 }
 

@@ -93,6 +93,6 @@ struct StoryPopover: View {
     }
 }
 
-#Preview {
-    StoryPopover(story: Story.sample1)
-}
+//#Preview {
+//    StoryPopover(story: Story.sample1)
+//}

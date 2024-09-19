@@ -50,11 +50,12 @@ struct StoryTitleView: View {
             NavigationLink {
                 StoryView(storyMetadata: storyMetadata, showStoryView: $showStoryView)
             } label: {
-                StoryButton(text: "Start!", color: Color("AccentColor"), action: {})
+                StoryButton(text: "Start!", color: Color("ButtonColor"), action: {})
                     .allowsHitTesting(false)
                     .padding()
             }
         }
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         .task {
             guard let imageLocation = storyMetadata.imageLocation else {
                 showStoryView = false
@@ -63,9 +64,12 @@ struct StoryTitleView: View {
             let image = try? await StorageManager.shared.getImage(path: imageLocation)
             self.image = image
         }
+        .edgesIgnoringSafeArea(.all)
+        .background(Color("AppBackgroundColor"))
+        
     }
 }
 
-#Preview {
-    StoryTitleView(storyMetadata: Story.sample1 ,showStoryView: .constant(true))
-}
+//#Preview {
+//    StoryTitleView(storyMetadata: Story.sample1, showStoryView: .constant(true))
+//}

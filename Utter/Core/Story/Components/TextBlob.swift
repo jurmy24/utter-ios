@@ -13,15 +13,21 @@ struct SpeechBubble: Shape {
     
     init(radius: CGFloat = 10) {
         self.radius = radius
-        tailSize = 20
+        self.tailSize = 15
     }
     
     func path(in rect: CGRect) -> Path {
+    
         Path { path in
+            
+            var tailParam = 2
+            if rect.height < 60 {
+                tailParam = 3
+            }
             path.move(to: CGPoint(x: rect.minX, y: rect.maxY - radius))
             path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY - rect.height / 2))
             path.addCurve(
-                to: CGPoint(x: rect.minX, y: rect.maxY - rect.height / 2 - tailSize),
+                to: CGPoint(x: rect.minX, y: rect.maxY - rect.height / CGFloat(tailParam) - tailSize),
                 control1: CGPoint(x: rect.minX - tailSize, y: rect.maxY - rect.height / 2),
                 control2: CGPoint(x: rect.minX, y: rect.maxY - rect.height / 2 - tailSize / 2)
             )
@@ -62,112 +68,79 @@ struct TextBlob: View {
     var character: String
     var text: String
     var modifier: Action?
-    
+
     var body: some View {
-        HStack(alignment: .center, spacing: 20) {
+        HStack(alignment: .top, spacing: 20) {
             // Avatar on the left
             if character != "Narrator" {
-                VStack {
-                    Image(systemName: avatar)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                    Text(character)
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color("TextColor"))
-                }
+                avatarView
+                    .padding(.top, 5)
             }
-            
-            // Speech bubble containing the text
-            HStack {
-                
-                switch modifier {
-                case .hideAll:
-                    Button {} label: {
-                        Image(systemName: "speaker.slash.fill")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20)) // Set the desired size
-                    }
-                    .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
-                    
-                    Text(text)
-                        .font(.headline)
-                        .foregroundColor(Color("TextColor"))
-                        .blur(radius: 4)
-                case .hideAudio:
-                    Button {} label: {
-                        Image(systemName: "speaker.slash.fill")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20)) // Set the desired size
-                    }
-                    .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
-                    
-                    Text(text)
-                        .font(.headline)
-                        .foregroundColor(Color("TextColor"))
-                        .fontWeight(.bold)
-                case .hideText:
-                    Button {
-                        // Replay the Audio file
-                    } label: {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20)) // Set the desired size
-                    }
-                    
-                    Text(text)
-                        .font(.headline)
-                        .foregroundColor(Color("TextColor"))
-                        .blur(radius: 4)
-                case .emphasizeText:
-                    Button {
-                        // Replay the Audio file
-                    } label: {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20)) // Set the desired size
-                    }
-                    
-                    Text(text)
-                        .font(.headline)
-                        .fontWeight(.black)
-                        .foregroundColor(Color("TextColor"))
-                case nil:
-                    Button {
-                        // Replay the Audio file
-                    } label: {
-                        // Place the Image at the top
-                        Image(systemName: "speaker.wave.2.fill")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.system(size: 20))
-                    }
-                    
-                    Text(text)
-                        .font(.headline)
-                        .foregroundColor(Color("TextColor"))
-                        .fontWeight(.bold)
-                }
-                
+
+            // Speech bubble containing the text and button
+            HStack (alignment: .top, spacing: 3){
+                speakerButton
+                textView
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 10)
+            .frame(alignment: .leading)
             .clipShape(SpeechBubble())
             .overlay(
                 character != "Narrator" ?
-                SpeechBubble()
-                    .stroke(modifier == nil ? Color("ReverseAccent") : Color("AccentColor"), lineWidth: 3)
-                : nil
+                SpeechBubble().stroke(bubbleStrokeColor, lineWidth: 2) : nil
             )
         }
     }
-}
 
+    // Avatar view
+    @ViewBuilder
+    var avatarView: some View {
+        VStack {
+            Image(systemName: avatar)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+            Text(character)
+                .font(.body)
+                .fontWeight(.semibold)
+                .foregroundColor(Color("TextColor"))
+        }
+    }
+
+    // Button to replay audio
+    var speakerButton: some View {
+        Button(action: {
+            // Replay the audio file
+        }) {
+            Image(systemName: modifier == .hideAudio || modifier == .hideAll ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                .foregroundColor(Color("AccentColor"))
+                .font(.system(size: 18))
+                .padding(.leading, 4)
+                .padding(.top, 3)
+        }
+        .allowsHitTesting(modifier != .hideAll)
+    }
+
+    // Display the text with optional modifications
+    var textView: some View {
+        Text(text)
+            .font(.body)
+            .fontWeight(modifier == .emphasizeText ? .black : .regular)
+            .foregroundColor(Color("TextColor"))
+            .blur(radius: modifier == .hideText || modifier == .hideAll ? 4 : 0)
+    }
+
+    // Bubble stroke color based on modifier
+    var bubbleStrokeColor: Color {
+        modifier == nil ? Color("ReverseAccent") : Color("AccentColor")
+    }
+}
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", character: "Narrator", text: "Tjenare mannen, det går bra för min del. Hur går det för dig? Hur går det för dig? Hur går det för dig?")
+    TextBlob(avatar: "person.circle.fill", character: "Chris", text: "Tjenare mannen")
 }
 
+//, det går bra för min del. Hur går det för dig?

@@ -83,6 +83,6 @@ struct StoryBlob: View {
     }
 }
 
-#Preview {
-    StoryBlob(story: Story.sample3, size: 150)
-}
+//#Preview {
+//    StoryBlob(story: Story.sample3, size: 150)
+//}

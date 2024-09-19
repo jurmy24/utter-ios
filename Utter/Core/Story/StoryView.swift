@@ -10,78 +10,112 @@ import SwiftUI
 struct StoryView: View {
     let storyMetadata: Story
     @Binding var showStoryView: Bool
-    @StateObject private var viewModel = StoryViewModel()
-    @State private var displayTitle = true
-    @State private var image: UIImage? = nil
-    @State private var story: StoryData?
-
+    @StateObject private var viewModel: StoryViewModel
+    
+    init(storyMetadata: Story, showStoryView: Binding<Bool>) {
+        self.storyMetadata = storyMetadata
+        self._showStoryView = showStoryView
+        let chapter = storyMetadata.currentChapter
+        let userLevel = storyMetadata.userProgress?.currentCefr ?? .a1
+        self._viewModel = StateObject(wrappedValue: StoryViewModel(chapterId: chapter, userLevel: userLevel))
+    }
+    
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                // Display story title and description
-                if let loadedStory = viewModel.story, viewModel.currentChapter == nil {
+        ZStack {
+            Color("AppBackgroundColor")
+                .ignoresSafeArea()
+            
+            VStack {
+                chapterTitleView
+                
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 16) {
+                            ForEach(viewModel.displayedBlocks.indices, id: \.self) { index in
+                                blockView(for: viewModel.displayedBlocks[index], at: index)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        
+                        Color.clear.frame(height: 1).id("bottomID")
+                    }
                     
-                } else if let chapter = viewModel.currentChapter {
-                    // Display all played blocks in the chapter
-                    ForEach(viewModel.playedBlocks) { block in
-                        displayBlock(block)
-                    }
-
-                    // Button to play the next block
-                    if viewModel.getCurrentBlock() != nil {
-                        StoryButton(text: "Next", color: Color("AccentColor"), action: {
-                            viewModel.playNextBlock()
-                        })
-                    }
+                    continueButton(proxy: proxy)
                 }
             }
-            .padding()
-        }
-        .task {
-            // Load the story when the view appears
-            guard let storageLocation = storyMetadata.storageLocation else {
-                showStoryView = false
-                return
+            .safeAreaInset(edge: .bottom) {
+                Color.clear.frame(height: 20)
             }
-            let story = try? await viewModel.loadStory(path: storageLocation)
-            self.story = story
         }
-        .background(Color("AppBackgroundColor"))
-        .defaultScrollAnchor(.bottom)
         .navigationBarBackButtonHidden(true)
+        .scrollIndicators(.hidden)
+        .toolbar { exitButton }
+        .task { await loadStory() }
     }
-
-    // Display block
-    @ViewBuilder
-    private func displayBlock(_ block: Block) -> some View {
-        if block.blockType == .story, let lines = block.lines {
-            displayStoryBlock(lines)
-        } else if block.blockType == .exercise, let exercises = block.exerciseOptions {
-            displayExerciseBlock(exercises)
-        }
+    
+    private var chapterTitleView: some View {
+        Text("\(viewModel.chapterId). " + (viewModel.currentChapter?.title ?? "Title not found"))
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(Color("TextColor"))
+            .padding()
     }
-
-    // Display story block
+    
     @ViewBuilder
-    private func displayStoryBlock(_ lines: [Line]) -> some View {
-        ForEach(lines) { line in
-            TextBlob(avatar: "person.circle.fill", character: line.character.rawValue, text: line.text)
-        }
-    }
-
-    // Display exercise block
-    @ViewBuilder
-    private func displayExerciseBlock(_ exercises: [ExerciseOption]) -> some View {
-        ForEach(exercises) { exercise in
-            if let query = exercise.query {
-                Text("Exercise: \(query)")
-                    .font(.headline)
-                    .padding(.vertical, 8)
+    private func blockView(for block: Block, at index: Int) -> some View {
+        switch block.blockType {
+        case .story:
+            StoryBlockView(
+                block: block,
+                currentLineIndex: index == viewModel.displayedBlocks.count - 1 ? viewModel.currentLineIndex : .max,
+                modifications: viewModel.lineModifications
+            )
+            .id(index)
+        case .exercise:
+            if let selectedExercise = viewModel.selectedExercises[block.id] {
+                ExerciseBlockView(exercise: selectedExercise)
+                    .id(index)
             }
         }
     }
+    
+    private func continueButton(proxy: ScrollViewProxy) -> some View {
+        StoryButton(text: "Continue", color: Color("ButtonColor")) {
+            viewModel.playNextLine()
+            withAnimation {
+                proxy.scrollTo("bottomID", anchor: .bottom)
+            }
+        }
+        .padding()
+    }
+    
+    private var exitButton: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                showStoryView = false
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.headline)
+            }
+        }
+    }
+    
+    private func loadStory() async {
+        guard let storageLocation = storyMetadata.storageLocation else {
+            showStoryView = false
+            print("Story storage location could not be found.")
+            return
+        }
+        do {
+            try await viewModel.loadStory(path: storageLocation)
+        } catch {
+            showStoryView = false
+            print("Failed to load story: \(error)")
+        }
+    }
 }
 
-#Preview {
-    StoryView(storyMetadata: Story.sample1, showStoryView: .constant(true))
-}
+//#Preview {
+//    StoryView(storyMetadata: Story.sample1, showStoryView: .constant(true))
+//}
