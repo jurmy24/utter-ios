@@ -31,54 +31,50 @@ struct PronunciationView: View {
     }
     
     var body: some View {
-            
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    // TODO: fetch this from the correct place based on the affectedLine
-                    let text = viewModel.getTextToRead()
-                    Text(text ?? "Could not locate the text.")
-                        .font(.body)
-                        .fontWeight(.bold)
-                        .foregroundStyle(colors.accent)
-                    
-                    
-                    Spacer()
-                    
-                    // TODO: Add ifMostlyCorrect or something to change the view
-//                    if selectedAnswers.contains(key) {
-//                        Image(systemName: option.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
-//                            .foregroundColor(option.isCorrect ? colors.correctAnswer : colors.wrongAnswer)
-//                    }
-                }
-                .cornerRadius(8)
-                
-                HStack {
-                    Button(action: {
-                        // Record audio logic here
-                        withAnimation {
-                            showCorrectAnimation = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                showCorrectAnimation = false
-                                isExerciseCompleted = true
-                                isExpandedAfterCompletion = false
-                            }
-                        }
-                    }) {
-                        Label("Press here to talk", systemImage: "mic.fill")
-                    }
-                    .allowsHitTesting(isExerciseCompleted ? false : true)
-
-                    Spacer()
-                }
-                .padding()
-                .background(isExerciseCompleted ? Color.gray.opacity(0.1) : colors.accent.opacity(0.1))
-                .foregroundColor(isExerciseCompleted ? Color.gray : colors.accent)
-                .cornerRadius(8)
-                
-            }
         
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                let text = viewModel.getTextToRead()
+                Text(text ?? "Could not locate the text.")
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .foregroundStyle(colors.accent)
+                
+                Spacer()
+                
+                // TODO: Add ifMostlyCorrect or something to change the view
+                //                    if selectedAnswers.contains(key) {
+                //                        Image(systemName: option.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                //                            .foregroundColor(option.isCorrect ? colors.correctAnswer : colors.wrongAnswer)
+                //                    }
+            }
+            .cornerRadius(8)
+            
+            HStack {
+                Button(action: {
+                    // Record audio logic here
+                    withAnimation {
+                        showCorrectAnimation = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation {
+                            showCorrectAnimation = false
+                            isExerciseCompleted = true
+                            isExpandedAfterCompletion = false
+                        }
+                    }
+                }) {
+                    Label("Press here to talk", systemImage: "mic.fill")
+                }
+                .allowsHitTesting(isExerciseCompleted ? false : true)
+                
+                Spacer()
+            }
+            .padding()
+            .background(isExerciseCompleted ? Color.gray.opacity(0.1) : colors.accent.opacity(0.1))
+            .foregroundColor(isExerciseCompleted ? Color.gray : colors.accent)
+            .cornerRadius(8)
+        }
     }
 }
 
