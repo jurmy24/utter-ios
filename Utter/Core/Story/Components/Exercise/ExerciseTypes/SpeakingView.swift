@@ -1,5 +1,5 @@
 //
-//  PronunciationView.swift
+//  SpeakingView.swift
 //  Utter
 //
 //  Created by Victor Magnus Oldensand on 2024-09-20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PronunciationView: View {
+struct SpeakingView: View {
     let colors: ExerciseColors = ExerciseColors.default
     let exercise: ExerciseOption
     let story: StoryData?
@@ -31,24 +31,14 @@ struct PronunciationView: View {
     }
     
     var body: some View {
-        
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                let text = viewModel.getLine()?.text
-                Text(text ?? "Could not locate the text.")
+            let (labelText, image) = labelTextAndImage(for: exercise.type)
+            
+            if let query = exercise.query {
+                Text(query)
                     .font(.body)
-                    .fontWeight(.bold)
-                    .foregroundStyle(colors.accent)
-                
-                Spacer()
-                
-                // TODO: Add ifMostlyCorrect or something to change the view
-                //                    if selectedAnswers.contains(key) {
-                //                        Image(systemName: option.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
-                //                            .foregroundColor(option.isCorrect ? colors.correctAnswer : colors.wrongAnswer)
-                //                    }
+                    .foregroundColor(colors.text)
             }
-            .cornerRadius(8)
             
             HStack {
                 Button(action: {
@@ -64,10 +54,9 @@ struct PronunciationView: View {
                         }
                     }
                 }) {
-                    Label("Press here to talk", systemImage: "mic.fill")
+                    Label(labelText, systemImage: image)
                 }
                 .allowsHitTesting(isExerciseCompleted ? false : true)
-                
                 Spacer()
             }
             .padding()
@@ -76,8 +65,26 @@ struct PronunciationView: View {
             .cornerRadius(8)
         }
     }
+    
+    // Helper function to get the label text and image based on exercise type
+    private func labelTextAndImage(for type: ExerciseType) -> (String, String) {
+        switch type {
+        case .speakReplace:
+            if let character = viewModel.getLine()?.character {
+                return ("Press to speak for \(character)", "mic.fill")
+            } else {
+                return ("Press to speak", "mic.fill")
+            }
+        case .speakQuestion:
+            return ("Press to speak", "mic.fill")
+        case .interact:
+            return ("Press to enter a live interaction", "waveform")
+        default:
+            return ("This is not a valid exercise type", "xmark.octagon")
+        }
+    }
 }
 
 #Preview {
-    PronunciationView(exercise: ExerciseOption.sampleCompListen, showCorrectAnimation: .constant(false), isExerciseCompleted: .constant(false), isExpandedAfterCompletion: .constant(false))
+    SpeakingView(exercise: ExerciseOption.sampleInteract, showCorrectAnimation: .constant(false), isExerciseCompleted: .constant(false), isExpandedAfterCompletion: .constant(false))
 }

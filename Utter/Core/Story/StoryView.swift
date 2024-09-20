@@ -11,6 +11,7 @@ struct StoryView: View {
     let storyMetadata: Story
     @Binding var showStoryView: Bool
     @StateObject private var viewModel: StoryViewModel
+    @State private var displayContinueButton: Bool = true
     
     init(storyMetadata: Story, showStoryView: Binding<Bool>) {
         self.storyMetadata = storyMetadata
@@ -79,20 +80,21 @@ struct StoryView: View {
             .id(index)
         case .exercise:
             if let selectedExercise = viewModel.selectedExercises[block.id] {
-                ExerciseBlockView(exercise: selectedExercise, story: viewModel.story)
+                ExerciseBlockView(exercise: selectedExercise, story: viewModel.story, displayContinueButton: $displayContinueButton)
                     .id(index)
             }
         }
     }
     
     private func continueButton(proxy: ScrollViewProxy) -> some View {
-        StoryButton(text: "Continue", color: Color("ButtonColor")) {
+        StoryButton(text: "Continue", color: displayContinueButton ? Color("ButtonColor") : Color.gray) {
             viewModel.playNextLine()
             withAnimation {
                 proxy.scrollTo("bottomID", anchor: .bottom)
             }
             showStoryView = !viewModel.chapterComplete
         }
+        .allowsHitTesting(displayContinueButton ? true : false)
         .padding()
     }
     

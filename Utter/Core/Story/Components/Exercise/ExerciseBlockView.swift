@@ -32,16 +32,19 @@ struct ExerciseBlockView: View {
     let colors: ExerciseColors
     let story: StoryData?
     
-    @State private var selectedAnswers: [String] = [] // For MCQ and TF questions
+    @Binding var displayContinueButton: Bool
+    
+    @State var selectedAnswers: [String] = [] // For MCQ and TF questions
     @State private var showHints: Bool = false
     @State private var showCorrectAnimation: Bool = false
     @State private var isExerciseCompleted: Bool = false
     @State private var isExpandedAfterCompletion: Bool = false
     
-    init(exercise: ExerciseOption, story: StoryData? = nil) {
+    init(exercise: ExerciseOption, story: StoryData? = nil, displayContinueButton: Binding<Bool>) {
         self.exercise = exercise
         self.colors = ExerciseColors.default
         self.story = story
+        self._displayContinueButton = displayContinueButton
     }
     
     var body: some View {
@@ -51,6 +54,9 @@ struct ExerciseBlockView: View {
             } else {
                 exerciseContent
             }
+        }
+        .onAppear {
+            displayContinueButton = false
         }
         .padding()
         .background(colors.background)
@@ -108,6 +114,9 @@ struct ExerciseBlockView: View {
                     .font(.title2)
             }
         }
+        .onAppear {
+            displayContinueButton = true
+        }
     }
     
     private var exerciseContent: some View {
@@ -131,11 +140,23 @@ struct ExerciseBlockView: View {
             
             switch exercise.type {
             case .compMCQ, .compTF, .compListen:
-                MultipleChoiceView(exercise: exercise, selectedAnswers: $selectedAnswers, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
+                MultipleChoiceView(exercise: exercise, 
+                                   selectedAnswers: $selectedAnswers,
+                                   showCorrectAnimation: $showCorrectAnimation,
+                                   isExerciseCompleted: $isExerciseCompleted,
+                                   isExpandedAfterCompletion:$isExpandedAfterCompletion)
             case .pronounceRep, .pronounceDeaf:
-                PronunciationView(exercise: exercise, story: self.story, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
+                PronunciationView(exercise: exercise, 
+                                  story: self.story,
+                                  showCorrectAnimation: $showCorrectAnimation,
+                                  isExerciseCompleted: $isExerciseCompleted,
+                                  isExpandedAfterCompletion: $isExpandedAfterCompletion)
             case .speakReplace, .speakQuestion, .interact:
-                speakingView
+                SpeakingView(exercise: exercise,
+                             story: self.story,
+                             showCorrectAnimation: $showCorrectAnimation,
+                             isExerciseCompleted: $isExerciseCompleted,
+                             isExpandedAfterCompletion: $isExpandedAfterCompletion)
             }
             
             if let hints = exercise.hints, !hints.isEmpty {
@@ -156,25 +177,25 @@ struct ExerciseBlockView: View {
         }
     }
     
-    private var speakingView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Button(action: {
-                // Record audio logic here
-            }) {
-                Label("Record Your Answer", systemImage: "mic.fill")
-            }
-            .padding()
-            .background(colors.accent.opacity(0.1))
-            .foregroundColor(colors.accent)
-            .cornerRadius(8)
-            
-            if exercise.type == .speakReplace, let affectedLine = exercise.affectedLine {
-                Text("Affected Line: \(affectedLine)")
-                    .font(.caption)
-                    .foregroundColor(colors.text.opacity(0.6))
-            }
-        }
-    }
+//    private var speakingView: some View {
+//        VStack(alignment: .leading, spacing: 8) {
+//            Button(action: {
+//                // Record audio logic here
+//            }) {
+//                Label("Record Your Answer", systemImage: "mic.fill")
+//            }
+//            .padding()
+//            .background(colors.accent.opacity(0.1))
+//            .foregroundColor(colors.accent)
+//            .cornerRadius(8)
+//            
+//            if exercise.type == .speakReplace, let affectedLine = exercise.affectedLine {
+//                Text("Affected Line: \(affectedLine)")
+//                    .font(.caption)
+//                    .foregroundColor(colors.text.opacity(0.6))
+//            }
+//        }
+//    }
     
     private func hintsView(hints: [String]) -> some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -200,7 +221,7 @@ struct ExerciseBlockView: View {
 #Preview{
     ScrollView {
         Group {
-            ExerciseBlockView(exercise: ExerciseOption.samplePronounceRep)
+            ExerciseBlockView(exercise: ExerciseOption.sampleMCQ, displayContinueButton: .constant(false))
         }
         .padding()
     }

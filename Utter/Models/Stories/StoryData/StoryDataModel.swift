@@ -259,7 +259,7 @@ struct AnswerOption: Codable {
 
 struct Line: Identifiable, Codable {
     let id: Int
-    let character: Character
+    let character: String
     let text, audio: String
     
     enum CodingKeys: String, CodingKey {
@@ -268,8 +268,8 @@ struct Line: Identifiable, Codable {
     }
 }
 
-enum Character: String, Codable {
-    case anna = "Anna"
-    case karl = "Karl"
-    case narrator = "Narrator"
-}
+//enum Character: String, Codable {
+//    case anna = "Anna"
+//    case karl = "Karl"
+//    case narrator = "Narrator"
+//}

@@ -1,5 +1,5 @@
 //
-//  PronunciationViewModel.swift
+//  LineViewModel.swift
 //  Utter
 //
 //  Created by Victor Magnus Oldensand on 2024-09-20.
@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-final class PronunciationViewModel: ObservableObject {
+final class LineViewModel: ObservableObject {
     var story: StoryData? = nil
     var affectedLine: String?
     
@@ -19,7 +19,7 @@ final class PronunciationViewModel: ObservableObject {
     }
     
     /// Locate and return the relevant line's text based on the affected line string.
-    func getTextToRead() -> String? {
+    func getLine() -> Line? {
         guard let story = self.story else {
             print("Story data is nil.")
             return nil
@@ -50,7 +50,7 @@ final class PronunciationViewModel: ObservableObject {
         }
 
         // Return the line's text
-        return line.text
+        return line
     }
     
     // Parse affected line format "1-1-2-1" into (chapter, block, line)

@@ -19,19 +19,7 @@ struct StoryBlockView: View {
                     let key = "\(block.id)-\(line.id)"
                     let action = modifications[key]
                     
-                    TextBlob(avatar: "person.circle.fill", character: line.character.rawValue, text: line.text, modifier: action)
-//                    switch action {
-//                    case .hideText, .hideAll:
-//                        Text("[Text Hidden]")
-//                            .italic()
-//                            .foregroundColor(.gray)
-//                    case .emphasizeText:
-//                        Text(line.character.rawValue + ": " + line.text)
-//                            .bold()
-//                            .foregroundColor(.blue)
-//                    case .hideAudio, .none:
-//                        Text(line.character.rawValue + ": " + line.text)
-//                    }
+                    TextBlob(avatar: "person.circle.fill", character: line.character, text: line.text, modifier: action)
                 }
             }
         }
