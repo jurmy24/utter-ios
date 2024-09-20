@@ -20,6 +20,10 @@ struct StoryBlockView: View {
                     let action = modifications[key]
                     
                     TextBlob(avatar: "person.circle.fill", character: line.character, text: line.text, modifier: action)
+                        .onAppear {
+                            print("This is the modification for the line \(line.text)")
+                            print(action?.rawValue ?? "No modification")
+                        }
                 }
             }
         }

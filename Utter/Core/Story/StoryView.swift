@@ -12,6 +12,7 @@ struct StoryView: View {
     @Binding var showStoryView: Bool
     @StateObject private var viewModel: StoryViewModel
     @State private var displayContinueButton: Bool = true
+    @State private var showStoryCompleteView: Bool = false
     
     init(storyMetadata: Story, showStoryView: Binding<Bool>) {
         self.storyMetadata = storyMetadata
@@ -27,23 +28,30 @@ struct StoryView: View {
                 .ignoresSafeArea()
             
             VStack {
-                chapterTitleView
-                
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 16) {
-                            ForEach(viewModel.displayedBlocks.indices, id: \.self) { index in
-                                blockView(for: viewModel.displayedBlocks[index], at: index)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        
-                        Color.clear.frame(height: 1).id("bottomID")
-                    }
-                    
-                    continueButton(proxy: proxy)
+                if showStoryCompleteView {
+                    StoryCompleteView(storyMetadata: storyMetadata, showStoryView: $showStoryView)
+                        .transition(.opacity) // Add opacity transition for fading effect
                 }
+                else {
+                    chapterTitleView
+                    
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 16) {
+                                ForEach(viewModel.displayedBlocks.indices, id: \.self) { index in
+                                    blockView(for: viewModel.displayedBlocks[index], at: index)
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            
+                            Color.clear.frame(height: 1).id("bottomID")
+                        }
+                        
+                        continueButton(proxy: proxy)
+                    }
+                }
+                
             }
             .safeAreaInset(edge: .bottom) {
                 Color.clear.frame(height: 20)
@@ -92,7 +100,19 @@ struct StoryView: View {
             withAnimation {
                 proxy.scrollTo("bottomID", anchor: .bottom)
             }
-            showStoryView = !viewModel.chapterComplete
+            // Add logic to display end-of-chapter screen here
+            if viewModel.chapterComplete {
+                withAnimation {
+                    showStoryCompleteView = true // Display StoryCompleteView when chapter is complete
+                }
+                
+                // Hide the StoryCompleteView after 2 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        showStoryView = false // Hide StoryCompleteView after 2 seconds
+                    }
+                }
+            }
         }
         .allowsHitTesting(displayContinueButton ? true : false)
         .padding()

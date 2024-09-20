@@ -63,23 +63,7 @@ extension StoryViewModel {
         displayedBlocks = [currentBlock].compactMap { $0 }
         preprocessBlocks()
     }
-    
-    // Move to the next block in the chapter
-    func playNextBlock() {
-        guard let currentChapter = currentChapter,
-              let currentIndex = currentChapter.blocks.firstIndex(where: { $0.id == currentBlock?.id }) else { return }
-        
-        let nextIndex = currentIndex + 1
-        if nextIndex < currentChapter.blocks.count {
-            currentBlock = currentChapter.blocks[nextIndex]
-            currentLineIndex = 0
-        } else {
-            // End of chapter logic here
-            
-            print("End of chapter")
-        }
-    }
-    
+      
     func playNextLine() {
         guard let currentBlock = currentBlock else { return }
         
@@ -89,11 +73,9 @@ extension StoryViewModel {
             if currentLineIndex < (storyBlock.lines?.count ?? 0) - 1 {
                 currentLineIndex += 1
             } else {
-                print("Moving from story block to exercise block")
                 moveToNextBlock()
             }
         case .exercise:
-            print("Moving from exercise block to next block")
             moveToNextBlock()
         }
     }
@@ -108,7 +90,6 @@ extension StoryViewModel {
             currentLineIndex = 0
             displayedBlocks.append(currentBlock!)
         } else {
-            // End of chapter logic here
             // TODO: update chapter complete in database, if chapter == numChapters set story to complete and unlock the next story
             print("End of chapter")
             chapterComplete = true
@@ -140,13 +121,12 @@ extension StoryViewModel {
                 }
             }
         }
-
     }
     
     // Parse affected line format "1-1-2-1" into (chapter, block, line)
     private func parseAffectedLine(_ affectedLine: String) -> (Int, Int, Int) {
         let components = affectedLine.split(separator: "-").compactMap { Int($0) }
-        return (components[0], components[1], components[2])
+        return (components[1], components[2], components[3])
     }
 }
 

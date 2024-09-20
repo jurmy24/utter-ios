@@ -126,11 +126,19 @@ struct TextBlob: View {
 
     // Display the text with optional modifications
     var textView: some View {
-        Text(text)
-            .font(.body)
-            .fontWeight(modifier == .emphasizeText ? .black : .regular)
-            .foregroundColor(modifier != .emphasizeText ? Color("TextColor") : Color("ReverseAccent"))
-            .blur(radius: modifier == .hideText || modifier == .hideAll ? 4 : 0)
+        if modifier != .hideAll {
+            Text(text)
+                .font(.body)
+                .fontWeight(modifier == .emphasizeText ? .bold : .regular)
+                .blur(radius: modifier == .hideText ? 4 : 0)
+                .foregroundColor(modifier != .emphasizeText ? Color("TextColor") : Color("AccentColor"))
+        } else {
+            Text(text)
+                .font(.body)
+                .blur(radius: 0)
+                .foregroundColor(Color("AppBackgroundColor"))
+        }
+        
     }
 
     // Bubble stroke color based on modifier
