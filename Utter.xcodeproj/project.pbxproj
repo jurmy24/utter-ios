@@ -51,6 +51,7 @@
 		E87D52E72C9D6FCB0067A1A0 /* MultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */; };
 		E87D52E92C9D6FED0067A1A0 /* HintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E82C9D6FED0067A1A0 /* HintsView.swift */; };
 		E87D52ED2C9D7F240067A1A0 /* PronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */; };
+		E87D52EF2C9D8ED20067A1A0 /* PronunciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52EE2C9D8ED20067A1A0 /* PronunciationViewModel.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -129,6 +130,7 @@
 		E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceView.swift; sourceTree = "<group>"; };
 		E87D52E82C9D6FED0067A1A0 /* HintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsView.swift; sourceTree = "<group>"; };
 		E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationView.swift; sourceTree = "<group>"; };
+		E87D52EE2C9D8ED20067A1A0 /* PronunciationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationViewModel.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			children = (
 				E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */,
 				E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */,
+				E87D52EE2C9D8ED20067A1A0 /* PronunciationViewModel.swift */,
 			);
 			path = ExerciseTypes;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				E87D52E92C9D6FED0067A1A0 /* HintsView.swift in Sources */,
 				E8E3471A2C9A9EF4006DDA92 /* Language.swift in Sources */,
 				E854EE592C94B49300BF1E33 /* SettingsView.swift in Sources */,
+				E87D52EF2C9D8ED20067A1A0 /* PronunciationViewModel.swift in Sources */,
 				E854EE622C96EEEA00BF1E33 /* StoryManager.swift in Sources */,
 				E82E3E562C885FF500EF9A6A /* Utilities.swift in Sources */,
 				E87D52E22C9D6EF50067A1A0 /* ExerciseHeaderView.swift in Sources */,

@@ -79,7 +79,7 @@ struct StoryView: View {
             .id(index)
         case .exercise:
             if let selectedExercise = viewModel.selectedExercises[block.id] {
-                ExerciseBlockView(exercise: selectedExercise)
+                ExerciseBlockView(exercise: selectedExercise, story: viewModel.story)
                     .id(index)
             }
         }

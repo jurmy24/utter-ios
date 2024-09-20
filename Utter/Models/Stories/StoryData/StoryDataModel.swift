@@ -63,7 +63,7 @@ struct ExerciseOption: Identifiable, Codable {
     let hints: [String]?
     let audio: String?
     let action: Action?
-    let affectedLine: String?
+    let affectedLine: String? // the strings are of the format int-int-int-int as storyid-chapterid-blockid-lineid
     let correctAnswer: String?
     
     enum CodingKeys: String, CodingKey {

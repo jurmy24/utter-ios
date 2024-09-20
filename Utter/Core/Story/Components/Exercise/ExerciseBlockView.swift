@@ -30,6 +30,7 @@ struct ExerciseColors {
 struct ExerciseBlockView: View {
     let exercise: ExerciseOption
     let colors: ExerciseColors
+    let story: StoryData?
     
     @State private var selectedAnswers: [String] = [] // For MCQ and TF questions
     @State private var showHints: Bool = false
@@ -37,9 +38,10 @@ struct ExerciseBlockView: View {
     @State private var isExerciseCompleted: Bool = false
     @State private var isExpandedAfterCompletion: Bool = false
     
-    init(exercise: ExerciseOption) {
+    init(exercise: ExerciseOption, story: StoryData? = nil) {
         self.exercise = exercise
         self.colors = ExerciseColors.default
+        self.story = story
     }
     
     var body: some View {
@@ -131,7 +133,7 @@ struct ExerciseBlockView: View {
             case .compMCQ, .compTF, .compListen:
                 MultipleChoiceView(exercise: exercise, selectedAnswers: $selectedAnswers, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
             case .pronounceRep, .pronounceDeaf:
-                PronunciationView(exercise: exercise, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
+                PronunciationView(exercise: exercise, story: self.story, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
             case .speakReplace, .speakQuestion, .interact:
                 speakingView
             }
@@ -151,32 +153,6 @@ struct ExerciseBlockView: View {
             Text("CEFR: \(exercise.cefr.map { $0.rawValue }.joined(separator: ", "))")
                 .font(.caption)
                 .foregroundColor(colors.text.opacity(0.6))
-        }
-    }
-            
-    private var pronunciationView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if exercise.type == .pronounceRep, let audio = exercise.audio {
-                Button(action: {
-                    // Play audio logic here
-                }) {
-                    Label("Listen and Repeat", systemImage: "play.circle.fill")
-                }
-                .padding()
-                .background(colors.accent.opacity(0.1))
-                .foregroundColor(colors.accent)
-                .cornerRadius(8)
-            }
-            
-            Button(action: {
-                // Record audio logic here
-            }) {
-                Label("Record Your Pronunciation", systemImage: "mic.fill")
-            }
-            .padding()
-            .background(colors.accent.opacity(0.1))
-            .foregroundColor(colors.accent)
-            .cornerRadius(8)
         }
     }
     
