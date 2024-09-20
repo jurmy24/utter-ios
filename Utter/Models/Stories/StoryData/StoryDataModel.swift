@@ -19,7 +19,7 @@ struct StoryData: Codable {
     let storyID: Int
     let difficulty: String
     let chapters: [Chapter]
-
+    
     enum CodingKeys: String, CodingKey {
         case title, description, audio
         case voiceMap = "voice_map"
@@ -40,7 +40,7 @@ struct Block: Identifiable, Codable {
     let blockType: BlockType
     let lines: [Line]?
     let exerciseOptions: [ExerciseOption]?
-
+    
     enum CodingKeys: String, CodingKey {
         case id = "block_id"
         case blockType = "block_type"
@@ -65,7 +65,7 @@ struct ExerciseOption: Identifiable, Codable {
     let action: Action?
     let affectedLine: String?
     let correctAnswer: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id = "exercise_id"
         case type, cefr
@@ -86,6 +86,28 @@ enum ExerciseType: String, Codable {
     case speakReplace = "speak-replace"
     case speakQuestion = "speak-question"
     case interact = "interact"
+    
+    // Computed property for user-friendly display names
+    var displayName: String {
+        switch self {
+        case .compMCQ:
+            return "Multiple Choice Question"
+        case .compTF:
+            return "True/False Question"
+        case .compListen:
+            return "Listening Comprehension"
+        case .pronounceRep:
+            return "Pronunciation: Repeat"
+        case .pronounceDeaf:
+            return "Pronunciation: Deaf Mode"
+        case .speakReplace:
+            return "Speaking: Replace Text"
+        case .speakQuestion:
+            return "Speaking: Question"
+        case .interact:
+            return "Interactive Exercise"
+        }
+    }
 }
 
 extension ExerciseOption {
@@ -106,7 +128,7 @@ extension ExerciseOption {
         affectedLine: nil,
         correctAnswer: "3"
     )
-
+    
     // Sample True/False (TF) Exercise
     static let sampleTF = ExerciseOption(
         id: 2,
@@ -123,13 +145,13 @@ extension ExerciseOption {
         affectedLine: nil,
         correctAnswer: "2"
     )
-
+    
     // Sample Listening Comprehension Exercise
     static let sampleCompListen = ExerciseOption(
         id: 3,
         type: .compListen,
         cefr: [.b1],
-        query: "What is Maria doing?",
+        query: nil,
         answerOptions: [
             "1": AnswerOption(text: "She is going to the market.", isCorrect: true),
             "2": AnswerOption(text: "She is going to the park.", isCorrect: false)
@@ -140,7 +162,7 @@ extension ExerciseOption {
         affectedLine: "1-1-2",
         correctAnswer: "1"
     )
-
+    
     // Sample Pronunciation (Repetition) Exercise
     static let samplePronounceRep = ExerciseOption(
         id: 4,
@@ -154,7 +176,7 @@ extension ExerciseOption {
         affectedLine: "1-1-1",
         correctAnswer: nil
     )
-
+    
     // Sample Pronunciation (Deaf Mode) Exercise
     static let samplePronounceDeaf = ExerciseOption(
         id: 5,
@@ -168,7 +190,7 @@ extension ExerciseOption {
         affectedLine: "1-1-1",
         correctAnswer: nil
     )
-
+    
     // Sample Speak Replace Exercise
     static let sampleSpeakReplace = ExerciseOption(
         id: 6,
@@ -182,7 +204,7 @@ extension ExerciseOption {
         affectedLine: "1-1-2",
         correctAnswer: nil
     )
-
+    
     // Sample Speak Question Exercise
     static let sampleSpeakQuestion = ExerciseOption(
         id: 7,
@@ -196,7 +218,7 @@ extension ExerciseOption {
         affectedLine: nil,
         correctAnswer: nil
     )
-
+    
     // Sample Interact Exercise
     static let sampleInteract = ExerciseOption(
         id: 8,
@@ -228,28 +250,18 @@ enum Action: String, Codable {
 struct AnswerOption: Codable {
     let text: String
     let isCorrect: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case text
         case isCorrect = "is_correct"
     }
 }
 
-//enum Cefr: String, Codable {
-//    case a1 = "A1"
-//    case a2 = "A2"
-//    case b1 = "B1"
-//    case b2 = "B2"
-//    case c1 = "C1"
-//    case c2 = "C2"
-//}
-
-
 struct Line: Identifiable, Codable {
     let id: Int
     let character: Character
     let text, audio: String
-
+    
     enum CodingKeys: String, CodingKey {
         case id = "line_id"
         case character, text, audio

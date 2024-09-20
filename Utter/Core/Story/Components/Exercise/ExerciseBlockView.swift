@@ -31,7 +31,7 @@ struct ExerciseBlockView: View {
     let exercise: ExerciseOption
     let colors: ExerciseColors
     
-    @State private var selectedAnswers: [String] = []
+    @State private var selectedAnswers: [String] = [] // For MCQ and TF questions
     @State private var showHints: Bool = false
     @State private var showCorrectAnimation: Bool = false
     @State private var isExerciseCompleted: Bool = false
@@ -85,7 +85,7 @@ struct ExerciseBlockView: View {
                 .font(.largeTitle)
             
             VStack(alignment: .leading) {
-                Text("Exercise Completed")
+                Text("\(exercise.type.displayName)")
                     .font(.headline)
                     .foregroundColor(colors.text)
                 
@@ -111,7 +111,7 @@ struct ExerciseBlockView: View {
     private var exerciseContent: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                exerciseHeader
+                exerciseHeader 
                 
                 if isExerciseCompleted {
                     Spacer()
@@ -127,19 +127,11 @@ struct ExerciseBlockView: View {
                 }
             }
             
-            if let query = exercise.query {
-                Text(query)
-                    .font(.body)
-                    .foregroundColor(colors.text)
-            }
-            
             switch exercise.type {
-            case .compMCQ, .compTF:
-                multipleChoiceView
-            case .compListen:
-                listeningComprehensionView
+            case .compMCQ, .compTF, .compListen:
+                MultipleChoiceView(exercise: exercise, selectedAnswers: $selectedAnswers, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
             case .pronounceRep, .pronounceDeaf:
-                pronunciationView
+                PronunciationView(exercise: exercise, showCorrectAnimation: $showCorrectAnimation, isExerciseCompleted: $isExerciseCompleted, isExpandedAfterCompletion: $isExpandedAfterCompletion)
             case .speakReplace, .speakQuestion, .interact:
                 speakingView
             }
@@ -152,7 +144,7 @@ struct ExerciseBlockView: View {
     
     private var exerciseHeader: some View {
         HStack {
-            Text("Exercise")
+            Text("\(exercise.type.displayName)")
                 .font(.headline)
                 .foregroundColor(colors.text)
             Spacer()
@@ -161,83 +153,7 @@ struct ExerciseBlockView: View {
                 .foregroundColor(colors.text.opacity(0.6))
         }
     }
-    
-    private var multipleChoiceView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let answerOptions = exercise.answerOptions {
-                ForEach(Array(answerOptions.keys), id: \.self) { key in
-                    if let option = answerOptions[key] {
-                        Button(action: {
-                            if !selectedAnswers.contains(key) {
-                                selectedAnswers.append(key)
-                                if option.isCorrect {
-                                    withAnimation {
-                                        showCorrectAnimation = true
-                                    }
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        withAnimation {
-                                            showCorrectAnimation = false
-                                            isExerciseCompleted = true
-                                            isExpandedAfterCompletion = false
-                                        }
-                                    }
-                                }
-                            }
-                        }) {
-                            HStack {
-                                Text(option.text)
-                                Spacer()
-                                if selectedAnswers.contains(key) {
-                                    Image(systemName: option.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                        .foregroundColor(option.isCorrect ? colors.correctAnswer : colors.wrongAnswer)
-                                }
-                            }
-                            .padding()
-                            .background(backgroundColor(for: key, isCorrect: option.isCorrect))
-                            .foregroundColor(foregroundColor(for: key, isCorrect: option.isCorrect))
-                            .cornerRadius(8)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .disabled(selectedAnswers.contains(where: { answerOptions[$0]?.isCorrect == true }))
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    
-    private func backgroundColor(for key: String, isCorrect: Bool) -> Color {
-        if selectedAnswers.contains(key) {
-            return isCorrect ? colors.correctAnswer.opacity(0.2) : colors.wrongAnswer.opacity(0.2)
-        }
-        return colors.buttonBackground
-    }
-    
-    private func foregroundColor(for key: String, isCorrect: Bool) -> Color {
-        if selectedAnswers.contains(key) {
-            return isCorrect ? colors.correctAnswer : colors.wrongAnswer
-        }
-        return colors.buttonText
-    }
-    
-    private var listeningComprehensionView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let audio = exercise.audio {
-                Button(action: {
-                    // Play audio logic here
-                }) {
-                    Label("Play Audio", systemImage: "play.circle.fill")
-                }
-                .padding()
-                .background(colors.accent.opacity(0.1))
-                .foregroundColor(colors.accent)
-                .cornerRadius(8)
-            }
-            multipleChoiceView
-        }
-    }
-    
+            
     private var pronunciationView: some View {
         VStack(alignment: .leading, spacing: 8) {
             if exercise.type == .pronounceRep, let audio = exercise.audio {
@@ -308,10 +224,7 @@ struct ExerciseBlockView: View {
 #Preview{
     ScrollView {
         Group {
-            ExerciseBlockView(exercise: ExerciseOption.sampleMCQ)
-            
-            
-
+            ExerciseBlockView(exercise: ExerciseOption.samplePronounceRep)
         }
         .padding()
     }

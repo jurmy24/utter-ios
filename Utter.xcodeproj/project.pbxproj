@@ -46,6 +46,11 @@
 		E85517792C90D5B200FEB145 /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517782C90D5B200FEB145 /* CircularProgressBarView.swift */; };
 		E855177D2C9205FC00FEB145 /* WavyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E855177C2C9205FC00FEB145 /* WavyPath.swift */; };
 		E85517852C921B8500FEB145 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85517842C921B8500FEB145 /* HorizontalProgressBar.swift */; };
+		E87D52E22C9D6EF50067A1A0 /* ExerciseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E12C9D6EF50067A1A0 /* ExerciseHeaderView.swift */; };
+		E87D52E42C9D6F2B0067A1A0 /* ExerciseCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E32C9D6F2B0067A1A0 /* ExerciseCompletionView.swift */; };
+		E87D52E72C9D6FCB0067A1A0 /* MultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */; };
+		E87D52E92C9D6FED0067A1A0 /* HintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52E82C9D6FED0067A1A0 /* HintsView.swift */; };
+		E87D52ED2C9D7F240067A1A0 /* PronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -119,6 +124,11 @@
 		E85517782C90D5B200FEB145 /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
 		E855177C2C9205FC00FEB145 /* WavyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavyPath.swift; sourceTree = "<group>"; };
 		E85517842C921B8500FEB145 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
+		E87D52E12C9D6EF50067A1A0 /* ExerciseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHeaderView.swift; sourceTree = "<group>"; };
+		E87D52E32C9D6F2B0067A1A0 /* ExerciseCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionView.swift; sourceTree = "<group>"; };
+		E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceView.swift; sourceTree = "<group>"; };
+		E87D52E82C9D6FED0067A1A0 /* HintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsView.swift; sourceTree = "<group>"; };
+		E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationView.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -331,7 +341,11 @@
 		E87D52DF2C9D6DB50067A1A0 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				E87D52E52C9D6FB50067A1A0 /* ExerciseTypes */,
 				E8E347572C9C51AC006DDA92 /* ExerciseBlockView.swift */,
+				E87D52E12C9D6EF50067A1A0 /* ExerciseHeaderView.swift */,
+				E87D52E32C9D6F2B0067A1A0 /* ExerciseCompletionView.swift */,
+				E87D52E82C9D6FED0067A1A0 /* HintsView.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -343,6 +357,15 @@
 				E8E347532C9C1C51006DDA92 /* StoryImageCard.swift */,
 			);
 			path = Title;
+			sourceTree = "<group>";
+		};
+		E87D52E52C9D6FB50067A1A0 /* ExerciseTypes */ = {
+			isa = PBXGroup;
+			children = (
+				E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */,
+				E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */,
+			);
+			path = ExerciseTypes;
 			sourceTree = "<group>";
 		};
 		E8E346E62C98168E006DDA92 /* Components */ = {
@@ -622,6 +645,7 @@
 				E855177D2C9205FC00FEB145 /* WavyPath.swift in Sources */,
 				E85517702C90CE0600FEB145 /* HomeView.swift in Sources */,
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
+				E87D52E72C9D6FCB0067A1A0 /* MultipleChoiceView.swift in Sources */,
 				E8E3474E2C9C1320006DDA92 /* StoryTitleView.swift in Sources */,
 				E8E346F52C988CE1006DDA92 /* StoryView.swift in Sources */,
 				E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */,
@@ -643,6 +667,7 @@
 				E8E347302C9AD6E6006DDA92 /* GoogleSignInResultModel.swift in Sources */,
 				E8E3470D2C9A9DCE006DDA92 /* UserLanguageDetailsModel.swift in Sources */,
 				E854EE472C94B1CD00BF1E33 /* AuthenticationViewModel.swift in Sources */,
+				E87D52E42C9D6F2B0067A1A0 /* ExerciseCompletionView.swift in Sources */,
 				E8E347212C9AA104006DDA92 /* AuthProviderOption.swift in Sources */,
 				E8E347232C9AAB7C006DDA92 /* StoryModel.swift in Sources */,
 				E82E3E582C8866DF00EF9A6A /* SignInGoogleHelper.swift in Sources */,
@@ -654,12 +679,15 @@
 				E854EE352C93652900BF1E33 /* CustomTabBar.swift in Sources */,
 				E83960962C6BEA1400D8456D /* UtterApp.swift in Sources */,
 				E82E3E4C2C884C1F00EF9A6A /* SignInEmailView.swift in Sources */,
+				E87D52E92C9D6FED0067A1A0 /* HintsView.swift in Sources */,
 				E8E3471A2C9A9EF4006DDA92 /* Language.swift in Sources */,
 				E854EE592C94B49300BF1E33 /* SettingsView.swift in Sources */,
 				E854EE622C96EEEA00BF1E33 /* StoryManager.swift in Sources */,
 				E82E3E562C885FF500EF9A6A /* Utilities.swift in Sources */,
+				E87D52E22C9D6EF50067A1A0 /* ExerciseHeaderView.swift in Sources */,
 				E8E3471E2C9A9F5F006DDA92 /* AuthDataResultModel.swift in Sources */,
 				E82E3E5A2C8DD5CA00EF9A6A /* SignInAppleHelper.swift in Sources */,
+				E87D52ED2C9D7F240067A1A0 /* PronunciationView.swift in Sources */,
 				E8E346FB2C98D27F006DDA92 /* WordWrapView.swift in Sources */,
 				E82E3E442C879C0F00EF9A6A /* SignUpEmailView.swift in Sources */,
 				E8E347162C9A9E8E006DDA92 /* DBStoryModel.swift in Sources */,
