@@ -328,6 +328,23 @@
 			path = Firestore;
 			sourceTree = "<group>";
 		};
+		E87D52DF2C9D6DB50067A1A0 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				E8E347572C9C51AC006DDA92 /* ExerciseBlockView.swift */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		E87D52E02C9D6DCC0067A1A0 /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				E8E3474F2C9C1551006DDA92 /* ChapterTitleView.swift */,
+				E8E347532C9C1C51006DDA92 /* StoryImageCard.swift */,
+			);
+			path = Title;
+			sourceTree = "<group>";
+		};
 		E8E346E62C98168E006DDA92 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,13 +376,12 @@
 		E8E346F62C988CE6006DDA92 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E87D52E02C9D6DCC0067A1A0 /* Title */,
+				E87D52DF2C9D6DB50067A1A0 /* Exercise */,
 				E8E346F92C98D261006DDA92 /* Word */,
 				E8E346F72C988CF5006DDA92 /* TextBlob.swift */,
-				E8E3474F2C9C1551006DDA92 /* ChapterTitleView.swift */,
 				E8E347512C9C1813006DDA92 /* StoryButton.swift */,
-				E8E347532C9C1C51006DDA92 /* StoryImageCard.swift */,
 				E8E347552C9C5026006DDA92 /* StoryBlockView.swift */,
-				E8E347572C9C51AC006DDA92 /* ExerciseBlockView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
