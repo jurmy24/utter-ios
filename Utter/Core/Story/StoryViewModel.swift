@@ -109,6 +109,7 @@ extension StoryViewModel {
             displayedBlocks.append(currentBlock!)
         } else {
             // End of chapter logic here
+            // TODO: update chapter complete in database, if chapter == numChapters set story to complete and unlock the next story
             print("End of chapter")
             chapterComplete = true
         }

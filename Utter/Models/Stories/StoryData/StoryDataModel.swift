@@ -56,7 +56,7 @@ enum BlockType: String, Codable {
 
 struct ExerciseOption: Identifiable, Codable {
     let id: Int
-    let type: String
+    let type: ExerciseType
     let cefr: [CEFRLevel]
     let query: String?
     let answerOptions: [String: AnswerOption]?
@@ -75,6 +75,147 @@ struct ExerciseOption: Identifiable, Codable {
         case affectedLine = "affected_line"
         case correctAnswer = "correct_answer"
     }
+}
+
+enum ExerciseType: String, Codable {
+    case compMCQ = "comp-mcq"
+    case compTF = "comp-tf"
+    case compListen = "comp-listen"
+    case pronounceRep = "pronounce-rep"
+    case pronounceDeaf = "pronounce-deaf"
+    case speakReplace = "speak-replace"
+    case speakQuestion = "speak-question"
+    case interact = "interact"
+}
+
+extension ExerciseOption {
+    // Sample Multiple Choice Question (MCQ) Exercise
+    static let sampleMCQ = ExerciseOption(
+        id: 1,
+        type: .compMCQ,
+        cefr: [.a1, .a2],
+        query: "What is the capital of France?",
+        answerOptions: [
+            "1": AnswerOption(text: "Berlin", isCorrect: false),
+            "2": AnswerOption(text: "Madrid", isCorrect: false),
+            "3": AnswerOption(text: "Paris", isCorrect: true)
+        ],
+        hints: ["It's known as the city of lights."],
+        audio: nil,
+        action: .hideText,
+        affectedLine: nil,
+        correctAnswer: "3"
+    )
+
+    // Sample True/False (TF) Exercise
+    static let sampleTF = ExerciseOption(
+        id: 2,
+        type: .compTF,
+        cefr: [.a1],
+        query: "The Eiffel Tower is located in Berlin. True or False?",
+        answerOptions: [
+            "1": AnswerOption(text: "True", isCorrect: false),
+            "2": AnswerOption(text: "False", isCorrect: true)
+        ],
+        hints: nil,
+        audio: nil,
+        action: nil,
+        affectedLine: nil,
+        correctAnswer: "2"
+    )
+
+    // Sample Listening Comprehension Exercise
+    static let sampleCompListen = ExerciseOption(
+        id: 3,
+        type: .compListen,
+        cefr: [.b1],
+        query: "What is Maria doing?",
+        answerOptions: [
+            "1": AnswerOption(text: "She is going to the market.", isCorrect: true),
+            "2": AnswerOption(text: "She is going to the park.", isCorrect: false)
+        ],
+        hints: nil,
+        audio: "audiofile.mp3", // Placeholder audio file
+        action: .hideAll,
+        affectedLine: "1-1-2",
+        correctAnswer: "1"
+    )
+
+    // Sample Pronunciation (Repetition) Exercise
+    static let samplePronounceRep = ExerciseOption(
+        id: 4,
+        type: .pronounceRep,
+        cefr: [.b2],
+        query: "Repeat after the speaker.",
+        answerOptions: nil,
+        hints: nil,
+        audio: "audiofile.mp3",
+        action: .emphasizeText,
+        affectedLine: "1-1-1",
+        correctAnswer: nil
+    )
+
+    // Sample Pronunciation (Deaf Mode) Exercise
+    static let samplePronounceDeaf = ExerciseOption(
+        id: 5,
+        type: .pronounceDeaf,
+        cefr: [.b2, .c1],
+        query: "Pronounce this sentence without listening to it first.",
+        answerOptions: nil,
+        hints: nil,
+        audio: nil,
+        action: .hideAudio,
+        affectedLine: "1-1-1",
+        correctAnswer: nil
+    )
+
+    // Sample Speak Replace Exercise
+    static let sampleSpeakReplace = ExerciseOption(
+        id: 6,
+        type: .speakReplace,
+        cefr: [.b2, .c1],
+        query: "Replace the underlined word with your own.",
+        answerOptions: nil,
+        hints: ["Try using synonyms."],
+        audio: nil,
+        action: .hideAll,
+        affectedLine: "1-1-2",
+        correctAnswer: nil
+    )
+
+    // Sample Speak Question Exercise
+    static let sampleSpeakQuestion = ExerciseOption(
+        id: 7,
+        type: .speakQuestion,
+        cefr: [.b2, .c2],
+        query: "Answer the following question: What would you do in this situation?",
+        answerOptions: nil,
+        hints: ["Think about your personal experience."],
+        audio: nil,
+        action: nil,
+        affectedLine: nil,
+        correctAnswer: nil
+    )
+
+    // Sample Interact Exercise
+    static let sampleInteract = ExerciseOption(
+        id: 8,
+        type: .interact,
+        cefr: [.c1, .c2],
+        query: "Interact with the conversation and give a response.",
+        answerOptions: nil,
+        hints: ["Consider the context of the conversation."],
+        audio: nil,
+        action: nil,
+        affectedLine: nil,
+        correctAnswer: nil
+    )
+    
+    // Collection of all exercise samples
+    static let samples = [
+        sampleMCQ, sampleTF, sampleCompListen, samplePronounceRep,
+        samplePronounceDeaf, sampleSpeakReplace, sampleSpeakQuestion, sampleInteract
+    ]
 }
 
 enum Action: String, Codable {
@@ -120,175 +261,3 @@ enum Character: String, Codable {
     case karl = "Karl"
     case narrator = "Narrator"
 }
-
-
-//struct VoiceMap: Codable {
-//    let narrator, anna, karl: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case narrator = "Narrator"
-//        case anna = "Anna"
-//        case karl = "Karl"
-//    }
-//}
-
-//// MARK: - Encode/decode helpers
-//
-//class JSONNull: Codable, Hashable {
-//
-//    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-//            return true
-//    }
-//
-//    public var hashValue: Int {
-//            return 0
-//    }
-//
-//    public init() {}
-//
-//    public required init(from decoder: Decoder) throws {
-//            let container = try decoder.singleValueContainer()
-//            if !container.decodeNil() {
-//                    throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-//            }
-//    }
-//
-//    public func encode(to encoder: Encoder) throws {
-//            var container = encoder.singleValueContainer()
-//            try container.encodeNil()
-//    }
-//}
-
-
-//
-//struct StoryData: Codable {
-//    let title: String
-//    let description: String
-//    let audio: String?
-//    let voiceMap: [String: String]?
-//    let language: String
-//    let storyId: Int
-//    let difficulty: String
-//    let chapters: [Chapter]
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case title
-//        case description
-//        case audio
-//        case voiceMap = "voice_map"  // Adjusting snake_case to camelCase
-//        case language
-//        case storyId = "story_id"     // Adjusting snake_case to camelCase
-//        case difficulty
-//        case chapters
-//    }
-//}
-//
-//
-//struct Chapter: Codable, Identifiable {
-//    let id: Int
-//    let title: String
-//    let summary: String
-//    let audio: String?
-//    let blocks: [Block]
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case id = "chapter"           // Mapping 'chapter' to 'id'
-//        case title
-//        case summary
-//        case audio
-//        case blocks
-//    }
-//}
-//
-//
-//struct Block: Codable, Identifiable {
-//    let id: Int
-//    let type: String
-//    let lines: [StoryLine]?
-//    let exerciseOptions: [Exercise]?
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case id = "block_id"          // Mapping 'block_id' to 'id'
-//        case type = "block_type"      // Mapping 'block_type' to 'type'
-//        case lines
-//        case exerciseOptions = "exercise_options"
-//    }
-//}
-//
-//struct StoryLine: Codable {
-//    let lineID: Int
-//    let character: String
-//    let text: String
-//    let audio: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case lineID = "line_id"
-//        case character
-//        case text
-//        case audio
-//    }
-//}
-//
-//struct Exercise: Codable {
-//    let exerciseID: Int
-//    let type: ExerciseType
-//    let cefr: [CEFRLevel2]
-//    let skipCondition: SkipCondition?
-//    let query: String?
-//    let answerOptions: [String: AnswerOption]?
-//    let hints: [String]?
-//    let audio: String?
-//    let action: Action?
-//    let affectedLine: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case exerciseID = "exercise_id"
-//        case type
-//        case cefr
-//        case skipCondition = "skip_condition"
-//        case query
-//        case answerOptions = "answer_options"
-//        case hints
-//        case audio
-//        case action
-//        case affectedLine = "affected_line"
-//    }
-//}
-//
-//
-//enum ExerciseType: String, Codable {
-//    case compMCQ = "comp-mcq"
-//    case compTF = "comp-tf"
-//    case compListen = "comp-listen"
-//    case pronounceRep = "pronounce-rep"
-//    case pronounceDeaf = "pronounce-deaf"
-//    case speakReplace = "speak-replace"
-//    case speakQuestion = "speak-question"
-//    case interact = "interact"
-//}
-//
-//enum CEFRLevel2: String, Codable {
-//    case a1 = "A1"
-//    case a2 = "A2"
-//    case b1 = "B1"
-//    case b2 = "B2"
-//    case c1 = "C1"
-//    case c2 = "C2"
-//}
-//
-//enum SkipCondition: String, Codable {
-//    case ifNotVoice = "if-not-voice"
-//    case ifNotAudio = "if-not-audio"
-//}
-//
-//struct AnswerOption: Codable {
-//    let text: String
-//    let isCorrect: Bool
-//}
-//
-//enum Action: String, Codable {
-//    case hideText = "hide-text"
-//    case hideAudio = "hide-audio"
-//    case emphasizeText = "emphasize-text"
-//    case hideAll = "hide-all"
-//}
