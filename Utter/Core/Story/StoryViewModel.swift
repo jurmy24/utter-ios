@@ -20,10 +20,12 @@ final class StoryViewModel: ObservableObject {
         
     let chapterId: Int
     let userLevel: CEFRLevel
+    let storyMetadata: Story?
     
-    init(chapterId: Int, userLevel: CEFRLevel) {
+    init(chapterId: Int, userLevel: CEFRLevel, storyMetadata: Story?) {
         self.chapterId = chapterId
         self.userLevel = userLevel
+        self.storyMetadata = storyMetadata
     }
     
     // Computed property for progress
@@ -91,6 +93,18 @@ extension StoryViewModel {
             displayedBlocks.append(currentBlock!)
         } else {
             // TODO: update chapter complete in database, if chapter == numChapters set story to complete and unlock the next story
+            Task {
+                if let storyMetadata = self.storyMetadata {
+                    let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+                    do {
+                        try await UserManager.shared.updateUserStoryProgress(userId: authDataResult.uid, language: storyMetadata.story.language, storyId: storyMetadata.id, totalChapters: storyMetadata.story.chapters)
+                    } catch {
+                        print("Didn't work so well")
+                    }
+                } else {
+                    print("Didn't work")
+                }
+            }
             print("End of chapter")
             chapterComplete = true
         }

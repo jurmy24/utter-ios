@@ -19,7 +19,7 @@ struct StoryView: View {
         self._showStoryView = showStoryView
         let chapter = storyMetadata.currentChapter
         let userLevel = storyMetadata.userProgress?.currentCefr ?? .a1
-        self._viewModel = StateObject(wrappedValue: StoryViewModel(chapterId: chapter, userLevel: userLevel))
+        self._viewModel = StateObject(wrappedValue: StoryViewModel(chapterId: chapter, userLevel: userLevel, storyMetadata: storyMetadata))
     }
     
     var body: some View {

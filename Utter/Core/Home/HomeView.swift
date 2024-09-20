@@ -56,6 +56,12 @@ struct HomeView: View {
             .scrollIndicators(.hidden)
             .background(Color("AppBackgroundColor"))
             .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                print("It appeared!")
+                Task {
+                    await viewModel.loadStories() // Reload stories when HomeView appears
+                }
+            }
         }
     }
 }
