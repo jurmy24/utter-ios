@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MultipleChoiceView: View {
     let exercise: ExerciseOption
-    @Binding var selectedAnswers: [String]
+    @State var selectedAnswers: [String] = []
     @Binding var showCorrectAnimation: Bool
     @Binding var isExerciseCompleted: Bool
     @Binding var isExpandedAfterCompletion: Bool
@@ -34,8 +34,10 @@ struct MultipleChoiceView: View {
                     ForEach(Array(answerOptions.keys), id: \.self) { key in
                         if let option = answerOptions[key] {
                             Button(action: {
+                                print("Pressed the button")
                                 if !selectedAnswers.contains(key) {
                                     selectedAnswers.append(key)
+
                                     if option.isCorrect {
                                         withAnimation {
                                             showCorrectAnimation = true
@@ -49,6 +51,7 @@ struct MultipleChoiceView: View {
                                         }
                                     }
                                 }
+                                print(selectedAnswers)
                             }) {
                                 HStack {
                                     Text(option.text)
@@ -88,5 +91,5 @@ struct MultipleChoiceView: View {
 }
 
 #Preview {
-    MultipleChoiceView(exercise: ExerciseOption.sampleMCQ, selectedAnswers: .constant(["1"]), showCorrectAnimation: .constant(false), isExerciseCompleted: .constant(true), isExpandedAfterCompletion: .constant(true))
+    MultipleChoiceView(exercise: ExerciseOption.sampleMCQ, showCorrectAnimation: .constant(false), isExerciseCompleted: .constant(true), isExpandedAfterCompletion: .constant(true))
 }

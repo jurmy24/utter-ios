@@ -21,11 +21,13 @@ struct StoryTitleView: View {
                 .fontWeight(.black)
                 .foregroundColor(Color("AccentColor"))
                 .opacity(isVisible ? 1.0 : 0.0) // Fade in from opacity 0 to 1
+                .padding(16)
                 .animation(.easeIn(duration: 1.0), value: isVisible) // Adjust the duration as needed
                 .onAppear {
-                    isVisible = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 , execute: {
+                        isVisible = true
+                    })
                 }
-                .padding()
             
             // Add a fixed-size image placeholder
             ZStack {
@@ -70,6 +72,6 @@ struct StoryTitleView: View {
     }
 }
 
-//#Preview {
-//    StoryTitleView(storyMetadata: Story.sample1, showStoryView: .constant(true))
-//}
+#Preview {
+    StoryTitleView(storyMetadata: Story.sample1, showStoryView: .constant(true))
+}

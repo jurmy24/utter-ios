@@ -88,11 +88,9 @@ struct StoryView: View {
                 currentLineIndex: index == viewModel.displayedBlocks.count - 1 ? viewModel.currentLineIndex : .max,
                 modifications: viewModel.lineModifications
             )
-            .id(index)
         case .exercise:
             if let selectedExercise = viewModel.selectedExercises[block.id] {
                 ExerciseBlockView(exercise: selectedExercise, story: viewModel.story, displayContinueButton: $displayContinueButton)
-                    .id(index)
             }
         }
     }

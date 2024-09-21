@@ -11,6 +11,7 @@ struct SpeechBubble: Shape {
     private let radius: CGFloat
     private let tailSize: CGFloat
     
+    
     init(radius: CGFloat = 10) {
         self.radius = radius
         self.tailSize = 15
@@ -69,6 +70,7 @@ struct TextBlob: View {
     var text: String
     var audioPath: String
     var modifier: Action?
+    @State private var hasPlayedAudio = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
@@ -93,12 +95,19 @@ struct TextBlob: View {
             )
         }
         .onAppear {
-            Task {
-                if self.modifier != .hideAudio, self.modifier != .hideAll {
-                    let data = try await StorageManager.shared.getData(path:self.audioPath)
-                    AudioManager.shared.playAudio(data: data)
+            // This plays every time it appears on the screen
+            // Only play the audio if it hasn't been played before
+            if !self.hasPlayedAudio {
+                    Task {
+                        if self.modifier != .hideAudio, self.modifier != .hideAll {
+                            let data = try await StorageManager.shared.getData(path: self.audioPath)
+                            AudioManager.shared.playAudio(data: data)
+                            
+                            // Mark audio as played
+                            self.hasPlayedAudio = true
+                        }
+                    }
                 }
-            }
         }
     }
 

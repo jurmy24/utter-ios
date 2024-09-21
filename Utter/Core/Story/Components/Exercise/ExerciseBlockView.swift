@@ -34,7 +34,6 @@ struct ExerciseBlockView: View {
     
     @Binding var displayContinueButton: Bool
     
-    @State var selectedAnswers: [String] = [] // For MCQ and TF questions
     @State private var showHints: Bool = false
     @State private var showCorrectAnimation: Bool = false
     @State private var isExerciseCompleted: Bool = false
@@ -44,6 +43,7 @@ struct ExerciseBlockView: View {
         self.exercise = exercise
         self.colors = ExerciseColors.default
         self.story = story
+
         self._displayContinueButton = displayContinueButton
     }
     
@@ -140,8 +140,7 @@ struct ExerciseBlockView: View {
             
             switch exercise.type {
             case .compMCQ, .compTF, .compListen:
-                MultipleChoiceView(exercise: exercise, 
-                                   selectedAnswers: $selectedAnswers,
+                MultipleChoiceView(exercise: exercise,
                                    showCorrectAnimation: $showCorrectAnimation,
                                    isExerciseCompleted: $isExerciseCompleted,
                                    isExpandedAfterCompletion:$isExpandedAfterCompletion)
