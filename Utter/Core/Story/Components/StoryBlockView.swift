@@ -19,7 +19,7 @@ struct StoryBlockView: View {
                     let key = "\(block.id)-\(line.id)"
                     let action = modifications[key]
                     
-                    TextBlob(avatar: "person.circle.fill", character: line.character, text: line.text, modifier: action)
+                    TextBlob(avatar: "person.circle.fill", character: line.character, text: line.text, audioPath: line.audio, modifier: action)
                 }
             }
         }

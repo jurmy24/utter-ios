@@ -52,7 +52,6 @@ struct PronunciationView: View {
             
             HStack {
                 Button(action: {
-                    // Record audio logic here
                     withAnimation {
                         showCorrectAnimation = true
                     }

@@ -67,6 +67,7 @@ struct TextBlob: View {
     var avatar: String
     var character: String
     var text: String
+    var audioPath: String
     var modifier: Action?
 
     var body: some View {
@@ -114,6 +115,11 @@ struct TextBlob: View {
     var speakerButton: some View {
         Button(action: {
             // Replay the audio file
+            Task {
+                let data = try await StorageManager.shared.getData(path:self.audioPath)
+                AudioManager.shared.playAudio(data: data)
+            }
+            
         }) {
             Image(systemName: modifier == .hideAudio || modifier == .hideAll ? "speaker.slash.fill" : "speaker.wave.2.fill")
                 .foregroundColor(Color("AccentColor"))
@@ -148,7 +154,7 @@ struct TextBlob: View {
 }
 
 #Preview {
-    TextBlob(avatar: "person.circle.fill", character: "Chris", text: "Tjenare mannen", modifier: .emphasizeText)
+    TextBlob(avatar: "person.circle.fill", character: "Chris", text: "Tjenare mannen", audioPath: "potato", modifier: .emphasizeText)
 }
 
 //, det går bra för min del. Hur går det för dig?

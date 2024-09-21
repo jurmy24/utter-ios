@@ -14,8 +14,12 @@ final class StorageManager {
     static let shared = StorageManager()
     private init() {}
     
-//    private let storage = Storage.storage().reference()
+    private let storage = Storage.storage().reference()
     private let gsStorage = Storage.storage()
+    
+    private var audioReference: StorageReference {
+        storage.child("audio")
+    }
     
 //    private var imagesReference: StorageReference {
 //        storage.child("images")
@@ -53,6 +57,7 @@ final class StorageManager {
 //    func getData(userId: String, path: String) async throws -> Data {
 //        try await userReference(userId: userId).child(path).data(maxSize: 3 * 1024 * 1024)
 //    }
+    
     func getImage(path: String) async throws -> UIImage {
         let data = try await getData(path: path)
         
