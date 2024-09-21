@@ -57,7 +57,10 @@
 		E87D52F92C9DD3400067A1A0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F82C9DD3400067A1A0 /* AudioManager.swift */; };
 		E87D52FE2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */; };
 		E87D53002C9F0E380067A1A0 /* SpeechTranscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52FF2C9F0E380067A1A0 /* SpeechTranscriptionManager.swift */; };
-		E87D53022C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */; };
+		E87D53022C9F247F0067A1A0 /* PronunciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53012C9F247F0067A1A0 /* PronunciationViewModel.swift */; };
+		E87D53062C9F567C0067A1A0 /* LiveInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53052C9F567C0067A1A0 /* LiveInteractionView.swift */; };
+		E87D53082C9F59D80067A1A0 /* LiveInteractionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53072C9F59D80067A1A0 /* LiveInteractionViewModel.swift */; };
+		E87D530B2C9F5A650067A1A0 /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = E87D530A2C9F5A650067A1A0 /* Vapi */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -142,7 +145,9 @@
 		E87D52F82C9DD3400067A1A0 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVoiceTranscriptionView.swift; sourceTree = "<group>"; };
 		E87D52FF2C9F0E380067A1A0 /* SpeechTranscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechTranscriptionManager.swift; sourceTree = "<group>"; };
-		E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVoiceTranscriptionViewModel.swift; sourceTree = "<group>"; };
+		E87D53012C9F247F0067A1A0 /* PronunciationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationViewModel.swift; sourceTree = "<group>"; };
+		E87D53052C9F567C0067A1A0 /* LiveInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveInteractionView.swift; sourceTree = "<group>"; };
+		E87D53072C9F59D80067A1A0 /* LiveInteractionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveInteractionViewModel.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -181,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E87D530B2C9F5A650067A1A0 /* Vapi in Frameworks */,
 				E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */,
 				E82E3E3C2C87991500EF9A6A /* FirebaseAuth in Frameworks */,
 				E82E3E512C885CC300EF9A6A /* GoogleSignIn in Frameworks */,
@@ -320,7 +326,6 @@
 				E854EE332C93651700BF1E33 /* TabBar */,
 				E8E346F32C988CCA006DDA92 /* Story */,
 				E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */,
-				E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -382,8 +387,11 @@
 			children = (
 				E87D52E62C9D6FCB0067A1A0 /* MultipleChoiceView.swift */,
 				E87D52EC2C9D7F240067A1A0 /* PronunciationView.swift */,
+				E87D53012C9F247F0067A1A0 /* PronunciationViewModel.swift */,
 				E87D52EE2C9D8ED20067A1A0 /* LineViewModel.swift */,
 				E87D52F02C9D98A20067A1A0 /* SpeakingView.swift */,
+				E87D53052C9F567C0067A1A0 /* LiveInteractionView.swift */,
+				E87D53072C9F59D80067A1A0 /* LiveInteractionViewModel.swift */,
 			);
 			path = ExerciseTypes;
 			sourceTree = "<group>";
@@ -606,6 +614,7 @@
 				E82E3E522C885CC300EF9A6A /* GoogleSignInSwift */,
 				E854EE422C94B06100BF1E33 /* FirebaseFirestore */,
 				E8E347032C9A0D97006DDA92 /* FirebaseStorage */,
+				E87D530A2C9F5A650067A1A0 /* Vapi */,
 			);
 			productName = Utter;
 			productReference = E83960922C6BEA1400D8456D /* Utter.app */;
@@ -638,6 +647,7 @@
 			packageReferences = (
 				E8B5A72A2C878BA700B27287 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E82E3E4F2C885CC300EF9A6A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				E87D53092C9F5A650067A1A0 /* XCRemoteSwiftPackageReference "ios" */,
 			);
 			productRefGroup = E83960932C6BEA1400D8456D /* Products */;
 			projectDirPath = "";
@@ -671,7 +681,7 @@
 				E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */,
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
-				E87D53022C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift in Sources */,
+				E87D53022C9F247F0067A1A0 /* PronunciationViewModel.swift in Sources */,
 				E8E347182C9A9ED2006DDA92 /* StoryType.swift in Sources */,
 				E8E347072C9A0E33006DDA92 /* StorageManager.swift in Sources */,
 				E8E347522C9C1813006DDA92 /* StoryButton.swift in Sources */,
@@ -697,6 +707,7 @@
 				E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */,
 				E855176C2C90CD5D00FEB145 /* LabelledDivider.swift in Sources */,
 				E8E347562C9C5026006DDA92 /* StoryBlockView.swift in Sources */,
+				E87D53062C9F567C0067A1A0 /* LiveInteractionView.swift in Sources */,
 				E87D52F12C9D98A20067A1A0 /* SpeakingView.swift in Sources */,
 				E8E346FD2C98D292006DDA92 /* WordView.swift in Sources */,
 				E854EE4C2C94B23E00BF1E33 /* SignUpEmailViewModel.swift in Sources */,
@@ -723,6 +734,7 @@
 				E87D52E92C9D6FED0067A1A0 /* HintsView.swift in Sources */,
 				E8E3471A2C9A9EF4006DDA92 /* Language.swift in Sources */,
 				E87D52F62C9DBEB90067A1A0 /* StoryCompleteView.swift in Sources */,
+				E87D53082C9F59D80067A1A0 /* LiveInteractionViewModel.swift in Sources */,
 				E854EE592C94B49300BF1E33 /* SettingsView.swift in Sources */,
 				E87D52EF2C9D8ED20067A1A0 /* LineViewModel.swift in Sources */,
 				E87D52F92C9DD3400067A1A0 /* AudioManager.swift in Sources */,
@@ -974,6 +986,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		E87D53092C9F5A650067A1A0 /* XCRemoteSwiftPackageReference "ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VapiAI/ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		E8B5A72A2C878BA700B27287 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1004,6 +1024,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E8B5A72A2C878BA700B27287 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		E87D530A2C9F5A650067A1A0 /* Vapi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E87D53092C9F5A650067A1A0 /* XCRemoteSwiftPackageReference "ios" */;
+			productName = Vapi;
 		};
 		E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

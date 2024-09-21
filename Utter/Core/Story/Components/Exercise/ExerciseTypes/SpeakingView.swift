@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SpeakingView: View {
+    private let speechRecognitionManager: SpeechRecognitionManager = SpeechRecognitionManager.shared
     let colors: ExerciseColors = ExerciseColors.default
     let exercise: ExerciseOption
     let story: StoryData?
@@ -15,6 +16,8 @@ struct SpeakingView: View {
     @Binding var isExerciseCompleted: Bool
     @Binding var isExpandedAfterCompletion: Bool
     @StateObject private var viewModel: LineViewModel
+    @State private var transcribedText: String = ""
+    @State private var isInteractive: Bool = false
     
     init(exercise: ExerciseOption,
          story: StoryData? = nil,
@@ -40,30 +43,63 @@ struct SpeakingView: View {
                     .foregroundColor(colors.text)
             }
             
-            HStack {
-                Button(action: {
-                    // Record audio logic here
-                    withAnimation {
-                        showCorrectAnimation = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showCorrectAnimation = false
-                            isExerciseCompleted = true
-                            isExpandedAfterCompletion = false
-                        }
-                    }
-                }) {
-                    Label(labelText, systemImage: image)
+            if exercise.type == .speakQuestion || exercise.type == .speakReplace {
+                HStack {
+                    Text(transcribedText)
+                        .font(.body)
+                        .fontWeight(.bold)
+                        .foregroundStyle(colors.accent)
+                    Spacer()
                 }
-                .allowsHitTesting(isExerciseCompleted ? false : true)
+            }
+            
+            HStack {
+                Button(action: exercise.type != .interact ? handleRecordButtonTap : handleLiveInteraction) {
+                    Label(labelText, systemImage: image)
+                    Spacer()
+                }
+                .disabled(!speechRecognitionManager.isAuthorized)
+                .allowsHitTesting(!isExerciseCompleted)
                 Spacer()
             }
             .padding()
             .background(isExerciseCompleted ? Color.gray.opacity(0.1) : colors.accent.opacity(0.1))
-            .foregroundColor(isExerciseCompleted ? Color.gray : colors.accent)
+            .foregroundColor(speechRecognitionManager.isRecording ? Color.red : (isExerciseCompleted ? Color.gray : colors.accent))
             .cornerRadius(8)
         }
+        .fullScreenCover(isPresented: $isInteractive, onDismiss: endSession) {
+            LiveInteractionView(isInteractive: $isInteractive)
+        }
+    }
+    
+    // MARK: - Methods
+    private func handleRecordButtonTap() {
+        if !speechRecognitionManager.isRecording {
+            Task {
+                try speechRecognitionManager.startRecording()
+            }
+        } else {
+            transcribedText = speechRecognitionManager.transcribedText
+            speechRecognitionManager.stopRecording()
+            endSession()
+        }
+    }
+    
+    private func endSession() {
+        withAnimation {
+            showCorrectAnimation = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation {
+                showCorrectAnimation = false
+                isExerciseCompleted = true
+                isExpandedAfterCompletion = false
+            }
+        }
+    }
+    
+    private func handleLiveInteraction() {
+        isInteractive = false
     }
     
     // Helper function to get the label text and image based on exercise type

@@ -17,5 +17,9 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>237123169328-1g26brlfn7n1diaqkpppu22o5r12r7dv.apps.googleusercontent.com</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>"App provides Voice over IP services"</string>
+	</array>
 </dict>
 </plist>

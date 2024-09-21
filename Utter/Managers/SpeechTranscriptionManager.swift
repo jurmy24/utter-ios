@@ -275,6 +275,17 @@ class SpeechRecognitionManager: ObservableObject {
         audioEngine.stop()
         recognitionRequest?.endAudio()
         isRecording = false
+        
+        self.transcribedText = ""
+        
+        // Reset audio session to playback mode after recording
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .default)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Failed to reset audio session for playback: \(error.localizedDescription)")
+        }
     }
 }
 

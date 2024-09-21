@@ -227,7 +227,7 @@ struct ExerciseBlockView: View {
 #Preview{
     ScrollView {
         Group {
-            ExerciseBlockView(exercise: ExerciseOption.sampleMCQ, displayContinueButton: .constant(false))
+            ExerciseBlockView(exercise: ExerciseOption.sampleTF, displayContinueButton: .constant(false))
         }
         .padding()
     }

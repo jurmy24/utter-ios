@@ -9,20 +9,17 @@ import Foundation
 import Combine
 
 @MainActor
-final class TestVoiceTranscriptionViewModel: ObservableObject {
+final class PronunciationViewModel: ObservableObject {
     private let speechRecognitionManager: SpeechRecognitionManager = SpeechRecognitionManager.shared
-    let targetText: String
-    var targetTextSet: Set<String> = []
+    private var targetText: String = "Placeholder"
+    private var targetTextSet: Set<String> = ["Placeholder"]
     @Published var recognizedWordsSet: Set<String> = []
     @Published var accuracy: Float = 0
     @Published var isEntireSentenceRecognized: Bool = false
     
     private var cancellables = Set<AnyCancellable>() // For Combine
     
-    init(targetText: String) {
-        self.targetText = targetText
-        self.targetTextSet = Set(preprocessText(targetText))
-        
+    init() {
         // Observe changes in the transcribed text from the SpeechRecognitionManager
         speechRecognitionManager.$transcribedText
             .sink { [weak self] _ in
@@ -31,10 +28,14 @@ final class TestVoiceTranscriptionViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func loadTargetText(targetText: String) {
+        self.targetText = targetText
+        self.targetTextSet = Set(preprocessText(targetText))
+    }
+    
     func toggleRecording() {
         if speechRecognitionManager.isRecording {
             speechRecognitionManager.stopRecording()
-            updateRecognizedWords()
         } else {
             do {
                 try speechRecognitionManager.startRecording()
