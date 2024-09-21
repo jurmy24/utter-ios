@@ -92,6 +92,14 @@ struct TextBlob: View {
                 SpeechBubble().stroke(bubbleStrokeColor, lineWidth: 2) : nil
             )
         }
+        .onAppear {
+            Task {
+                if self.modifier != .hideAudio, self.modifier != .hideAll {
+                    let data = try await StorageManager.shared.getData(path:self.audioPath)
+                    AudioManager.shared.playAudio(data: data)
+                }
+            }
+        }
     }
 
     // Avatar view
@@ -116,8 +124,10 @@ struct TextBlob: View {
         Button(action: {
             // Replay the audio file
             Task {
-                let data = try await StorageManager.shared.getData(path:self.audioPath)
-                AudioManager.shared.playAudio(data: data)
+                if self.modifier != .hideAudio, self.modifier != .hideAll {
+                    let data = try await StorageManager.shared.getData(path:self.audioPath)
+                    AudioManager.shared.playAudio(data: data)
+                }
             }
             
         }) {
@@ -127,7 +137,7 @@ struct TextBlob: View {
                 .padding(.leading, 4)
                 .padding(.top, 3)
         }
-        .allowsHitTesting(modifier != .hideAll)
+        .allowsHitTesting(!(modifier == .hideAll || modifier == .hideAudio))
     }
 
     // Display the text with optional modifications

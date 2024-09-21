@@ -72,8 +72,11 @@ struct StoryView: View {
         Text("\(viewModel.chapterId). " + (viewModel.currentChapter?.title ?? "Title not found"))
             .font(.title3)
             .fontWeight(.bold)
-            .foregroundColor(Color("TextColor"))
+            .foregroundColor(Color("ReverseTextColor"))
             .padding()
+            .background(Color("AccentColor"))
+            .cornerRadius(8.0)
+            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
     }
     
     @ViewBuilder
