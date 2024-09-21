@@ -25,5 +25,6 @@ class AudioManager {
     
     func stopAudio() {
         player?.stop()
+        player = nil
     }
 }

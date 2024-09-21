@@ -15,7 +15,8 @@ struct RootView: View {
         // Conditionally display the home pages if the user is logged in
         VStack {
             if !showSignInView {
-                CustomTabBar(showSignInView: $showSignInView)
+//                CustomTabBar(showSignInView: $showSignInView)
+                TestVoiceTranscriptionView(targetText: "Hej, jag heter Viktor och jag kommer ifrån Sverige.")
             }
         }
         .onAppear{

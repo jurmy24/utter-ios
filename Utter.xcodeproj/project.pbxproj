@@ -55,6 +55,9 @@
 		E87D52F12C9D98A20067A1A0 /* SpeakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F02C9D98A20067A1A0 /* SpeakingView.swift */; };
 		E87D52F62C9DBEB90067A1A0 /* StoryCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F52C9DBEB90067A1A0 /* StoryCompleteView.swift */; };
 		E87D52F92C9DD3400067A1A0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F82C9DD3400067A1A0 /* AudioManager.swift */; };
+		E87D52FE2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */; };
+		E87D53002C9F0E380067A1A0 /* SpeechTranscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52FF2C9F0E380067A1A0 /* SpeechTranscriptionManager.swift */; };
+		E87D53022C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -137,6 +140,9 @@
 		E87D52F02C9D98A20067A1A0 /* SpeakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingView.swift; sourceTree = "<group>"; };
 		E87D52F52C9DBEB90067A1A0 /* StoryCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCompleteView.swift; sourceTree = "<group>"; };
 		E87D52F82C9DD3400067A1A0 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVoiceTranscriptionView.swift; sourceTree = "<group>"; };
+		E87D52FF2C9F0E380067A1A0 /* SpeechTranscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechTranscriptionManager.swift; sourceTree = "<group>"; };
+		E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVoiceTranscriptionViewModel.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -313,6 +319,8 @@
 				E8E346E92C982D90006DDA92 /* LanguageSelection */,
 				E854EE332C93651700BF1E33 /* TabBar */,
 				E8E346F32C988CCA006DDA92 /* Story */,
+				E87D52FD2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift */,
+				E87D53012C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -392,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				E87D52F82C9DD3400067A1A0 /* AudioManager.swift */,
+				E87D52FF2C9F0E380067A1A0 /* SpeechTranscriptionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -662,10 +671,12 @@
 				E8E347322C9AD757006DDA92 /* AppleSignInResultModel.swift in Sources */,
 				E855176A2C90CD4C00FEB145 /* ContinueWithGoogle.swift in Sources */,
 				E85517742C90D3CE00FEB145 /* CircularProgressBarBackgroundView.swift in Sources */,
+				E87D53022C9F247F0067A1A0 /* TestVoiceTranscriptionViewModel.swift in Sources */,
 				E8E347182C9A9ED2006DDA92 /* StoryType.swift in Sources */,
 				E8E347072C9A0E33006DDA92 /* StorageManager.swift in Sources */,
 				E8E347522C9C1813006DDA92 /* StoryButton.swift in Sources */,
 				E854EE392C93764F00BF1E33 /* TabBarButton.swift in Sources */,
+				E87D52FE2C9F0B310067A1A0 /* TestVoiceTranscriptionView.swift in Sources */,
 				E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */,
 				E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */,
 				E85517852C921B8500FEB145 /* HorizontalProgressBar.swift in Sources */,
@@ -680,6 +691,7 @@
 				E854EE602C94BA6400BF1E33 /* UserManager.swift in Sources */,
 				E85517792C90D5B200FEB145 /* CircularProgressBarView.swift in Sources */,
 				E8E347502C9C1551006DDA92 /* ChapterTitleView.swift in Sources */,
+				E87D53002C9F0E380067A1A0 /* SpeechTranscriptionManager.swift in Sources */,
 				E8E3472E2C9AD664006DDA92 /* StoryViewModel.swift in Sources */,
 				E82E3E462C879F3E00EF9A6A /* AuthenticationManager.swift in Sources */,
 				E854EE4E2C94B28E00BF1E33 /* HomeViewModel.swift in Sources */,
@@ -867,6 +879,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Utter/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Utter uses the microphone to record your speech so that it can be transcribed.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Utter uses speech recognition to evaluate pronunciation and communicate with our voicebots.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -904,6 +917,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Utter/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Utter uses the microphone to record your speech so that it can be transcribed.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Utter uses speech recognition to evaluate pronunciation and communicate with our voicebots.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
