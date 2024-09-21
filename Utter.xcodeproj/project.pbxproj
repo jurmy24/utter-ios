@@ -61,6 +61,7 @@
 		E87D53062C9F567C0067A1A0 /* LiveInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53052C9F567C0067A1A0 /* LiveInteractionView.swift */; };
 		E87D53082C9F59D80067A1A0 /* LiveInteractionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D53072C9F59D80067A1A0 /* LiveInteractionViewModel.swift */; };
 		E87D530B2C9F5A650067A1A0 /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = E87D530A2C9F5A650067A1A0 /* Vapi */; };
+		E87D530D2C9F5D8A0067A1A0 /* TokensInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = E87D530C2C9F5D8A0067A1A0 /* TokensInfo.plist */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -148,6 +149,7 @@
 		E87D53012C9F247F0067A1A0 /* PronunciationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationViewModel.swift; sourceTree = "<group>"; };
 		E87D53052C9F567C0067A1A0 /* LiveInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveInteractionView.swift; sourceTree = "<group>"; };
 		E87D53072C9F59D80067A1A0 /* LiveInteractionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveInteractionViewModel.swift; sourceTree = "<group>"; };
+		E87D530C2C9F5D8A0067A1A0 /* TokensInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TokensInfo.plist; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			children = (
 				E82E3E4D2C885BFF00EF9A6A /* GoogleService-Info.plist */,
 				E83960A42C6BF90400D8456D /* Info.plist */,
+				E87D530C2C9F5D8A0067A1A0 /* TokensInfo.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
 				E87D52F72C9DD3130067A1A0 /* Managers */,
@@ -667,6 +670,7 @@
 				E839609D2C6BEA1500D8456D /* Preview Assets.xcassets in Resources */,
 				E827E4A52C90B2A600D6D4F1 /* Launch Screen.storyboard in Resources */,
 				E839609A2C6BEA1500D8456D /* Assets.xcassets in Resources */,
+				E87D530D2C9F5D8A0067A1A0 /* TokensInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

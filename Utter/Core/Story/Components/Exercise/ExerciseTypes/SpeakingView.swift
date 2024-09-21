@@ -18,6 +18,7 @@ struct SpeakingView: View {
     @StateObject private var viewModel: LineViewModel
     @State private var transcribedText: String = ""
     @State private var isInteractive: Bool = false
+    private var processedStory: String = ""
     
     init(exercise: ExerciseOption,
          story: StoryData? = nil,
@@ -31,6 +32,7 @@ struct SpeakingView: View {
         self._isExerciseCompleted = isExerciseCompleted
         self._isExpandedAfterCompletion = isExpandedAfterCompletion
         self._viewModel = StateObject(wrappedValue: LineViewModel(story: story, affectedLine: exercise.affectedLine))
+        self.processedStory = "" // TODO: create a function to retrieve the story we have processed so far
     }
     
     var body: some View {
@@ -67,8 +69,18 @@ struct SpeakingView: View {
             .foregroundColor(speechRecognitionManager.isRecording ? Color.red : (isExerciseCompleted ? Color.gray : colors.accent))
             .cornerRadius(8)
         }
-        .fullScreenCover(isPresented: $isInteractive, onDismiss: endSession) {
-            LiveInteractionView(isInteractive: $isInteractive)
+        .fullScreenCover(isPresented: $isInteractive , onDismiss: endSession) {
+            if let query = exercise.query {
+                NavigationStack{
+                    LiveInteractionView(isInteractive: $isInteractive, firstMessage: query, extraContext: self.processedStory)
+                }
+            } else {
+                LiveInteractionView(isInteractive: $isInteractive, firstMessage: "", extraContext: "")
+                    .onAppear {
+                        print("Issue")
+                        isInteractive = false
+                    }
+            }
         }
     }
     
@@ -99,7 +111,7 @@ struct SpeakingView: View {
     }
     
     private func handleLiveInteraction() {
-        isInteractive = false
+        isInteractive = true
     }
     
     // Helper function to get the label text and image based on exercise type
