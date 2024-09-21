@@ -55,7 +55,6 @@
 		E87D52F12C9D98A20067A1A0 /* SpeakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F02C9D98A20067A1A0 /* SpeakingView.swift */; };
 		E87D52F62C9DBEB90067A1A0 /* StoryCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F52C9DBEB90067A1A0 /* StoryCompleteView.swift */; };
 		E87D52F92C9DD3400067A1A0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52F82C9DD3400067A1A0 /* AudioManager.swift */; };
-		E87D52FC2C9EDA1D0067A1A0 /* FirebaseStoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D52FB2C9EDA1D0067A1A0 /* FirebaseStoryService.swift */; };
 		E8B5A72C2C878BA700B27287 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E8B5A72B2C878BA700B27287 /* FirebaseAnalytics */; };
 		E8E346E82C9816A6006DDA92 /* AvatarGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */; };
 		E8E346EB2C982DB2006DDA92 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E346EA2C982DB2006DDA92 /* LanguageView.swift */; };
@@ -138,7 +137,6 @@
 		E87D52F02C9D98A20067A1A0 /* SpeakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingView.swift; sourceTree = "<group>"; };
 		E87D52F52C9DBEB90067A1A0 /* StoryCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCompleteView.swift; sourceTree = "<group>"; };
 		E87D52F82C9DD3400067A1A0 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		E87D52FB2C9EDA1D0067A1A0 /* FirebaseStoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStoryService.swift; sourceTree = "<group>"; };
 		E8E346E72C9816A6006DDA92 /* AvatarGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGrid.swift; sourceTree = "<group>"; };
 		E8E346EA2C982DB2006DDA92 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		E8E346EC2C982F7B006DDA92 /* LanguageOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOption.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				E83960A42C6BF90400D8456D /* Info.plist */,
 				E83960952C6BEA1400D8456D /* UtterApp.swift */,
 				E827E4A42C90B2A600D6D4F1 /* Launch Screen.storyboard */,
-				E87D52FA2C9EDA0E0067A1A0 /* Services */,
 				E87D52F72C9DD3130067A1A0 /* Managers */,
 				E8E347002C99F256006DDA92 /* Models */,
 				E8E3471F2C9AA0B7006DDA92 /* Enums */,
@@ -397,14 +394,6 @@
 				E87D52F82C9DD3400067A1A0 /* AudioManager.swift */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		E87D52FA2C9EDA0E0067A1A0 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				E87D52FB2C9EDA1D0067A1A0 /* FirebaseStoryService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		E8E346E62C98168E006DDA92 /* Components */ = {
@@ -685,7 +674,6 @@
 				E85517702C90CE0600FEB145 /* HomeView.swift in Sources */,
 				E82E3E422C879A8300EF9A6A /* AuthenticationView.swift in Sources */,
 				E87D52E72C9D6FCB0067A1A0 /* MultipleChoiceView.swift in Sources */,
-				E87D52FC2C9EDA1D0067A1A0 /* FirebaseStoryService.swift in Sources */,
 				E8E3474E2C9C1320006DDA92 /* StoryTitleView.swift in Sources */,
 				E8E346F52C988CE1006DDA92 /* StoryView.swift in Sources */,
 				E8E346ED2C982F7B006DDA92 /* LanguageOption.swift in Sources */,
