@@ -8,60 +8,70 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack {
+        ZStack {
+            Color("AppBackgroundColor")
+                .ignoresSafeArea()
+            
             List {
-                Button("Log Out") {
-                    Task {
-                        do {
-                            try viewModel.signOut()
-                            showSignInView = true
-                        } catch {
-                            print(error)
+                Section {
+                    Button(action: signOut) {
+                        HStack {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                            Text("Log Out")
                         }
+                        .foregroundColor(.red)
                     }
+                    .listRowBackground(Color("FieldBackground"))
+                } header: {
+                    Text("Account")
                 }
                 
-                if viewModel.authProviders.contains(.email){
-                    emailSection
+                if viewModel.authProviders.contains(.email) {
+                    Section {
+                        Button(action: resetPassword) {
+                            HStack {
+                                Image(systemName: "key")
+                                Text("Reset Password")
+                            }
+                        }
+                    } header: {
+                        Text("Email Functions")
+                    }
                 }
             }
+            .listStyle(InsetGroupedListStyle())
+            .scrollContentBackground(.hidden)
         }
+        .navigationBarTitle("Settings", displayMode: .inline)
         .onAppear {
             viewModel.loadAuthProviders()
         }
-        .navigationBarTitle("Settings")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("AppBackgroundColor"))
-    }
-}
-
-#Preview {
-    NavigationStack{
-        SettingsView(showSignInView: .constant(false))
     }
     
-}
-
-extension SettingsView {
-    private var emailSection: some View {
-        Section {
-            Button("Reset Password") {
-                Task {
-                    do {
-                        try await viewModel.resetPassword()
-                        print("PASSWORD RESET!")
-                    } catch {
-                        print(error)
-                    }
-                }
+    private func signOut() {
+        Task {
+            do {
+                try viewModel.signOut()
+                showSignInView = true
+            } catch {
+                print("Error signing out: \(error)")
             }
-        } header: {
-            Text("Email functions")
+        }
+    }
+    
+    private func resetPassword() {
+        Task {
+            do {
+                try await viewModel.resetPassword()
+                print("Password reset successfully!")
+            } catch {
+                print("Error resetting password: \(error)")
+            }
         }
     }
 }
