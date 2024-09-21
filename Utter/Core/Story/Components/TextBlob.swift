@@ -18,7 +18,7 @@ struct SpeechBubble: Shape {
     }
     
     func path(in rect: CGRect) -> Path {
-    
+        
         Path { path in
             
             var tailParam = 2
@@ -70,8 +70,7 @@ struct TextBlob: View {
     var text: String
     var audioPath: String
     var modifier: Action?
-    @State private var hasPlayedAudio = false
-
+    
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
             // Avatar on the left
@@ -79,9 +78,9 @@ struct TextBlob: View {
                 avatarView
                     .padding(.top, 5)
             }
-
+            
             // Speech bubble containing the text and button
-            HStack (alignment: .top, spacing: 3){
+            HStack (alignment: .top, spacing: 3) {
                 speakerButton
                 textView
             }
@@ -97,20 +96,16 @@ struct TextBlob: View {
         .onAppear {
             // This plays every time it appears on the screen
             // Only play the audio if it hasn't been played before
-            if !self.hasPlayedAudio {
-                    Task {
-                        if self.modifier != .hideAudio, self.modifier != .hideAll {
-                            let data = try await StorageManager.shared.getData(path: self.audioPath)
-                            AudioManager.shared.playAudio(data: data)
-                            
-                            // Mark audio as played
-                            self.hasPlayedAudio = true
-                        }
-                    }
+            Task {
+                if self.modifier != .hideAudio, self.modifier != .hideAll {
+                    let data = try await StorageManager.shared.getData(path: self.audioPath)
+                    AudioManager.shared.playAudio(data: data)
                 }
+            }
         }
+        
     }
-
+    
     // Avatar view
     @ViewBuilder
     var avatarView: some View {
@@ -127,7 +122,7 @@ struct TextBlob: View {
                 .foregroundColor(Color("TextColor"))
         }
     }
-
+    
     // Button to replay audio
     var speakerButton: some View {
         Button(action: {
@@ -148,7 +143,7 @@ struct TextBlob: View {
         }
         .allowsHitTesting(!(modifier == .hideAll || modifier == .hideAudio))
     }
-
+    
     // Display the text with optional modifications
     var textView: some View {
         if modifier != .hideAll {
@@ -165,7 +160,7 @@ struct TextBlob: View {
         }
         
     }
-
+    
     // Bubble stroke color based on modifier
     var bubbleStrokeColor: Color {
         modifier == nil ? Color("ReverseAccent") : Color("AccentColor")

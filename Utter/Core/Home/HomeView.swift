@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     // TODO: The selected language should be what is chosen in the Language view
-    @StateObject private var viewModel = HomeViewModel(selectedLanguage: .swedish)
+    @StateObject private var viewModel = HomeViewModel.shared
     
     var body: some View {
         if viewModel.stories.isEmpty {
@@ -56,12 +56,6 @@ struct HomeView: View {
             .scrollIndicators(.hidden)
             .background(Color("AppBackgroundColor"))
             .edgesIgnoringSafeArea(.all)
-//            .onAppear {
-//                print("It appeared!")
-//                Task {
-//                    await viewModel.loadStories() // Reload stories when HomeView appears
-//                }
-//            }
         }
     }
 }

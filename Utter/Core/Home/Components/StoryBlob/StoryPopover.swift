@@ -10,6 +10,7 @@ import SwiftUI
 struct StoryPopover: View {
     let story: Story
     @State private var showStoryView: Bool = false
+    //    @State private var stories: ([DBStory], [UserStoryProgress])
     
     var body: some View {
         ZStack {
@@ -78,7 +79,7 @@ struct StoryPopover: View {
             .presentationCompactAdaptation(.popover)
             .padding()
             .background(story.isLocked ? Color("LockedLevelBackground"): Color("AccentColor"))
-            .fullScreenCover(isPresented: $showStoryView) {
+            .fullScreenCover(isPresented: $showStoryView, onDismiss: didDismiss) {
                 if story.currentChapter == 1 {
                     NavigationStack {
                         StoryTitleView(storyMetadata: story, showStoryView: $showStoryView)
@@ -90,6 +91,14 @@ struct StoryPopover: View {
                 }
             }
         }
+    }
+    
+    func didDismiss() {
+        //        withAnimation {
+        Task {
+            await HomeViewModel.shared.loadStories()
+        }
+        //        }
     }
 }
 

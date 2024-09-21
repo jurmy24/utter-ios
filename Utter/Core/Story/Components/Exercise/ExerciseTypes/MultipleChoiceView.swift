@@ -34,7 +34,6 @@ struct MultipleChoiceView: View {
                     ForEach(Array(answerOptions.keys), id: \.self) { key in
                         if let option = answerOptions[key] {
                             Button(action: {
-                                print("Pressed the button")
                                 if !selectedAnswers.contains(key) {
                                     selectedAnswers.append(key)
 
@@ -51,7 +50,6 @@ struct MultipleChoiceView: View {
                                         }
                                     }
                                 }
-                                print(selectedAnswers)
                             }) {
                                 HStack {
                                     Text(option.text)

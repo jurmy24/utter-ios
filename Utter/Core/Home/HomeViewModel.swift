@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 @MainActor
 final class HomeViewModel: ObservableObject {
+        
+    static let shared = HomeViewModel(selectedLanguage: .swedish) // TODO: this is for now
     
     @Published private(set) var stories: [Story] = []
     @Published var selectedLanguage: Language? = nil
@@ -40,6 +42,9 @@ final class HomeViewModel: ObservableObject {
     }
     
     func loadStories() async {
+        //        guard let selectedLanguage = self.selectedLanguage else { return }
+        //        let call = await firebaseStoryService.loadStories(selectedLanguage: selectedLanguage)
+        //        self.stories = getStories(dbStories: call.0, userProgresses: call.1)
         guard let selectedLanguage = self.selectedLanguage else { return }
         do {
             // Fetch stories and user progress

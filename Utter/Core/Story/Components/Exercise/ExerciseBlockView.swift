@@ -57,6 +57,13 @@ struct ExerciseBlockView: View {
         }
         .onAppear {
             displayContinueButton = false
+            Task {
+                if let audioPath = exercise.audio {
+                    let data = try await StorageManager.shared.getData(path: audioPath)
+                    AudioManager.shared.playAudio(data: data)
+                }
+                
+            }
         }
         .padding()
         .background(colors.background)

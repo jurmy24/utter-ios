@@ -13,6 +13,7 @@ struct StoryView: View {
     @StateObject private var viewModel: StoryViewModel
     @State private var displayContinueButton: Bool = true
     @State private var showStoryCompleteView: Bool = false
+    @State var isFirstView: Bool = true
     
     init(storyMetadata: Story, showStoryView: Binding<Bool>) {
         self.storyMetadata = storyMetadata
@@ -35,20 +36,26 @@ struct StoryView: View {
                 else {
                     chapterTitleView
                     
+                    Spacer()
+                    
                     ScrollViewReader { proxy in
                         ScrollView {
                             LazyVStack(alignment: .leading, spacing: 16) {
                                 ForEach(viewModel.displayedBlocks.indices, id: \.self) { index in
                                     blockView(for: viewModel.displayedBlocks[index], at: index)
+//                                        .id("bottomId")
+//                                        .onAppear {
+//                                            proxy.scrollTo(viewModel.displayedBlocks[index].id, anchor: .bottom)
+//                                        }
                                 }
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            
-                            Color.clear.frame(height: 1).id("bottomID")
                         }
+                        .padding(16)
+                        .frame(maxWidth: .infinity)
+                        .defaultScrollAnchor(isFirstView ? .top : .bottom)
                         
                         continueButton(proxy: proxy)
+                        
                     }
                 }
                 
@@ -91,16 +98,19 @@ struct StoryView: View {
         case .exercise:
             if let selectedExercise = viewModel.selectedExercises[block.id] {
                 ExerciseBlockView(exercise: selectedExercise, story: viewModel.story, displayContinueButton: $displayContinueButton)
+                    .onAppear {
+                        // TODO: this is not a good way to do automatic scrolling
+                        isFirstView = false
+                    }
             }
         }
     }
     
     private func continueButton(proxy: ScrollViewProxy) -> some View {
         StoryButton(text: "Continue", color: displayContinueButton ? Color("ButtonColor") : Color.gray) {
+            AudioManager.shared.stopAudio()
             viewModel.playNextLine()
-            withAnimation {
-                proxy.scrollTo("bottomID", anchor: .bottom)
-            }
+            
             // Add logic to display end-of-chapter screen here
             if viewModel.chapterComplete {
                 withAnimation {
@@ -122,6 +132,7 @@ struct StoryView: View {
     private var exitButton: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
+                AudioManager.shared.stopAudio()
                 showStoryView = false
             } label: {
                 Image(systemName: "xmark")
