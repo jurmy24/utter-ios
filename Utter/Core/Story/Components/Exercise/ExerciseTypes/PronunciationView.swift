@@ -15,24 +15,39 @@ struct DynamicWordHighlighter: View {
         return string.lowercased().filter { !$0.isPunctuation }
     }
     
+//    var body: some View {
+//        text.split(separator: " ", omittingEmptySubsequences: false)
+//            .enumerated()
+//            .reduce(Text("")) { (current, pair) -> Text in
+//                let (index, substring) = pair
+//                let word = String(substring)
+//                let strippedWord = stripPunctuation(word)
+//                
+//                let wordText = Text(word)
+//                    .foregroundColor(highlightWords.contains(strippedWord) ? .green : Color("AccentColor"))
+//                
+//                if index == 0 {
+//                    return wordText
+//                } else {
+//                    return current + Text(" ") + wordText
+//                }
+//            }
+//    }
     var body: some View {
-        text.split(separator: " ", omittingEmptySubsequences: false)
-            .enumerated()
-            .reduce(Text("")) { (current, pair) -> Text in
-                let (index, substring) = pair
-                let word = String(substring)
-                let strippedWord = stripPunctuation(word)
-                
-                let wordText = Text(word)
-                    .foregroundColor(highlightWords.contains(strippedWord) ? .green : Color("AccentColor"))
-                
-                if index == 0 {
-                    return wordText
-                } else {
-                    return current + Text(" ") + wordText
+            HStack(spacing: 4) {
+                ForEach(text.split(separator: " ", omittingEmptySubsequences: false), id: \.self) { substring in
+                    let word = String(substring)
+                    let strippedWord = stripPunctuation(word)
+                    
+                    Text(word)
+                        .foregroundColor(highlightWords.contains(strippedWord) ? .green : Color("AccentColor"))
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 2)
+                        .background(Color("AccentColor").opacity(0.3))
+                        .cornerRadius(3)
                 }
             }
-    }
+        }
 }
 
 struct PronunciationView: View {
@@ -83,7 +98,6 @@ struct PronunciationView: View {
     private var textDisplay: some View {
         HStack {
             if let text = lineViewModel.getLine()?.text {
-//                let text = "Detta är ett nytt prov"
                 DynamicWordHighlighter(text: text, highlightWords: $viewModel.recognizedWordsSet)
                     .font(.body)
                     .fontWeight(.bold)
