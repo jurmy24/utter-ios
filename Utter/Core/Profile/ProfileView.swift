@@ -13,6 +13,9 @@ struct ProfileView: View {
     @Binding var showSignInView: Bool
     @State private var selectedAvatar: String = ""
     
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     var body: some View {
         VStack(spacing: 20) {
             // Profile Avatar
@@ -98,9 +101,23 @@ struct ProfileView: View {
                         .font(.headline)
                 }
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    isDarkMode.toggle()
+                    setAppearance()
+                }) {
+                    Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                        .font(.headline)
+                }
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color("AppBackgroundColor"))
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+    }
+    
+    private func setAppearance() {
+        UIApplication.shared.windows.first?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
     }
 }
 
