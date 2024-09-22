@@ -106,7 +106,7 @@ class CallManager: ObservableObject {
             "context": context,
         ] as [String : Any]
         do {
-            try await vapi.start(assistantId: "77c55889-6355-45e7-ac59-bd040ca3a14e", assistantOverrides: overrides)
+            try await vapi.start(assistantId: "0568bfab-7ac5-4ee8-9a94-0e7b919331ce", assistantOverrides: overrides) //77c55889-6355-45e7-ac59-bd040ca3a14e
             startTimer() // Start the timer when the call starts
         } catch {
             print("Error starting call: \(error)")

@@ -14,6 +14,7 @@ final class LineViewModel: ObservableObject {
     
     // Using string for the affected line is bad practice, should use a unique identifier or something
     init(story: StoryData?, affectedLine: String?) {
+        print(self.affectedLine ?? "No affected line")
         self.story = story
         self.affectedLine = affectedLine
     }
