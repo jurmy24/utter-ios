@@ -13,6 +13,9 @@ class CallManager: ObservableObject {
     enum CallState {
         case started, loading, ended
     }
+    @Published var assistantTranscript: String = ""
+    @Published var userTranscript: String = ""
+    @Published var currentSpeaker: SpeechUpdate.Role = .assistant
     
     @Published var callState: CallState = .ended
     var vapiEvents = [Vapi.Event]()
@@ -23,17 +26,17 @@ class CallManager: ObservableObject {
     private var timer: Timer?
     
     func startTimer() {
-            progress = 0
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-                guard let self = self else { return }
-                if self.progress < 1.0 {
-                    self.progress += 1.0 / 60.0 // Increase by 1/60 each second
-                } else {
-                    self.stopTimer()
-                }
+        progress = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            if self.progress < 1.0 {
+                self.progress += 1.0 / 60.0 // Increase by 1/60 each second
+            } else {
+                self.stopTimer()
             }
         }
-
+    }
+    
     func stopTimer() {
         timer?.invalidate()
         timer = nil
@@ -67,8 +70,12 @@ class CallManager: ObservableObject {
                     self?.callState = .started
                 case .callDidEnd:
                     self?.callState = .ended
-                case .speechUpdate:
-                    print(event)
+                case .speechUpdate(let update):
+                    self?.handleSpeechUpdate(update)
+                case .transcript(let transcript):
+                    self?.handleTranscript(transcript)
+//                case .speechUpdate:
+//                    print(event)
                 case .conversationUpdate:
                     print(event)
                 case .functionCall:
@@ -77,8 +84,8 @@ class CallManager: ObservableObject {
                     print(event)
                 case .metadata:
                     print(event)
-                case .transcript:
-                    print(event)
+//                case .transcript:
+//                    print(event)
                 case .error(let error):
                     print("Error: \(error)")
                 }
@@ -98,7 +105,7 @@ class CallManager: ObservableObject {
     @MainActor
     func startCall(firstMessage: String, extraContext: String) async {
         callState = .loading
-
+        
         let context = "STORY HISTORY:\n" + extraContext + "\nGUIDANCE: Make sure the user speaks the language of the story and help them as needed. Speak in simple terminology in the language. You can also provide hints if they are struggling."
         
         let overrides = [
@@ -106,7 +113,7 @@ class CallManager: ObservableObject {
             "context": context,
         ] as [String : Any]
         do {
-            try await vapi.start(assistantId: "0568bfab-7ac5-4ee8-9a94-0e7b919331ce", assistantOverrides: overrides) //77c55889-6355-45e7-ac59-bd040ca3a14e
+            try await vapi.start(assistantId: "9394f62f-a057-4ff1-a06a-c36579235617" , assistantOverrides: overrides) //77c55889-6355-45e7-ac59-bd040ca3a14e, "0568bfab-7ac5-4ee8-9a94-0e7b919331ce"
             startTimer() // Start the timer when the call starts
         } catch {
             print("Error starting call: \(error)")
@@ -117,6 +124,29 @@ class CallManager: ObservableObject {
     func endCall() {
         stopTimer() // Stop the timer when the call ends
         vapi.stop()
+    }
+    
+    private func handleSpeechUpdate(_ update: SpeechUpdate) {
+        DispatchQueue.main.async {
+            if update.status == .started {
+                self.currentSpeaker = update.role
+            }
+        }
+    }
+
+    private func handleTranscript(_ transcript: Transcript) {
+        DispatchQueue.main.async {
+            switch transcript.role {
+            case .assistant:
+                if transcript.transcriptType == .final {
+                    self.assistantTranscript = transcript.transcript
+                }
+            case .user:
+                if transcript.transcriptType == .final {
+                    self.userTranscript = transcript.transcript
+                }
+            }
+        }
     }
 }
 
@@ -138,19 +168,48 @@ struct LiveInteractionView: View {
                     
                     Spacer()
                     
-                    if callManager.callState == .started {
-                        Circle()
-                            .fill(Color.green.opacity(0.6))
-                            .frame(width: 100, height: 100)
-                            .scaleEffect(isAnimating ? 1.2 : 1.0)
-                            .opacity(isAnimating ? 0.6 : 1.0)
-                            .animation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: isAnimating)
-                            .onAppear {
-                                isAnimating = true
-                            }
-                            .onDisappear {
-                                isAnimating = false
-                            }
+                    //                    if callManager.callState == .started {
+                    //                        Circle()
+                    //                            .fill(Color.green.opacity(0.9))
+                    //                            .frame(width: 100, height: 100)
+                    //                            .scaleEffect(isAnimating ? 1.2 : 1.0)
+                    //                            .opacity(isAnimating ? 0.6 : 1.0)
+                    //                            .animation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: isAnimating)
+                    //                            .onAppear {
+                    //                                isAnimating = true
+                    //                            }
+                    //                            .onDisappear {
+                    //                                isAnimating = false
+                    //                            }
+                    //                    } else {
+                    //                        Text(callManager.callStateText)
+                    //                            .font(.title)
+                    //                            .fontWeight(.semibold)
+                    //                            .foregroundColor(.white)
+                    //                            .padding()
+                    //                            .background(callManager.callStateColor)
+                    //                            .cornerRadius(10)
+                    //                    }
+                    if true/*callManager.callState == .started*/ {
+                        VStack(spacing:50) {
+                            Text("Assistant: \(callManager.assistantTranscript)")
+                                .padding()
+                                .font(.headline)
+                                .background(Color.green.opacity(0.1))
+                                .cornerRadius(10)
+                            
+                            Circle()
+                                .fill(callManager.currentSpeaker == .assistant ? Color.green : Color.blue)
+                                .frame(width: 20, height: 20)
+                                .opacity(isAnimating ? 0.6 : 1.0)
+                                .animation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: isAnimating)
+                            
+                            Text("User: \(callManager.userTranscript)")
+                                .font(.headline)
+                                .padding()
+                                .background(Color.blue.opacity(0.1))
+                                .cornerRadius(10)
+                        }
                     } else {
                         Text(callManager.callStateText)
                             .font(.title)
@@ -160,7 +219,7 @@ struct LiveInteractionView: View {
                             .background(callManager.callStateColor)
                             .cornerRadius(10)
                     }
-
+                    
                     Spacer()
                     
                     Button(action: {
@@ -185,11 +244,10 @@ struct LiveInteractionView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack {
-                    if callManager.callState == .started {
-                        ProgressView(value: callManager.progress, total: 1.0)
-                            .progressViewStyle(LinearProgressViewStyle())
-                            .frame(width: 100)
-                    }
+                    ProgressView(value: callManager.progress, total: 1.0)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .frame(width: 300)
+                    Spacer()
                     Button {
                         callManager.endCall()
                         isInteractive = false

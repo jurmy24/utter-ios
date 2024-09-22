@@ -98,6 +98,8 @@ struct SpeakingView: View {
     }
     
     private func endSession() {
+        speechRecognitionManager.resetAudioSession()
+        
         withAnimation {
             showCorrectAnimation = true
         }

@@ -278,6 +278,10 @@ class SpeechRecognitionManager: ObservableObject {
         
         self.transcribedText = ""
         
+        resetAudioSession()
+    }
+    
+    func resetAudioSession() {
         // Reset audio session to playback mode after recording
         let audioSession = AVAudioSession.sharedInstance()
         do {
